@@ -1,0 +1,20 @@
+{
+    "name": "apache/apache-ignite-client",
+    "type": "library",
+    "description": "PHP Client for Apache Ignite",
+    "keywords": ["apache", "ignite", "php"],
+    "homepage": "https://github.com/apache/ignite",
+    "license": "Apache-2.0",
+    "authors": [
+    ],
+    "require": {
+        "php": ">=7.2.0"
+    },
+    "require-dev": {
+    },
+    "suggest": {
+    },
+    "autoload": {
+        "psr-4": {"Apache\\Ignite\\": "src/"}
+    }
+}
