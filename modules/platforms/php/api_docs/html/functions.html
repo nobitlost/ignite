@@ -65,11 +65,11 @@ $(function() {
 
 <h3><a id="index__"></a>- _ -</h3><ul>
 <li>__construct()
-: <a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_connection_exception.html#a380cde97a54d14c0e11bcaa6349a822d">Apache\Ignite\Exception\ConnectionException</a>
-, <a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_ignite_client_exception.html#a2cc4f6454ff6c0649102e3298248efc3">Apache\Ignite\Exception\IgniteClientException</a>
+: <a class="el" href="class_apache_1_1_ignite_1_1_client.html#a037a1906d259a4a1e1c4b4fd4be687b9">Apache\Ignite\Client</a>
+, <a class="el" href="class_apache_1_1_ignite_1_1_client_configuration.html#a25d639553478c5be3b417267f275f8b8">Apache\Ignite\ClientConfiguration</a>
+, <a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html#ae9cc47c92356457880a53304b169a35b">Apache\Ignite\Exception\ClientException</a>
+, <a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_connection_exception.html#a380cde97a54d14c0e11bcaa6349a822d">Apache\Ignite\Exception\ConnectionException</a>
 , <a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_operation_exception.html#ace290a92e9c93201a156c43d14e642ef">Apache\Ignite\Exception\OperationException</a>
-, <a class="el" href="class_apache_1_1_ignite_1_1_ignite_client.html#ac775e7de982eb9ffc3ef8fd0639a047a">Apache\Ignite\IgniteClient</a>
-, <a class="el" href="class_apache_1_1_ignite_1_1_ignite_client_configuration.html#a934fbdd734fce239764435b7420f33c6">Apache\Ignite\IgniteClientConfiguration</a>
 , <a class="el" href="class_apache_1_1_ignite_1_1_object_type_1_1_collection_object_type.html#aa73724eb327f3fd1d041044d8ee6283e">Apache\Ignite\ObjectType\CollectionObjectType</a>
 , <a class="el" href="class_apache_1_1_ignite_1_1_object_type_1_1_map_object_type.html#a348d37fd81e53687375358a674e11fcf">Apache\Ignite\ObjectType\MapObjectType</a>
 , <a class="el" href="class_apache_1_1_ignite_1_1_object_type_1_1_object_type.html#a56c12a0c7002613b512c95bf9e00aa69">Apache\Ignite\ObjectType\ObjectType</a>
@@ -107,6 +107,9 @@ $(function() {
 
 
 <h3><a id="index_c"></a>- c -</h3><ul>
+<li>cacheNames()
+: <a class="el" href="class_apache_1_1_ignite_1_1_client.html#af979fadb1a50573d6e4fd9fb35517955">Apache\Ignite\Client</a>
+</li>
 <li>CHAR
 : <a class="el" href="class_apache_1_1_ignite_1_1_object_type_1_1_object_type.html#a04f7e72390da41d6785ee37a8446a206">Apache\Ignite\ObjectType\ObjectType</a>
 </li>
@@ -120,10 +123,10 @@ $(function() {
 : <a class="el" href="class_apache_1_1_ignite_1_1_object_type_1_1_object_type.html#ae6783add965ec59ac5a05c67ab21bac8">Apache\Ignite\ObjectType\ObjectType</a>
 </li>
 <li>connect()
-: <a class="el" href="class_apache_1_1_ignite_1_1_ignite_client.html#a74d94a92ef72780ecfc42b714e7df234">Apache\Ignite\IgniteClient</a>
+: <a class="el" href="class_apache_1_1_ignite_1_1_client.html#ab8b0c48c01bb9eddeb00ed4ebba0a650">Apache\Ignite\Client</a>
 </li>
 <li>createCache()
-: <a class="el" href="class_apache_1_1_ignite_1_1_ignite_client.html#a135784da2d7bf75dcdeaadb494128d93">Apache\Ignite\IgniteClient</a>
+: <a class="el" href="class_apache_1_1_ignite_1_1_client.html#a5e5a23f9ff97a7cc334fa89eaf226358">Apache\Ignite\Client</a>
 </li>
 </ul>
 
@@ -142,10 +145,10 @@ $(function() {
 : <a class="el" href="class_apache_1_1_ignite_1_1_object_type_1_1_object_type.html#a17aa8c66dd27f637c13b898ec36b25f6">Apache\Ignite\ObjectType\ObjectType</a>
 </li>
 <li>destroyCache()
-: <a class="el" href="class_apache_1_1_ignite_1_1_ignite_client.html#a4cf711f20fb5c1264c04569d28f6fd34">Apache\Ignite\IgniteClient</a>
+: <a class="el" href="class_apache_1_1_ignite_1_1_client.html#a113f3e6b078be78ce7985c4f8f122f6c">Apache\Ignite\Client</a>
 </li>
 <li>disconnect()
-: <a class="el" href="class_apache_1_1_ignite_1_1_ignite_client.html#a1e697018fe4f35bde2aae12284bc629c">Apache\Ignite\IgniteClient</a>
+: <a class="el" href="class_apache_1_1_ignite_1_1_client.html#af14768828af196522dfdaaceea980f7a">Apache\Ignite\Client</a>
 </li>
 <li>DOUBLE
 : <a class="el" href="class_apache_1_1_ignite_1_1_object_type_1_1_object_type.html#a64278a0d58fd726928c2ac4c239f569c">Apache\Ignite\ObjectType\ObjectType</a>
@@ -178,25 +181,28 @@ $(function() {
 
 <h3><a id="index_g"></a>- g -</h3><ul>
 <li>get()
-: <a class="el" href="interface_apache_1_1_ignite_1_1_cache_client_interface.html#a3f89ed00ed6fce280a9fcaaa529d92c0">Apache\Ignite\CacheClientInterface</a>
+: <a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html#a411d1b42c09dd4525b0340b3d2f6c6db">Apache\Ignite\CacheInterface</a>
 </li>
 <li>getCache()
-: <a class="el" href="class_apache_1_1_ignite_1_1_ignite_client.html#a291491b4aac144a530aabb5909abdf0d">Apache\Ignite\IgniteClient</a>
+: <a class="el" href="class_apache_1_1_ignite_1_1_client.html#a9ec8e6b48728e7b6bf168b800ced203a">Apache\Ignite\Client</a>
+</li>
+<li>getCacheConfiguration()
+: <a class="el" href="class_apache_1_1_ignite_1_1_client.html#a7c24de885010dbff2b907312fcce801e">Apache\Ignite\Client</a>
 </li>
 <li>getEndpoints()
-: <a class="el" href="class_apache_1_1_ignite_1_1_ignite_client_configuration.html#aaafe3149800f885072763ceed26b23c9">Apache\Ignite\IgniteClientConfiguration</a>
+: <a class="el" href="class_apache_1_1_ignite_1_1_client_configuration.html#a3be59caa411e94169a88061d3ffbbe99">Apache\Ignite\ClientConfiguration</a>
 </li>
 <li>getOrCreateCache()
-: <a class="el" href="class_apache_1_1_ignite_1_1_ignite_client.html#a9f4f8f7a6eb6d40db16e7c8b9156932e">Apache\Ignite\IgniteClient</a>
+: <a class="el" href="class_apache_1_1_ignite_1_1_client.html#a245c1d5b8d28a2a92f468a87a79439ae">Apache\Ignite\Client</a>
 </li>
 <li>getPassword()
-: <a class="el" href="class_apache_1_1_ignite_1_1_ignite_client_configuration.html#a400e0a8de1c7c7abc4c50c1454943dd8">Apache\Ignite\IgniteClientConfiguration</a>
+: <a class="el" href="class_apache_1_1_ignite_1_1_client_configuration.html#a133e218a47eadceee46be21cc31c2749">Apache\Ignite\ClientConfiguration</a>
 </li>
 <li>getTypeCode()
 : <a class="el" href="class_apache_1_1_ignite_1_1_object_type_1_1_object_type.html#aea69f6936ce8e97e0fcee614059115da">Apache\Ignite\ObjectType\ObjectType</a>
 </li>
 <li>getUserName()
-: <a class="el" href="class_apache_1_1_ignite_1_1_ignite_client_configuration.html#a16421d204459ab145a477f45f75f1800">Apache\Ignite\IgniteClientConfiguration</a>
+: <a class="el" href="class_apache_1_1_ignite_1_1_client_configuration.html#ae06b5bfc7a91c674eece3f1c6cf78d51">Apache\Ignite\ClientConfiguration</a>
 </li>
 </ul>
 
@@ -213,7 +219,7 @@ $(function() {
 
 <h3><a id="index_i"></a>- i -</h3><ul>
 <li>illegalArgumentException()
-: <a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_ignite_client_exception.html#a78fbd0ef8aeb34e9582a6342d7d648ce">Apache\Ignite\Exception\IgniteClientException</a>
+: <a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html#a0a6354b92ccf34e5a96cf48623d52d77">Apache\Ignite\Exception\ClientException</a>
 </li>
 <li>INTEGER
 : <a class="el" href="class_apache_1_1_ignite_1_1_object_type_1_1_object_type.html#a58d222e3e9b3dbe9ad7fc531d93fff44">Apache\Ignite\ObjectType\ObjectType</a>
@@ -222,7 +228,7 @@ $(function() {
 : <a class="el" href="class_apache_1_1_ignite_1_1_object_type_1_1_object_type.html#ae809e559dcbd14936c6a38460cc43c83">Apache\Ignite\ObjectType\ObjectType</a>
 </li>
 <li>internalError()
-: <a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_ignite_client_exception.html#a5f117468c16c46bf4cf70b1c1d34edfd">Apache\Ignite\Exception\IgniteClientException</a>
+: <a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html#a4906a7d56046739c805cf9b53be426a4">Apache\Ignite\Exception\ClientException</a>
 </li>
 </ul>
 
@@ -269,26 +275,26 @@ $(function() {
 
 <h3><a id="index_p"></a>- p -</h3><ul>
 <li>put()
-: <a class="el" href="interface_apache_1_1_ignite_1_1_cache_client_interface.html#a3bbd2cc76387ed251c1a2128bd395e7b">Apache\Ignite\CacheClientInterface</a>
+: <a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html#a2159c928e1aa9afee679870d18f2a81e">Apache\Ignite\CacheInterface</a>
 </li>
 </ul>
 
 
 <h3><a id="index_s"></a>- s -</h3><ul>
 <li>setDebug()
-: <a class="el" href="class_apache_1_1_ignite_1_1_ignite_client.html#a2696e345abb09ded19bbe797ca924202">Apache\Ignite\IgniteClient</a>
+: <a class="el" href="class_apache_1_1_ignite_1_1_client.html#af65773727a6af1361a2dee75c5ab4543">Apache\Ignite\Client</a>
 </li>
 <li>setKeyType()
-: <a class="el" href="interface_apache_1_1_ignite_1_1_cache_client_interface.html#a59a94009cbc82f1b0eb9d27d8ba4c420">Apache\Ignite\CacheClientInterface</a>
+: <a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html#aafe6edd6fbd2b1d841425769bf7a3f08">Apache\Ignite\CacheInterface</a>
 </li>
 <li>setPassword()
-: <a class="el" href="class_apache_1_1_ignite_1_1_ignite_client_configuration.html#a27813e6cf4e98a36630e3c43fac20727">Apache\Ignite\IgniteClientConfiguration</a>
+: <a class="el" href="class_apache_1_1_ignite_1_1_client_configuration.html#a12f348aeee59975a2e31813653533d6f">Apache\Ignite\ClientConfiguration</a>
 </li>
 <li>setUserName()
-: <a class="el" href="class_apache_1_1_ignite_1_1_ignite_client_configuration.html#ad67630f54c16ea2b078536610f1db54a">Apache\Ignite\IgniteClientConfiguration</a>
+: <a class="el" href="class_apache_1_1_ignite_1_1_client_configuration.html#a0809cf53e2b2b450fee1e7585203f2b8">Apache\Ignite\ClientConfiguration</a>
 </li>
 <li>setValueType()
-: <a class="el" href="interface_apache_1_1_ignite_1_1_cache_client_interface.html#a304ccd222f91b82e0b49ea1cc59b051b">Apache\Ignite\CacheClientInterface</a>
+: <a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html#ac467310f7333e1c33a0a383eb2333c01">Apache\Ignite\CacheInterface</a>
 </li>
 <li>SHORT
 : <a class="el" href="class_apache_1_1_ignite_1_1_object_type_1_1_object_type.html#a6bc0e9aed21e339d2cdf9282462c2619">Apache\Ignite\ObjectType\ObjectType</a>
@@ -326,7 +332,7 @@ $(function() {
 
 <h3><a id="index_u"></a>- u -</h3><ul>
 <li>unsupportedTypeException()
-: <a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_ignite_client_exception.html#a05f2a2c7aa9e0338b517b937b98ad849">Apache\Ignite\Exception\IgniteClientException</a>
+: <a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html#a8c30eda88cbeb7e65ebe13ece87c4556">Apache\Ignite\Exception\ClientException</a>
 </li>
 <li>USER_COL
 : <a class="el" href="class_apache_1_1_ignite_1_1_object_type_1_1_collection_object_type.html#ae190376637262908004fb32356e54eb9">Apache\Ignite\ObjectType\CollectionObjectType</a>

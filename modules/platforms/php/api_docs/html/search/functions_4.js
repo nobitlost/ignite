@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['illegalargumentexception',['illegalArgumentException',['../class_apache_1_1_ignite_1_1_exception_1_1_ignite_client_exception.html#a78fbd0ef8aeb34e9582a6342d7d648ce',1,'Apache::Ignite::Exception::IgniteClientException']]],
-  ['internalerror',['internalError',['../class_apache_1_1_ignite_1_1_exception_1_1_ignite_client_exception.html#a5f117468c16c46bf4cf70b1c1d34edfd',1,'Apache::Ignite::Exception::IgniteClientException']]]
+  ['illegalargumentexception',['illegalArgumentException',['../class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html#a0a6354b92ccf34e5a96cf48623d52d77',1,'Apache::Ignite::Exception::ClientException']]],
+  ['internalerror',['internalError',['../class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html#a4906a7d56046739c805cf9b53be426a4',1,'Apache::Ignite::Exception::ClientException']]]
 ];
