@@ -83,10 +83,43 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a411d1b42c09dd4525b0340b3d2f6c6db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2159c928e1aa9afee679870d18f2a81e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html#a2159c928e1aa9afee679870d18f2a81e">put</a> ($key, $value)</td></tr>
 <tr class="separator:a2159c928e1aa9afee679870d18f2a81e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8e23da73bc0750e96985029c992c0712"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html#a8e23da73bc0750e96985029c992c0712">clearKey</a> ($key)</td></tr>
+<tr class="separator:a8e23da73bc0750e96985029c992c0712"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a267e3b90258f89896cddec6c6a0050fe"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html#a267e3b90258f89896cddec6c6a0050fe">removeAll</a> ()</td></tr>
 <tr class="separator:a267e3b90258f89896cddec6c6a0050fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
+<a id="a8e23da73bc0750e96985029c992c0712"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8e23da73bc0750e96985029c992c0712">&#9670;&nbsp;</a></span>clearKey()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Apache\Ignite\CacheInterface::clearKey </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>$key</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Removes entry with the specified key from the cache, without notifying listeners and cache writers.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">mixed</td><td class="paramname">$key</td><td>key to be removed.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a411d1b42c09dd4525b0340b3d2f6c6db"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a411d1b42c09dd4525b0340b3d2f6c6db">&#9670;&nbsp;</a></span>get()</h2>
 

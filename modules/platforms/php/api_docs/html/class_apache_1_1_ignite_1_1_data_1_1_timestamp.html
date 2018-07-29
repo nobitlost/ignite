@@ -92,12 +92,12 @@ Public Member Functions</h2></td></tr>
 <tr class="inherit_header pub_methods_class_apache_1_1_ignite_1_1_data_1_1_date"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_apache_1_1_ignite_1_1_data_1_1_date')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_apache_1_1_ignite_1_1_data_1_1_date.html">Apache\Ignite\Data\Date</a></td></tr>
 <tr class="memitem:ad69159c1e854e5c7292845c7034a3f5f inherit pub_methods_class_apache_1_1_ignite_1_1_data_1_1_date"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apache_1_1_ignite_1_1_data_1_1_date.html#ad69159c1e854e5c7292845c7034a3f5f">__construct</a> (float $millis)</td></tr>
 <tr class="separator:ad69159c1e854e5c7292845c7034a3f5f inherit pub_methods_class_apache_1_1_ignite_1_1_data_1_1_date"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94b301381adc3c13acfaf8f91df767d4 inherit pub_methods_class_apache_1_1_ignite_1_1_data_1_1_date"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apache_1_1_ignite_1_1_data_1_1_date.html#a94b301381adc3c13acfaf8f91df767d4">toDateTime</a> ()</td></tr>
+<tr class="separator:a94b301381adc3c13acfaf8f91df767d4 inherit pub_methods_class_apache_1_1_ignite_1_1_data_1_1_date"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8f2f75e32733273ae88f9c4256ed8528 inherit pub_methods_class_apache_1_1_ignite_1_1_data_1_1_date"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apache_1_1_ignite_1_1_data_1_1_date.html#a8f2f75e32733273ae88f9c4256ed8528">getMillis</a> ()</td></tr>
 <tr class="separator:a8f2f75e32733273ae88f9c4256ed8528 inherit pub_methods_class_apache_1_1_ignite_1_1_data_1_1_date"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2cc2081b342665971507df347debee6c inherit pub_methods_class_apache_1_1_ignite_1_1_data_1_1_date"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apache_1_1_ignite_1_1_data_1_1_date.html#a2cc2081b342665971507df347debee6c">getSeconds</a> ()</td></tr>
 <tr class="separator:a2cc2081b342665971507df347debee6c inherit pub_methods_class_apache_1_1_ignite_1_1_data_1_1_date"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a94b301381adc3c13acfaf8f91df767d4 inherit pub_methods_class_apache_1_1_ignite_1_1_data_1_1_date"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apache_1_1_ignite_1_1_data_1_1_date.html#a94b301381adc3c13acfaf8f91df767d4">toDateTime</a> ()</td></tr>
-<tr class="separator:a94b301381adc3c13acfaf8f91df767d4 inherit pub_methods_class_apache_1_1_ignite_1_1_data_1_1_date"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
@@ -108,7 +108,7 @@ Static Public Member Functions</h2></td></tr>
 <tr class="separator:ab1fc1b060a2acf549bf0a8ef66cd368d inherit pub_static_methods_class_apache_1_1_ignite_1_1_data_1_1_date"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Class representing an Ignite <a class="el" href="class_apache_1_1_ignite_1_1_data_1_1_timestamp.html">Timestamp</a> type. </p>
+<div class="textblock"><p>Class representing Ignite <a class="el" href="class_apache_1_1_ignite_1_1_data_1_1_timestamp.html">Timestamp</a> type (Ignite <a class="el" href="class_apache_1_1_ignite_1_1_data_1_1_date.html">Date</a> with additional nanoseconds fraction of the last millisecond). </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a2a096a28e3959e3cfe70629c42387f74"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2a096a28e3959e3cfe70629c42387f74">&#9670;&nbsp;</a></span>__construct()</h2>
@@ -138,11 +138,12 @@ Static Public Member Functions</h2></td></tr>
 <p>Public constructor.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramtype">float</td><td class="paramname">$millis</td><td>integer value representing number of milliseconds since January 1, 1970, 00:00:00 UTC. </td></tr>
-    <tr><td class="paramtype">int</td><td class="paramname">$nanos</td><td>nanoseconds of the last millisecond, should be in the range from 0 to 999999. </td></tr>
+    <tr><td class="paramtype">float</td><td class="paramname">$millis</td><td>integer number of milliseconds elapsed since January 1, 1970, 00:00:00 UTC. </td></tr>
+    <tr><td class="paramtype">int</td><td class="paramname">$nanos</td><td>nanoseconds of the last millisecond, should be in the range from 0 to 999999.</td></tr>
   </table>
   </dd>
 </dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_apache_1_1_ignite_1_1_data_1_1_timestamp.html">Timestamp</a> new <a class="el" href="class_apache_1_1_ignite_1_1_data_1_1_timestamp.html">Timestamp</a> instance. </dd></dl>
 
 </div>
 </div>
@@ -170,14 +171,14 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Creates an <a class="el" href="class_apache_1_1_ignite_1_1_data_1_1_timestamp.html">Timestamp</a> object from a DateTime object.</p>
+<p>Creates <a class="el" href="class_apache_1_1_ignite_1_1_data_1_1_timestamp.html">Timestamp</a> instance from DateTime instance.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramtype">DateTime</td><td class="paramname">$dateTime</td><td>a DateTime object.</td></tr>
+    <tr><td class="paramtype">DateTime</td><td class="paramname">$dateTime</td><td>DateTime instance.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_apache_1_1_ignite_1_1_data_1_1_timestamp.html">Timestamp</a> created <a class="el" href="class_apache_1_1_ignite_1_1_data_1_1_timestamp.html">Timestamp</a> object. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_apache_1_1_ignite_1_1_data_1_1_timestamp.html">Timestamp</a> new <a class="el" href="class_apache_1_1_ignite_1_1_data_1_1_timestamp.html">Timestamp</a> instance. </dd></dl>
 
 </div>
 </div>

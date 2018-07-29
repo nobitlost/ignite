@@ -86,6 +86,12 @@ Inheritance diagram for Apache\Ignite\Type\MapObjectType:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a08566a2b0936735801da3d2ff083c597"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_map_object_type.html#a08566a2b0936735801da3d2ff083c597">__construct</a> (int $subType=<a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_map_object_type.html#aa215559de46f69ed8ad8ec34baf028b8">MapObjectType::HASH_MAP</a>, $keyType=null, $valueType=null)</td></tr>
 <tr class="separator:a08566a2b0936735801da3d2ff083c597"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a57b5925cc7410f51433c7f1c9fffed00"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_map_object_type.html#a57b5925cc7410f51433c7f1c9fffed00">getSubType</a> ()</td></tr>
+<tr class="separator:a57b5925cc7410f51433c7f1c9fffed00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:adafd45b62fdc44a25b8497a22548caea"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_map_object_type.html#adafd45b62fdc44a25b8497a22548caea">getKeyType</a> ()</td></tr>
+<tr class="separator:adafd45b62fdc44a25b8497a22548caea"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8a3544d297b76a475e0ace87c3767b9d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_map_object_type.html#a8a3544d297b76a475e0ace87c3767b9d">getValueType</a> ()</td></tr>
+<tr class="separator:a8a3544d297b76a475e0ace87c3767b9d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_apache_1_1_ignite_1_1_type_1_1_object_type"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_apache_1_1_ignite_1_1_type_1_1_object_type')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html">Apache\Ignite\Type\ObjectType</a></td></tr>
 <tr class="memitem:aa18f1ab6c78fd12599efa73bedc71d7c inherit pub_methods_class_apache_1_1_ignite_1_1_type_1_1_object_type"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html#aa18f1ab6c78fd12599efa73bedc71d7c">getTypeCode</a> ()</td></tr>
 <tr class="separator:aa18f1ab6c78fd12599efa73bedc71d7c inherit pub_methods_class_apache_1_1_ignite_1_1_type_1_1_object_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -244,6 +250,74 @@ Additional Inherited Members</h2></td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="adafd45b62fdc44a25b8497a22548caea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#adafd45b62fdc44a25b8497a22548caea">&#9670;&nbsp;</a></span>getKeyType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Apache\Ignite\Type\MapObjectType::getKeyType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Returns type of the keys in the map.</p>
+<dl class="section return"><dt>Returns</dt><dd>int|ObjectType|null type of the keys in the map:<ul>
+<li>either a type code of primitive (simple) type (<a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html#PrimitiveTypeCodes">PrimitiveTypeCodes</a>)</li>
+<li>or an instance of class representing non-primitive (composite) type</li>
+<li>or null (or not specified) that means the type is not specified </li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+<a id="a57b5925cc7410f51433c7f1c9fffed00"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a57b5925cc7410f51433c7f1c9fffed00">&#9670;&nbsp;</a></span>getSubType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Apache\Ignite\Type\MapObjectType::getSubType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Returns map subtype, one of the <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_map_object_type.html">MapObjectType</a> constants.</p>
+<dl class="section return"><dt>Returns</dt><dd>int map subtype, one of the <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_map_object_type.html">MapObjectType</a> constants. </dd></dl>
+
+</div>
+</div>
+<a id="a8a3544d297b76a475e0ace87c3767b9d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8a3544d297b76a475e0ace87c3767b9d">&#9670;&nbsp;</a></span>getValueType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Apache\Ignite\Type\MapObjectType::getValueType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Returns type of the values in the map.</p>
+<dl class="section return"><dt>Returns</dt><dd>int|ObjectType|null type of the values in the map:<ul>
+<li>either a type code of primitive (simple) type (<a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html#PrimitiveTypeCodes">PrimitiveTypeCodes</a>)</li>
+<li>or an instance of class representing non-primitive (composite) type</li>
+<li>or null (or not specified) that means the type is not specified </li>
+</ul>
+</dd></dl>
 
 </div>
 </div>

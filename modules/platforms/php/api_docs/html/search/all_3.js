@@ -5,6 +5,7 @@ var searchData=
   ['cachenames',['cacheNames',['../class_apache_1_1_ignite_1_1_client.html#af979fadb1a50573d6e4fd9fb35517955',1,'Apache::Ignite::Client']]],
   ['char',['CHAR',['../class_apache_1_1_ignite_1_1_type_1_1_object_type.html#ac4a3a54faa1f26f3754b82acfa14b96f',1,'Apache::Ignite::Type::ObjectType']]],
   ['char_5farray',['CHAR_ARRAY',['../class_apache_1_1_ignite_1_1_type_1_1_object_type.html#a1cdd445b3d60d875b87fc40de9fca560',1,'Apache::Ignite::Type::ObjectType']]],
+  ['clearkey',['clearKey',['../interface_apache_1_1_ignite_1_1_cache_interface.html#a8e23da73bc0750e96985029c992c0712',1,'Apache::Ignite::CacheInterface']]],
   ['client',['Client',['../class_apache_1_1_ignite_1_1_client.html',1,'Apache::Ignite']]],
   ['clientconfiguration',['ClientConfiguration',['../class_apache_1_1_ignite_1_1_client_configuration.html',1,'Apache::Ignite']]],
   ['clientexception',['ClientException',['../class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html',1,'Apache::Ignite::Exception']]],
