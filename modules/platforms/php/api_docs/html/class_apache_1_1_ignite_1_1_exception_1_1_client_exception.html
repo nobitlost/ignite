@@ -67,7 +67,6 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pub-static-methods">Static Public Member Functions</a> &#124;
 <a href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Apache\Ignite\Exception\ClientException Class Reference</div>  </div>
@@ -88,15 +87,6 @@ Inheritance diagram for Apache\Ignite\Exception\ClientException:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:ae9cc47c92356457880a53304b169a35b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html#ae9cc47c92356457880a53304b169a35b">__construct</a> (string $message)</td></tr>
 <tr class="separator:ae9cc47c92356457880a53304b169a35b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr class="memitem:a8c30eda88cbeb7e65ebe13ece87c4556"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html#a8c30eda88cbeb7e65ebe13ece87c4556">unsupportedTypeException</a> ($type)</td></tr>
-<tr class="separator:a8c30eda88cbeb7e65ebe13ece87c4556"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0a6354b92ccf34e5a96cf48623d52d77"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html#a0a6354b92ccf34e5a96cf48623d52d77">illegalArgumentException</a> (?string $message)</td></tr>
-<tr class="separator:a0a6354b92ccf34e5a96cf48623d52d77"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a4906a7d56046739c805cf9b53be426a4"><td class="memItemLeft" align="right" valign="top">static&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html#a4906a7d56046739c805cf9b53be426a4">internalError</a> (?string $message=null)</td></tr>
-<tr class="separator:a4906a7d56046739c805cf9b53be426a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Base Ignite client exception class. </p>
@@ -123,109 +113,6 @@ Static Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
-<a id="a0a6354b92ccf34e5a96cf48623d52d77"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0a6354b92ccf34e5a96cf48623d52d77">&#9670;&nbsp;</a></span>illegalArgumentException()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static Apache\Ignite\Exception\ClientException::illegalArgumentException </td>
-          <td>(</td>
-          <td class="paramtype">?string&#160;</td>
-          <td class="paramname"><em>$message</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>An illegal or inappropriate argument has been passed to the API method.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramtype">string&#160;|&#160;null</td><td class="paramname">$message</td><td>the detail message.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">ClientException</a> </dd></dl>
-
-</div>
-</div>
-<a id="a4906a7d56046739c805cf9b53be426a4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4906a7d56046739c805cf9b53be426a4">&#9670;&nbsp;</a></span>internalError()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static Apache\Ignite\Exception\ClientException::internalError </td>
-          <td>(</td>
-          <td class="paramtype">?string&#160;</td>
-          <td class="paramname"><em>$message</em> = <code>null</code></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Ignite client internal error.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramtype">string&#160;|&#160;null</td><td class="paramname">$message</td><td>the detail message.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">ClientException</a> </dd></dl>
-
-</div>
-</div>
-<a id="a8c30eda88cbeb7e65ebe13ece87c4556"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8c30eda88cbeb7e65ebe13ece87c4556">&#9670;&nbsp;</a></span>unsupportedTypeException()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">static Apache\Ignite\Exception\ClientException::unsupportedTypeException </td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>$type</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Ignite client does not support one of the specified or received data types.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramtype">mixed</td><td class="paramname">$type</td><td>unsupported data type.</td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">ClientException</a> </dd></dl>
 
 </div>
 </div>

@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['binary_5fenum',['BINARY_ENUM',['../class_apache_1_1_ignite_1_1_object_type_1_1_object_type.html#a65da37429e862c55699c10527e9431ac',1,'Apache::Ignite::ObjectType::ObjectType']]],
-  ['binary_5fobject',['BINARY_OBJECT',['../class_apache_1_1_ignite_1_1_object_type_1_1_object_type.html#ab24eaedfd6cb3ea9212caad2d7e8eb82',1,'Apache::Ignite::ObjectType::ObjectType']]],
-  ['boolean',['BOOLEAN',['../class_apache_1_1_ignite_1_1_object_type_1_1_object_type.html#ace92af1aafcd452b9b8c807ac7e96367',1,'Apache::Ignite::ObjectType::ObjectType']]],
-  ['boolean_5farray',['BOOLEAN_ARRAY',['../class_apache_1_1_ignite_1_1_object_type_1_1_object_type.html#a356befb01cbd6500084fc257bd8cfb10',1,'Apache::Ignite::ObjectType::ObjectType']]],
-  ['byte',['BYTE',['../class_apache_1_1_ignite_1_1_object_type_1_1_object_type.html#a3e4b53dbe6820cfeffee089cfd697751',1,'Apache::Ignite::ObjectType::ObjectType']]],
-  ['byte_5farray',['BYTE_ARRAY',['../class_apache_1_1_ignite_1_1_object_type_1_1_object_type.html#a84aa6f6621e583848a8e180fa59d9c35',1,'Apache::Ignite::ObjectType::ObjectType']]]
+  ['binary_5fenum',['BINARY_ENUM',['../class_apache_1_1_ignite_1_1_type_1_1_object_type.html#a149ab48a68a73a382c8b365d420a1db6',1,'Apache::Ignite::Type::ObjectType']]],
+  ['binary_5fobject',['BINARY_OBJECT',['../class_apache_1_1_ignite_1_1_type_1_1_object_type.html#a01a597e6048442e31fe5f3b46aa75e90',1,'Apache::Ignite::Type::ObjectType']]],
+  ['boolean',['BOOLEAN',['../class_apache_1_1_ignite_1_1_type_1_1_object_type.html#a227dff414792f2b62996fcfac94c31c6',1,'Apache::Ignite::Type::ObjectType']]],
+  ['boolean_5farray',['BOOLEAN_ARRAY',['../class_apache_1_1_ignite_1_1_type_1_1_object_type.html#a35d678a44210eb01a9dbf339d4cf5ba2',1,'Apache::Ignite::Type::ObjectType']]],
+  ['byte',['BYTE',['../class_apache_1_1_ignite_1_1_type_1_1_object_type.html#a9b752ffddcaf491fc61b07a6e4b5120a',1,'Apache::Ignite::Type::ObjectType']]],
+  ['byte_5farray',['BYTE_ARRAY',['../class_apache_1_1_ignite_1_1_type_1_1_object_type.html#a89b106815e5111588bc7d431cbcb3e10',1,'Apache::Ignite::Type::ObjectType']]]
 ];

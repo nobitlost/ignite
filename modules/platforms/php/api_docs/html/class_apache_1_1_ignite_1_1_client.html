@@ -137,8 +137,7 @@ Public Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>array array with the existing cache names. The array is empty if no caches exist.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_connection_exception.html">Exception::ConnectionException</a></td><td>if </td></tr>
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if other error. </td></tr>
+    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
   </table>
   </dd>
 </dl>
@@ -161,6 +160,7 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Connects the client.</p>
+<p>Reconnects if the client already connected.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramtype"><a class="el" href="class_apache_1_1_ignite_1_1_client_configuration.html">ClientConfiguration</a></td><td class="paramname">$config</td><td>the client configuration.</td></tr>
@@ -209,12 +209,10 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html">CacheInterface</a> new cache client instance for the created cache.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html">CacheInterface</a> new cache instance for the created cache.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_connection_exception.html">Exception::ConnectionException</a></td><td>if </td></tr>
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_operation_exception.html">Exception::OperationException</a></td><td>if cache with the provided name already exists. </td></tr>
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if other error. </td></tr>
+    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
   </table>
   </dd>
 </dl>
@@ -245,9 +243,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_connection_exception.html">Exception::ConnectionException</a></td><td>if </td></tr>
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_operation_exception.html">Exception::OperationException</a></td><td>if cache with the provided name does not exist. </td></tr>
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if other error. </td></tr>
+    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
   </table>
   </dd>
 </dl>
@@ -288,14 +284,14 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Gets cache client instance of cache with the provided name. The method does not check if the cache with the provided name exists.</p>
+<p>Gets cache instance of cache with the provided name. The method does not check if the cache with the provided name exists.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramtype">string</td><td class="paramname">$name</td><td>cache name.</td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html">CacheInterface</a> new cache client instance.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html">CacheInterface</a> new cache instance.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
     <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
@@ -330,9 +326,7 @@ Public Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_apache_1_1_ignite_1_1_cache_configuration.html">CacheConfiguration</a> cache configuration.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_connection_exception.html">Exception::ConnectionException</a></td><td>if </td></tr>
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_operation_exception.html">Exception::OperationException</a></td><td>if cache with the provided name does not exist. </td></tr>
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if other error. </td></tr>
+    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
   </table>
   </dd>
 </dl>
@@ -372,10 +366,9 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html">CacheInterface</a> new cache client instance for the existing or created cache.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html">CacheInterface</a> new cache instance for the existing or created cache.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_connection_exception.html">Exception::ConnectionException</a></td><td>if </td></tr>
     <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
   </table>
   </dd>
@@ -398,7 +391,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Enables/disables the library debug output (including errors logging). Disabled by default.</p>
+<p>Enables/disables the Ignite client's debug output (including errors logging). Disabled by default.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramtype">bool</td><td class="paramname">$value</td><td>true to enable, false to disable. </td></tr>

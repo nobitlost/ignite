@@ -83,6 +83,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a411d1b42c09dd4525b0340b3d2f6c6db"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2159c928e1aa9afee679870d18f2a81e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html#a2159c928e1aa9afee679870d18f2a81e">put</a> ($key, $value)</td></tr>
 <tr class="separator:a2159c928e1aa9afee679870d18f2a81e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a267e3b90258f89896cddec6c6a0050fe"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html#a267e3b90258f89896cddec6c6a0050fe">removeAll</a> ()</td></tr>
+<tr class="separator:a267e3b90258f89896cddec6c6a0050fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Member Function Documentation</h2>
 <a id="a411d1b42c09dd4525b0340b3d2f6c6db"></a>
@@ -160,6 +162,30 @@ Public Member Functions</h2></td></tr>
 
 </div>
 </div>
+<a id="a267e3b90258f89896cddec6c6a0050fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a267e3b90258f89896cddec6c6a0050fe">&#9670;&nbsp;</a></span>removeAll()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Apache\Ignite\CacheInterface::removeAll </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Removes all entries from the cache, notifying listeners and cache writers.</p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="aafe6edd6fbd2b1d841425769bf7a3f08"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aafe6edd6fbd2b1d841425769bf7a3f08">&#9670;&nbsp;</a></span>setKeyType()</h2>
 
@@ -222,7 +248,7 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramtype">int&#160;|&#160;ObjectType&#160;|&#160;null</td><td class="paramname">$type</td><td>type of the values in the cache:<ul>
-<li>either a type code of primitive (simple) type (<a class="el" href="class_apache_1_1_ignite_1_1_object_type_1_1_object_type.html#PrimitiveTypeCodes">PrimitiveTypeCodes</a>)</li>
+<li>either a type code of primitive (simple) type (<a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html#PrimitiveTypeCodes">PrimitiveTypeCodes</a>)</li>
 <li>or an instance of class representing non-primitive (composite) type</li>
 <li>or null (means the type is not specified).</li>
 </ul>

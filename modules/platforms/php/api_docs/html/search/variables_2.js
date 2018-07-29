@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['char',['CHAR',['../class_apache_1_1_ignite_1_1_object_type_1_1_object_type.html#a04f7e72390da41d6785ee37a8446a206',1,'Apache::Ignite::ObjectType::ObjectType']]],
-  ['char_5farray',['CHAR_ARRAY',['../class_apache_1_1_ignite_1_1_object_type_1_1_object_type.html#aa5a652fa13d6b7a6caee4ac0674bffbd',1,'Apache::Ignite::ObjectType::ObjectType']]],
-  ['collection',['COLLECTION',['../class_apache_1_1_ignite_1_1_object_type_1_1_object_type.html#a10ffde896f9f2d6873f76e03da15ceec',1,'Apache::Ignite::ObjectType::ObjectType']]],
-  ['complex_5fobject',['COMPLEX_OBJECT',['../class_apache_1_1_ignite_1_1_object_type_1_1_object_type.html#ae6783add965ec59ac5a05c67ab21bac8',1,'Apache::Ignite::ObjectType::ObjectType']]]
+  ['char',['CHAR',['../class_apache_1_1_ignite_1_1_type_1_1_object_type.html#ac4a3a54faa1f26f3754b82acfa14b96f',1,'Apache::Ignite::Type::ObjectType']]],
+  ['char_5farray',['CHAR_ARRAY',['../class_apache_1_1_ignite_1_1_type_1_1_object_type.html#a1cdd445b3d60d875b87fc40de9fca560',1,'Apache::Ignite::Type::ObjectType']]],
+  ['collection',['COLLECTION',['../class_apache_1_1_ignite_1_1_type_1_1_object_type.html#ad22f7c3e4ae5fd9fba9de24658b8cb60',1,'Apache::Ignite::Type::ObjectType']]],
+  ['complex_5fobject',['COMPLEX_OBJECT',['../class_apache_1_1_ignite_1_1_type_1_1_object_type.html#a05680791f18f1b76a5e5c7a01dc6b71c',1,'Apache::Ignite::Type::ObjectType']]]
 ];
