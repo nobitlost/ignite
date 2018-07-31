@@ -1,17 +1,25 @@
 var searchData=
 [
   ['get',['get',['../interface_apache_1_1_ignite_1_1_cache_interface.html#a411d1b42c09dd4525b0340b3d2f6c6db',1,'Apache::Ignite::CacheInterface']]],
+  ['getall',['getAll',['../interface_apache_1_1_ignite_1_1_cache_interface.html#a08bf756c4b72a009e236f0a0c1c64c6b',1,'Apache::Ignite::CacheInterface']]],
+  ['getandput',['getAndPut',['../interface_apache_1_1_ignite_1_1_cache_interface.html#ac362819d7f1419c78b3c3a4824bab123',1,'Apache::Ignite::CacheInterface']]],
+  ['getandputifabsent',['getAndPutIfAbsent',['../interface_apache_1_1_ignite_1_1_cache_interface.html#a55d8c859f28235737cd7f5f45f407e20',1,'Apache::Ignite::CacheInterface']]],
+  ['getandremove',['getAndRemove',['../interface_apache_1_1_ignite_1_1_cache_interface.html#a3df46679fa167fed8b6f84b24e008a02',1,'Apache::Ignite::CacheInterface']]],
+  ['getandreplace',['getAndReplace',['../interface_apache_1_1_ignite_1_1_cache_interface.html#a93a7277fb8ed42dce0589c069df5a78f',1,'Apache::Ignite::CacheInterface']]],
   ['getcache',['getCache',['../class_apache_1_1_ignite_1_1_client.html#a9ec8e6b48728e7b6bf168b800ced203a',1,'Apache::Ignite::Client']]],
   ['getcacheconfiguration',['getCacheConfiguration',['../class_apache_1_1_ignite_1_1_client.html#a7c24de885010dbff2b907312fcce801e',1,'Apache::Ignite::Client']]],
   ['getendpoints',['getEndpoints',['../class_apache_1_1_ignite_1_1_client_configuration.html#a3be59caa411e94169a88061d3ffbbe99',1,'Apache::Ignite::ClientConfiguration']]],
+  ['getkey',['getKey',['../class_apache_1_1_ignite_1_1_cache_entry.html#a7a952635c9b45f2becc5b94aea716156',1,'Apache::Ignite::CacheEntry']]],
   ['getkeytype',['getKeyType',['../class_apache_1_1_ignite_1_1_type_1_1_map_object_type.html#adafd45b62fdc44a25b8497a22548caea',1,'Apache::Ignite::Type::MapObjectType']]],
   ['getmillis',['getMillis',['../class_apache_1_1_ignite_1_1_data_1_1_date.html#a8f2f75e32733273ae88f9c4256ed8528',1,'Apache\Ignite\Data\Date\getMillis()'],['../class_apache_1_1_ignite_1_1_data_1_1_time.html#a4893820b9bc08539a3272fcda80d8f6e',1,'Apache\Ignite\Data\Time\getMillis()']]],
   ['getnanos',['getNanos',['../class_apache_1_1_ignite_1_1_data_1_1_timestamp.html#af20d33b9b0578e2e48c9712918a8d197',1,'Apache::Ignite::Data::Timestamp']]],
   ['getorcreatecache',['getOrCreateCache',['../class_apache_1_1_ignite_1_1_client.html#a245c1d5b8d28a2a92f468a87a79439ae',1,'Apache::Ignite::Client']]],
   ['getpassword',['getPassword',['../class_apache_1_1_ignite_1_1_client_configuration.html#a133e218a47eadceee46be21cc31c2749',1,'Apache::Ignite::ClientConfiguration']]],
   ['getseconds',['getSeconds',['../class_apache_1_1_ignite_1_1_data_1_1_date.html#a2cc2081b342665971507df347debee6c',1,'Apache\Ignite\Data\Date\getSeconds()'],['../class_apache_1_1_ignite_1_1_data_1_1_time.html#a23f8957f8c0e42ea5fa95f2504de993e',1,'Apache\Ignite\Data\Time\getSeconds()']]],
+  ['getsize',['getSize',['../interface_apache_1_1_ignite_1_1_cache_interface.html#a7edd7779a03a7b228c7c755bdb36bbb2',1,'Apache::Ignite::CacheInterface']]],
   ['getsubtype',['getSubType',['../class_apache_1_1_ignite_1_1_type_1_1_map_object_type.html#a57b5925cc7410f51433c7f1c9fffed00',1,'Apache::Ignite::Type::MapObjectType']]],
   ['gettypecode',['getTypeCode',['../class_apache_1_1_ignite_1_1_type_1_1_object_type.html#aa18f1ab6c78fd12599efa73bedc71d7c',1,'Apache::Ignite::Type::ObjectType']]],
   ['getusername',['getUserName',['../class_apache_1_1_ignite_1_1_client_configuration.html#ae06b5bfc7a91c674eece3f1c6cf78d51',1,'Apache::Ignite::ClientConfiguration']]],
+  ['getvalue',['getValue',['../class_apache_1_1_ignite_1_1_cache_entry.html#a6e4602feac645d8d5c0510a305074603',1,'Apache::Ignite::CacheEntry']]],
   ['getvaluetype',['getValueType',['../class_apache_1_1_ignite_1_1_type_1_1_map_object_type.html#a8a3544d297b76a475e0ace87c3767b9d',1,'Apache::Ignite::Type::MapObjectType']]]
 ];

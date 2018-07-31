@@ -65,7 +65,8 @@ $(function() {
 
 <h3><a id="index__"></a>- _ -</h3><ul>
 <li>__construct()
-: <a class="el" href="class_apache_1_1_ignite_1_1_client.html#a037a1906d259a4a1e1c4b4fd4be687b9">Apache\Ignite\Client</a>
+: <a class="el" href="class_apache_1_1_ignite_1_1_cache_entry.html#a055ed9de7cffeb0d0ad6a80c380fd181">Apache\Ignite\CacheEntry</a>
+, <a class="el" href="class_apache_1_1_ignite_1_1_client.html#a037a1906d259a4a1e1c4b4fd4be687b9">Apache\Ignite\Client</a>
 , <a class="el" href="class_apache_1_1_ignite_1_1_client_configuration.html#a25d639553478c5be3b417267f275f8b8">Apache\Ignite\ClientConfiguration</a>
 , <a class="el" href="class_apache_1_1_ignite_1_1_data_1_1_date.html#ad69159c1e854e5c7292845c7034a3f5f">Apache\Ignite\Data\Date</a>
 , <a class="el" href="class_apache_1_1_ignite_1_1_data_1_1_time.html#a915841d1af8c7d7785d7447c2dcd373b">Apache\Ignite\Data\Time</a>
@@ -75,7 +76,6 @@ $(function() {
 , <a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_operation_exception.html#ace290a92e9c93201a156c43d14e642ef">Apache\Ignite\Exception\OperationException</a>
 , <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_collection_object_type.html#a15e135d0b6e32eb3bc35687bf43bf18e">Apache\Ignite\Type\CollectionObjectType</a>
 , <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_map_object_type.html#a08566a2b0936735801da3d2ff083c597">Apache\Ignite\Type\MapObjectType</a>
-, <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html#a620988c8d02cd5ea258669b40889d4d5">Apache\Ignite\Type\ObjectType</a>
 </li>
 </ul>
 
@@ -84,11 +84,23 @@ $(function() {
 <li>cacheNames()
 : <a class="el" href="class_apache_1_1_ignite_1_1_client.html#af979fadb1a50573d6e4fd9fb35517955">Apache\Ignite\Client</a>
 </li>
+<li>clear()
+: <a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html#af23ec9a7f995a4eed13b2991a13b8deb">Apache\Ignite\CacheInterface</a>
+</li>
 <li>clearKey()
 : <a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html#a8e23da73bc0750e96985029c992c0712">Apache\Ignite\CacheInterface</a>
 </li>
+<li>clearKeys()
+: <a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html#a1855f655d834dfa80704c7c5c8bcbfe0">Apache\Ignite\CacheInterface</a>
+</li>
 <li>connect()
 : <a class="el" href="class_apache_1_1_ignite_1_1_client.html#ab8b0c48c01bb9eddeb00ed4ebba0a650">Apache\Ignite\Client</a>
+</li>
+<li>containsKey()
+: <a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html#aed9bab40e198b0608454ac19f7ca842d">Apache\Ignite\CacheInterface</a>
+</li>
+<li>containsKeys()
+: <a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html#a476529b8ab67e93232f3514094afb694">Apache\Ignite\CacheInterface</a>
 </li>
 <li>createCache()
 : <a class="el" href="class_apache_1_1_ignite_1_1_client.html#a5e5a23f9ff97a7cc334fa89eaf226358">Apache\Ignite\Client</a>
@@ -118,6 +130,21 @@ $(function() {
 <li>get()
 : <a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html#a411d1b42c09dd4525b0340b3d2f6c6db">Apache\Ignite\CacheInterface</a>
 </li>
+<li>getAll()
+: <a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html#a08bf756c4b72a009e236f0a0c1c64c6b">Apache\Ignite\CacheInterface</a>
+</li>
+<li>getAndPut()
+: <a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html#ac362819d7f1419c78b3c3a4824bab123">Apache\Ignite\CacheInterface</a>
+</li>
+<li>getAndPutIfAbsent()
+: <a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html#a55d8c859f28235737cd7f5f45f407e20">Apache\Ignite\CacheInterface</a>
+</li>
+<li>getAndRemove()
+: <a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html#a3df46679fa167fed8b6f84b24e008a02">Apache\Ignite\CacheInterface</a>
+</li>
+<li>getAndReplace()
+: <a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html#a93a7277fb8ed42dce0589c069df5a78f">Apache\Ignite\CacheInterface</a>
+</li>
 <li>getCache()
 : <a class="el" href="class_apache_1_1_ignite_1_1_client.html#a9ec8e6b48728e7b6bf168b800ced203a">Apache\Ignite\Client</a>
 </li>
@@ -126,6 +153,9 @@ $(function() {
 </li>
 <li>getEndpoints()
 : <a class="el" href="class_apache_1_1_ignite_1_1_client_configuration.html#a3be59caa411e94169a88061d3ffbbe99">Apache\Ignite\ClientConfiguration</a>
+</li>
+<li>getKey()
+: <a class="el" href="class_apache_1_1_ignite_1_1_cache_entry.html#a7a952635c9b45f2becc5b94aea716156">Apache\Ignite\CacheEntry</a>
 </li>
 <li>getKeyType()
 : <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_map_object_type.html#adafd45b62fdc44a25b8497a22548caea">Apache\Ignite\Type\MapObjectType</a>
@@ -147,6 +177,9 @@ $(function() {
 : <a class="el" href="class_apache_1_1_ignite_1_1_data_1_1_date.html#a2cc2081b342665971507df347debee6c">Apache\Ignite\Data\Date</a>
 , <a class="el" href="class_apache_1_1_ignite_1_1_data_1_1_time.html#a23f8957f8c0e42ea5fa95f2504de993e">Apache\Ignite\Data\Time</a>
 </li>
+<li>getSize()
+: <a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html#a7edd7779a03a7b228c7c755bdb36bbb2">Apache\Ignite\CacheInterface</a>
+</li>
 <li>getSubType()
 : <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_map_object_type.html#a57b5925cc7410f51433c7f1c9fffed00">Apache\Ignite\Type\MapObjectType</a>
 </li>
@@ -155,6 +188,9 @@ $(function() {
 </li>
 <li>getUserName()
 : <a class="el" href="class_apache_1_1_ignite_1_1_client_configuration.html#ae06b5bfc7a91c674eece3f1c6cf78d51">Apache\Ignite\ClientConfiguration</a>
+</li>
+<li>getValue()
+: <a class="el" href="class_apache_1_1_ignite_1_1_cache_entry.html#a6e4602feac645d8d5c0510a305074603">Apache\Ignite\CacheEntry</a>
 </li>
 <li>getValueType()
 : <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_map_object_type.html#a8a3544d297b76a475e0ace87c3767b9d">Apache\Ignite\Type\MapObjectType</a>
@@ -166,12 +202,33 @@ $(function() {
 <li>put()
 : <a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html#a2159c928e1aa9afee679870d18f2a81e">Apache\Ignite\CacheInterface</a>
 </li>
+<li>putAll()
+: <a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html#ab845ba00bf994db2397f8530f07f5626">Apache\Ignite\CacheInterface</a>
+</li>
+<li>putIfAbsent()
+: <a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html#ad5a3a778d424a50e74e9df2a46b0b293">Apache\Ignite\CacheInterface</a>
+</li>
 </ul>
 
 
 <h3><a id="index_r"></a>- r -</h3><ul>
 <li>removeAll()
 : <a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html#a267e3b90258f89896cddec6c6a0050fe">Apache\Ignite\CacheInterface</a>
+</li>
+<li>removeIfEquals()
+: <a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html#a114519d32262efa570fd893ab26e1199">Apache\Ignite\CacheInterface</a>
+</li>
+<li>removeKey()
+: <a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html#aa8238a2e7c8333abed925adcb2105253">Apache\Ignite\CacheInterface</a>
+</li>
+<li>removeKeys()
+: <a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html#ac0ad2214eb4dd3fa978adb7f7a300a1f">Apache\Ignite\CacheInterface</a>
+</li>
+<li>replace()
+: <a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html#a7efbce4d86d510e84b4bd713f61a976f">Apache\Ignite\CacheInterface</a>
+</li>
+<li>replaceIfEquals()
+: <a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html#a75355ea9f78dae9df3f3210c92e3a573">Apache\Ignite\CacheInterface</a>
 </li>
 </ul>
 

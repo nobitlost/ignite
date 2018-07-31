@@ -67,7 +67,6 @@ $(function() {
 <div class="header">
   <div class="summary">
 <a href="#pub-methods">Public Member Functions</a> &#124;
-<a href="#pro-methods">Protected Member Functions</a> &#124;
 <a href="class_apache_1_1_ignite_1_1_type_1_1_object_type-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">Apache\Ignite\Type\ObjectType Class Reference</div>  </div>
@@ -171,47 +170,62 @@ Public Attributes</h2></td></tr>
 <tr class="separator:a55fa4d18f0194abee7821879a978ad54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a05680791f18f1b76a5e5c7a01dc6b71c"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html#a05680791f18f1b76a5e5c7a01dc6b71c">COMPLEX_OBJECT</a> = 103</td></tr>
 <tr class="separator:a05680791f18f1b76a5e5c7a01dc6b71c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-methods"></a>
-Protected Member Functions</h2></td></tr>
-<tr class="memitem:a620988c8d02cd5ea258669b40889d4d5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html#a620988c8d02cd5ea258669b40889d4d5">__construct</a> (int $typeCode)</td></tr>
-<tr class="separator:a620988c8d02cd5ea258669b40889d4d5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Base class representing a type of Ignite object.</p>
-<p>The class has no public constructor. Only subclasses may be instantiated.</p>
+<p>The class is abstract and has no public constructor. Only subclasses may be instantiated.</p>
 <p>There are two groups of Ignite object types:</p>
 <ul>
-<li>Primitive (simple) types. To fully describe such a type it is enough to specify Ignite type code <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html#PrimitiveTypeCodes">PrimitiveTypeCodes</a> only.</li>
-<li>Non-primitive (composite) types. To fully describe such a type Ignite type code <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html#CompositeTypeCodes">CompositeTypeCodes</a> with additional information should be specified. Eg. a kind of map or a kind of collection.</li>
+<li>Primitive (simple) types. To fully describe such a type: it is enough to specify Ignite type code <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html#PrimitiveTypeCodes">PrimitiveTypeCodes</a> only.</li>
+<li>Non-primitive (composite) types. To fully describe such a type: Ignite type code <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html#CompositeTypeCodes">CompositeTypeCodes</a> with additional information (eg. a kind of map or a kind of collection) should be specified.</li>
 </ul>
 <p>This class helps the Ignite client to make a mapping between PHP types and types used by Ignite.</p>
 <p>In many methods the Ignite client does not require to directly specify a type of Ignite object. In this case the Ignite client tries to make automatic mapping between PHP types and Ignite object types according to the following mapping tables: </p><hr/>
-<p>DEFAULT MAPPING FROM PHP type TO Ignite type code.</p>
-<p>This mapping is used when an application does not explicitly specify an Ignite type for a field and is writing data to that field.</p>
+<p>COMMENTS TO ALL TABLES:</p>
+<h2>PHP type </h2>
+<p>It is a PHP primitive or a PHP object: <a href="http://php.net/manual/en/language.types.intro.php">http://php.net/manual/en/language.types.intro.php</a> Plus additional types:</p><ul>
+<li>Ds/Set, Ds/Map - ???</li>
+<li>Date, Time, Timestamp, ???, BinaryObject - are PHP classes introduced by the Ignite client.</li>
+</ul>
+<h2>Ignite type code </h2>
+<p>It is a type code of Ignite primitive type (<a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html#PrimitiveTypeCodes">PrimitiveTypeCodes</a>) or Ignite composite type (<a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html#CompositeTypeCodes">CompositeTypeCodes</a>). </p><hr/>
+<p>DEFAULT MAPPING FROM PHP type TO Ignite type code:</p>
+<p>This mapping is used when an application does not explicitly specify an Ignite type for a field and it is writing data to that field.</p>
 <pre>
-| PHP type                  | Ignite type code      |
-| ------------------------- | ----------------------|
-| boolean                   | BOOLEAN               |
-| integer                   | INTEGER               |
-| float                     | DOUBLE                |
-| string                    | STRING                |
-| Date                      | DATE                  |
-| Time                      | TIME                  |
-| Timestamp                 | TIMESTAMP             |
-| array of boolean          | BOOLEAN_ARRAY / MAP   |
-| array of integer          | INTEGER_ARRAY / MAP   |
-| array of float            | DOUBLE_ARRAY / MAP    |
-| array of string           | STRING_ARRAY / MAP    |
-| array of Date             | DATE_ARRAY / MAP      |
-| array of Time             | TIME_ARRAY / MAP      |
-| array of Timestamp        | TIMESTAMP_ARRAY / MAP |
-| Ds/Set                    | COLLECTION (HASH_SET) |
-| Ds/Map                    | MAP (HASH_MAP)        |
-</pre><p>Type of an array content is determined by the type of the first element of the array. Empty array has no default mapping.</p>
-<p>All other PHP types have no default mapping. </p><hr/>
-<p>DEFAULT MAPPING FROM Ignite type code TO PHP type.</p>
-<p>This mapping is used when an application does not explicitly specify an Ignite type for a field and is reading data from that field.</p>
+| PHP type                      | Ignite type code      |
+| ----------------------------- | ----------------------|
+| boolean                       | BOOLEAN               |
+| integer                       | INTEGER               |
+| float                         | DOUBLE                |
+| string                        | STRING                |
+| Date                          | DATE                  |
+| Time                          | TIME                  |
+| Timestamp                     | TIMESTAMP             |
+| ???                           | ENUM                  |
+| ???                           | DECIMAL               |
+| BinaryObject ???              | COMPLEX_OBJECT        |
+| any other PHP Object          | COMPLEX_OBJECT        |
+| associative array of          |                       |
+|    any PHP supported type     | MAP (HASH_MAP)        |
+| indexed array of boolean      | BOOLEAN_ARRAY         |
+| indexed array of integer      | INTEGER_ARRAY         |
+| indexed array of float        | DOUBLE_ARRAY          |
+| indexed array of string       | STRING_ARRAY          |
+| indexed array of Date         | DATE_ARRAY            |
+| indexed array of Time         | TIME_ARRAY            |
+| indexed array of Timestamp    | TIMESTAMP_ARRAY       |
+| indexed array of ???          | ENUM_ARRAY            |
+| indexed array of ???          | DECIMAL_ARRAY         |
+| indexed array of BinaryObject | OBJECT_ARRAY          |
+| indexed array of              |                       |
+|       any other PHP Object    | OBJECT_ARRAY          |
+| Ds/Set                        | COLLECTION (HASH_SET) |
+| Ds/Map                        | MAP (HASH_MAP)        |
+</pre><p>All other PHP types have no default mapping.</p>
+<p>PHP Class - ??? PHP supported type - is any PHP type mentioned in the table.</p>
+<p>Associative and indexed PHP arrays: <a href="http://php.net/manual/en/language.types.array.php">http://php.net/manual/en/language.types.array.php</a> Type of an array's value is determined by the value's type in the first element of the array. Empty array has no default mapping. </p><hr/>
+<p>DEFAULT MAPPING FROM Ignite type code TO PHP type:</p>
+<p>This mapping is used when an application does not explicitly specify an Ignite type for a field and it is reading data from that field.</p>
 <pre>
 | Ignite type code             | PHP type                              |
 | ---------------------------- | --------------------------------------|
@@ -221,24 +235,32 @@ Protected Member Functions</h2></td></tr>
 | LONG                         | integer/float                         |
 | FLOAT                        | float                                 |
 | DOUBLE                       | float                                 |
+| DECIMAL                      | ???                                   |
 | BOOLEAN                      | boolean                               |
 | STRING                       | string                                |
 | CHAR                         | string (one character)                |
+| UUID                         | ???                                   |
 | DATE                         | Date                                  |
 | TIME                         | Time                                  |
 | TIMESTAMP                    | Timestamp                             |
+| ENUM                         | ???                                   |
+| COMPLEX_OBJECT               | BinaryObject ???                      |
 | BYTE_ARRAY                   | array of integer                      |
 | SHORT_ARRAY                  | array of integer                      |
 | INTEGER_ARRAY                | array of integer                      |
 | LONG_ARRAY                   | array of integer/float                |
 | FLOAT_ARRAY                  | array of float                        |
 | DOUBLE_ARRAY                 | array of float                        |
+| DECIMAL_ARRAY                | ???                                   |
 | BOOLEAN_ARRAY                | array of boolean                      |
 | STRING_ARRAY                 | array of string                       |
 | CHAR_ARRAY                   | array of string (one character)       |
+| UUID_ARRAY                   | ???                                   |
 | DATE_ARRAY                   | array of Date                         |
 | TIME_ARRAY                   | array of Time                         |
 | TIMESTAMP_ARRAY              | array of Timestamp                    |
+| ENUM_ARRAY                   | ???                                   |
+| OBJECT_ARRAY                 | ???                                   |
 | COLLECTION (USER_COL)        | array                                 |
 | COLLECTION (ARR_LIST)        | array                                 |
 | COLLECTION (LINKED_LIST)     | array                                 |
@@ -250,43 +272,29 @@ Protected Member Functions</h2></td></tr>
 | MAP (LINKED_HASH_MAP)        | Ds/Map                                |
 | NULL                         | null                                  |
 </pre> <hr/>
-<p>COMMENTS TO ALL TABLES</p>
-<p>PHP type - is a PHP primitive or a PHP object (<a href="http://php.net/manual/en/language.types.intro.php">http://php.net/manual/en/language.types.intro.php</a>)</p>
-<p>Ignite type code - is the type code of an Ignite primitive type (<a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html#PrimitiveTypeCodes">PrimitiveTypeCodes</a>) or an Ignite composite type (<a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html#CompositeTypeCodes">CompositeTypeCodes</a>). </p><hr/>
- </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a620988c8d02cd5ea258669b40889d4d5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a620988c8d02cd5ea258669b40889d4d5">&#9670;&nbsp;</a></span>__construct()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">Apache\Ignite\Type\ObjectType::__construct </td>
-          <td>(</td>
-          <td class="paramtype">int&#160;</td>
-          <td class="paramname"><em>$typeCode</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">protected</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramtype">int</td><td class="paramname">$typeCode</td><td></td></tr>
-  </table>
-  </dd>
-</dl>
-
-</div>
-</div>
-<h2 class="groupheader">Member Function Documentation</h2>
+<p>RETURNED PHP types WHEN READING DATA OF THE SPECIFIED Ignite type code:</p>
+<p>When an application explicitly specifies an Ignite type for a field and it is reading data from that field, the following PHP types are returned for every concrete Ignite type code - SEE THE PREVIOUS TABLE with the following additional comments:</p>
+<p>TO UPDATE ???</p>
+<ul>
+<li>for COMPLEX_OBJECT the Ignite <a class="el" href="class_apache_1_1_ignite_1_1_client.html">Client</a> returns a PHP Object which is defined by the specified ComplexObjectType.</li>
+<li>the returned Map for MAP is defined by the specified <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_map_object_type.html">MapObjectType</a>.</li>
+<li>the returned Set or Array for COLLECTION is defined by the specified <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_collection_object_type.html">CollectionObjectType</a>.</li>
+<li>the returned Array for OBJECT_ARRAY is defined by the specified ObjectArrayType.</li>
+<li>NULL cannot be specified as a type of a field but PHP null may be returned as a value of a field. <hr/>
+</li>
+</ul>
+<p>ALLOWED PHP types WHEN WRITING DATA OF THE SPECIFIED Ignite type code:</p>
+<p>When an application explicitly specifies an Ignite type for a field and it is writing data to that field, the following PHP types are allowed for every concrete Ignite type code - SEE THE PREVIOUS TABLE with the following additional comments:</p>
+<p>TO UPDATE ???</p>
+<ul>
+<li>for COMPLEX_OBJECT the Ignite <a class="el" href="class_apache_1_1_ignite_1_1_client.html">Client</a> allows a PHP Object which is defined by the specified ComplexObjectType.</li>
+<li>the allowed Map for MAP is defined by the specified <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_map_object_type.html">MapObjectType</a>.</li>
+<li>the allowed Set or Array for COLLECTION is defined by the specified <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_collection_object_type.html">CollectionObjectType</a>.</li>
+<li>the allowed Array for OBJECT_ARRAY is defined by the specified ObjectArrayType.</li>
+<li>NULL cannot be specified as a type of a field but PHP null is allowed as value of a field (but not as a key/value in a cache) or as a value of Array/Set/Map element for all Ignite types, except BYTE, SHORT, INTEGER, LONG, FLOAT, DOUBLE, CHAR, BOOLEAN.</li>
+</ul>
+<h2>- for all *_ARRAY Ignite types an empty PHP Array is allowed. </h2>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="aa18f1ab6c78fd12599efa73bedc71d7c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa18f1ab6c78fd12599efa73bedc71d7c">&#9670;&nbsp;</a></span>getTypeCode()</h2>
 
@@ -301,7 +309,8 @@ Protected Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
+<p>INTERNAL Gets Ignite type code of this Ignite object type.</p>
+<dl class="section return"><dt>Returns</dt><dd>int Ignite type code </dd></dl>
 
 </div>
 </div>

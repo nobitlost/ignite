@@ -1,6 +1,7 @@
 var searchData=
 [
   ['cacheconfiguration',['CacheConfiguration',['../class_apache_1_1_ignite_1_1_cache_configuration.html',1,'Apache::Ignite']]],
+  ['cacheentry',['CacheEntry',['../class_apache_1_1_ignite_1_1_cache_entry.html',1,'Apache::Ignite']]],
   ['cacheinterface',['CacheInterface',['../interface_apache_1_1_ignite_1_1_cache_interface.html',1,'Apache::Ignite']]],
   ['client',['Client',['../class_apache_1_1_ignite_1_1_client.html',1,'Apache::Ignite']]],
   ['clientconfiguration',['ClientConfiguration',['../class_apache_1_1_ignite_1_1_client_configuration.html',1,'Apache::Ignite']]],
