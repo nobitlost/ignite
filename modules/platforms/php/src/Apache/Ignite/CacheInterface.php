@@ -18,7 +18,22 @@
 
 namespace Apache\Ignite;
 
+use Apache\Ignite\Type\ObjectType;
+use Apache\Ignite\Exception\ClientException;
+use Apache\Ignite\Query\Query;
+use Apache\Ignite\Query\CursorInterface;
+
 /**
+ * Interface representing and providing access to Ignite cache.
+ *
+ * An instance of the class with this interface should be obtained via the methods of Ignite Client.
+ * One instance of such a class provides access to one Ignite cache which is specified
+ * during the instance obtaining and cannot be changed after that.
+ *
+ * There are three groups of methods in the cache interface:
+ *   - methods to configure the interface itself (optionally specify Ignite type for cache key and/or value)
+ *   - methods to operate with the cache using Key-Value Queries
+ *   - methods to operate with the cache using SQL and Scan Queries
  * 
  */
 interface CacheInterface
@@ -48,18 +63,20 @@ interface CacheInterface
      */
     const PEEK_MODE_BACKUP = 3;
     /** @} */ // end of PeekMode
-    
+
+    /* Methods to configure the cache interface */
+
     /**
      * Specifies a type of the cache key.
      *
-     * The cache client assumes that keys in all further operations with the cache
-     * will have the specified type.
-     * Eg. the cache client will convert keys provided as input parameters of the methods
-     * to the specified object type before sending them to a server.
+     * Ignite client assumes that keys in all further operations with the cache
+     * will have the Ignite type specified by this method.
+     * Eg. the client will convert keys provided as input parameters of the Key-Value or SQL operations
+     * to the specified Ignite object type before sending the keys to a server.
      *
-     * After the cache client creation a type of the cache key is not specified (null).
+     * By default a type of the cache key is not specified (null).
      *
-     * If the type is not specified then during operations the cache client
+     * If the type is not specified then during operations Ignite client
      * will do automatic mapping between some of the PHP types and Ignite object types -
      * according to the mapping table defined in the description of the ObjectType class.
      *
@@ -68,24 +85,24 @@ interface CacheInterface
      *   - or an instance of class representing non-primitive (composite) type
      *   - or null (means the type is not specified).
      *
-     * @return CacheInterface the same instance of the cache client.
+     * @return CacheInterface the same instance of the class.
      *
-     * @throws Exception::ClientException if error.
+     * @throws ClientException if error.
      */
     public function setKeyType($type): CacheInterface;
     
     /**
      * Specifies a type of the cache value.
      *
-     * The cache client assumes that values in all further operations with the cache
-     * will have the specified type.
-     * Eg. the cache client will convert values provided as input parameters of the methods
-     * to the specified object type before sending them to a server.
+     * Ignite client assumes that values in all further operations with the cache
+     * will have the Ignite type specified by this method.
+     * Eg. the client will convert values provided as input parameters of the Key-Value or SQL operations
+     * to the specified Ignite object type before sending the values to a server.
      *
-     * After the cache client creation a type of the cache value is not specified (null).
+     * By default a type of the cache value is not specified (null).
      *
-     * If the type is not specified then during operations the cache client
-     * will do automatic mapping between some of the PHP types and object types -
+     * If the type is not specified then during operations Ignite client
+     * will do automatic mapping between some of the PHP types and Ignite object types -
      * according to the mapping table defined in the description of the ObjectType class.
      *
      * @param int|ObjectType|null $type type of the values in the cache:
@@ -93,11 +110,13 @@ interface CacheInterface
      *   - or an instance of class representing non-primitive (composite) type
      *   - or null (means the type is not specified).
      *
-     * @return CacheInterface the same instance of the cache client.
+     * @return CacheInterface the same instance of the class.
      *
-     * @throws Exception::ClientException if error.
+     * @throws ClientException if error.
      */
     public function setValueType($type): CacheInterface;
+
+    /* Methods to operate with the cache using Key-Value Queries */
     
     /**
      * Retrieves a value associated with the specified key from the cache.
@@ -106,7 +125,7 @@ interface CacheInterface
      * 
      * @return mixed value associated with the specified key, or null if it does not exist.
      * 
-     * @throws Exception::ClientException if error.
+     * @throws ClientException if error.
      */
     public function get($key);
     
@@ -118,7 +137,7 @@ interface CacheInterface
      * @return array the retrieved entries (key-value pairs) of CacheEntry.
      *   Entries with the keys which do not exist in the cache are not included into the array.
      *
-     * @throws Exception::ClientException if error.
+     * @throws ClientException if error.
      */
     public function getAll(array $keys): array;
     
@@ -131,7 +150,7 @@ interface CacheInterface
      * @param mixed $key key
      * @param mixed $value value to be associated with the specified key.
      *
-     * @throws Exception::ClientException if error.
+     * @throws ClientException if error.
      */
     public function put($key, $value): void;
 
@@ -143,7 +162,7 @@ interface CacheInterface
      *
      * @param array $entries entries (key-value pairs) of CacheEntry to be put into the cache.
      *
-     * @throws Exception::ClientException if error.
+     * @throws ClientException if error.
      */
     public function putAll(array $entries): void;
     
@@ -154,7 +173,7 @@ interface CacheInterface
      * 
      * @return bool true if the key exists, false otherwise.
      *
-     * @throws Exception::ClientException if error.
+     * @throws ClientException if error.
      */
     public function containsKey($key): bool;
     
@@ -166,7 +185,7 @@ interface CacheInterface
      * @return bool true if all the keys exist,
      *   false if at least one of the keys does not exist in the cache.
      * 
-     * @throws Exception::ClientException if error.
+     * @throws ClientException if error.
      */
     public function containsKeys(array $keys): bool;
     
@@ -182,7 +201,7 @@ interface CacheInterface
      * 
      * @return mixed the previous value associated with the specified key, or null if it did not exist.
      * 
-     * @throws Exception::ClientException if error.
+     * @throws ClientException if error.
      */
     public function getAndPut($key, $value);
 
@@ -196,7 +215,7 @@ interface CacheInterface
      * 
      * @return mixed the previous value associated with the specified key, or null if it did not exist.
      * 
-     * @throws Exception::ClientException if error.
+     * @throws ClientException if error.
      */
     public function getAndReplace($key, $value);
     
@@ -207,7 +226,7 @@ interface CacheInterface
      * 
      * @return mixed the last value associated with the specified key, or null if it did not exist.
      * 
-     * @throws Exception::ClientException if error.
+     * @throws ClientException if error.
      */
     public function getAndRemove($key);
 
@@ -220,7 +239,7 @@ interface CacheInterface
      * 
      * @return true if the operation has been done, false otherwise.
      * 
-     * @throws Exception::ClientException if error.
+     * @throws ClientException if error.
      */
     public function putIfAbsent($key, $value): bool;
     
@@ -234,7 +253,7 @@ interface CacheInterface
      * @return mixed the current value associated with the key if it already exists in the cache,
      *   null if the new entry is created.
      * 
-     * @throws Exception::ClientException if error.
+     * @throws ClientException if error.
      */
     public function getAndPutIfAbsent($key, $value);
     
@@ -247,7 +266,7 @@ interface CacheInterface
      * 
      * @return bool true if the operation has been done, false otherwise.
      * 
-     * @throws Exception::ClientException if error.
+     * @throws ClientException if error.
      */
     public function replace($key, $value): bool;
 
@@ -262,14 +281,14 @@ interface CacheInterface
      * 
      * @return bool true if the operation has been done, false otherwise.
      * 
-     * @throws Exception::ClientException if error.
+     * @throws ClientException if error.
      */
     public function replaceIfEquals($key, $value, $newValue): bool;
     
     /**
      * Removes all entries from the cache, without notifying listeners and cache writers.
      * 
-     * @throws Exception::ClientException if error.
+     * @throws ClientException if error.
      */
     public function clear(): void;
     
@@ -278,7 +297,7 @@ interface CacheInterface
      * 
      * @param mixed $key key to be removed.
      *
-     * @throws Exception::ClientException if error.
+     * @throws ClientException if error.
      */
     public function clearKey($key): void;
     
@@ -287,7 +306,7 @@ interface CacheInterface
      * 
      * @param array $keys keys to be removed.
      * 
-     * @throws Exception::ClientException if error.
+     * @throws ClientException if error.
      */
     public function clearKeys($keys): void;
     
@@ -298,7 +317,7 @@ interface CacheInterface
      * 
      * @return bool true if the operation has been done, false otherwise.
      * 
-     * @throws Exception::ClientException if error.
+     * @throws ClientException if error.
      */
     public function removeKey($key): bool;
     
@@ -311,7 +330,7 @@ interface CacheInterface
      * 
      * @return bool true if the operation has been done, false otherwise.
      * 
-     * @throws Exception::ClientException if error.
+     * @throws ClientException if error.
      */
     public function removeIfEquals($key, $value): bool;
     
@@ -320,14 +339,14 @@ interface CacheInterface
      * 
      * @param array $keys keys to be removed.
      * 
-     * @throws Exception::ClientException if error.
+     * @throws ClientException if error.
      */
     public function removeKeys($keys): void;
             
     /**
      * Removes all entries from the cache, notifying listeners and cache writers.
      * 
-     * @throws Exception::ClientException if error.
+     * @throws ClientException if error.
      */
     public function removeAll(): void;
     
@@ -338,7 +357,23 @@ interface CacheInterface
      * 
      * @return int the number of the entries in the cache.
      * 
-     * @throws Exception::ClientException if error.
+     * @throws ClientException if error.
      */
     public function getSize(int ...$peekModes): int;
+
+    /* Methods to operate with the cache using SQL and Scan Queries */
+
+    /**
+     * Starts an SQL, SQL Fields or Scan query operation.
+     * 
+     * @param Query $query query to be executed.
+     * 
+     * @return CursorInterface new instance of the class with interface representing a cursor
+     * to obtain the results of the query operation:
+     *   - SqlFieldsCursorInterface in case of SqlFieldsQuery query
+     *   - CursorInterface in case of other types of query
+     *
+     * @throws ClientException if error.
+     */
+    public function query(Query $query): CursorInterface;
 }

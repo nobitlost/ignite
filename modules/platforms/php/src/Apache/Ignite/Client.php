@@ -18,12 +18,14 @@
 
 namespace Apache\Ignite;
 
+use Apache\Ignite\Exception\ClientException;
+use Apache\Ignite\Config\CacheConfiguration;
 use Apache\Ignite\Impl\Connection\ClientFailoverSocket;
 use Apache\Ignite\Impl\Binary\MessageBuffer;
+use Apache\Ignite\Impl\Binary\BinaryCommunicator;
 use Apache\Ignite\Impl\Utils\ArgumentChecker;
 use Apache\Ignite\Impl\Utils\Logger;
 use Apache\Ignite\Impl\Binary\ClientOperation;
-use Apache\Ignite\Impl\Binary\BinaryWriter;
 use Apache\Ignite\Impl\Cache;
 
 /**
@@ -32,15 +34,16 @@ use Apache\Ignite\Impl\Cache;
 class Client
 {
     private $socket;
+    private $communicator;
     
     /**
-     * Public constructor.
-     * 
-     * @return Client new Ignite client instance.
+     * Public Client constructor.
      */
     public function __construct()
     {
         $this->socket = new ClientFailoverSocket();
+        $this->communicator = new BinaryCommunicator($this->socket);
+        error_reporting(E_ALL ^ E_WARNING);
     }
     
     /**
@@ -50,7 +53,7 @@ class Client
      *
      * @param ClientConfiguration $config the client configuration.
      * 
-     * @throws Exception::ClientException if error.
+     * @throws ClientException if error.
      */
     public function connect(ClientConfiguration $config): void
     {
@@ -75,21 +78,22 @@ class Client
      * 
      * @return CacheInterface new instance of the class with interface representing the created cache.
      * 
-     * @throws Exception::ClientException if error.
+     * @throws ClientException if error.
      */
     public function createCache(
             string $name,
             CacheConfiguration $cacheConfig = null): CacheInterface
     {
         ArgumentChecker::notEmpty($name, 'name');
-        $this->socket->send(
+        $this->communicator->send(
             $cacheConfig ?
                 ClientOperation::CACHE_CREATE_WITH_CONFIGURATION :
                 ClientOperation::CACHE_CREATE_WITH_NAME,
-            function (MessageBuffer $payload) use ($name, $cacheConfig) {
+            function (MessageBuffer $payload) use ($name, $cacheConfig)
+            {
                 $this->writeCacheNameOrConfig($payload, $name, $cacheConfig);
             });
-        return new Cache($name, $this->socket);
+        return new Cache($name, $this->communicator);
     }
     
     /**
@@ -102,21 +106,22 @@ class Client
      * 
      * @return CacheInterface new instance of the class with interface representing the existing or created cache.
      * 
-     * @throws Exception::ClientException if error.
+     * @throws ClientException if error.
      */
     public function getOrCreateCache(
             string $name,
             CacheConfiguration $cacheConfig = null): CacheInterface
     {
         ArgumentChecker::notEmpty($name, 'name');
-        $this->socket->send(
+        $this->communicator->send(
             $cacheConfig ?
                 ClientOperation::CACHE_GET_OR_CREATE_WITH_CONFIGURATION :
                 ClientOperation::CACHE_GET_OR_CREATE_WITH_NAME,
-            function (MessageBuffer $payload) use ($name, $cacheConfig) {
+            function (MessageBuffer $payload) use ($name, $cacheConfig)
+            {
                 $this->writeCacheNameOrConfig($payload, $name, $cacheConfig);
             });
-        return new Cache($name, $this->socket);
+        return new Cache($name, $this->communicator);
     }
     
     /**
@@ -127,12 +132,12 @@ class Client
      * 
      * @return CacheInterface new instance of the class with interface representing the cache.
      * 
-     * @throws Exception::ClientException if error.
+     * @throws ClientException if error.
      */
     public function getCache(string $name): CacheInterface
     {
         ArgumentChecker::notEmpty($name, 'name');
-        return new Cache($name, $this->socket);
+        return new Cache($name, $this->communicator);
     }
     
     /**
@@ -140,12 +145,12 @@ class Client
      *
      * @param string $name cache name.
      * 
-     * @throws Exception::ClientException if error.
+     * @throws ClientException if error.
      */
     public function destroyCache(string $name): void
     {
         ArgumentChecker::notEmpty($name, 'name');
-        $this->socket->send(
+        $this->communicator->send(
             ClientOperation::CACHE_DESTROY,
             function (MessageBuffer $payload) use ($name)
             {
@@ -160,10 +165,25 @@ class Client
      * 
      * @return CacheConfiguration cache configuration.
      * 
-     * @throws Exception::ClientException if error.
+     * @throws ClientException if error.
      */
     public function getCacheConfiguration(string $name): CacheConfiguration
     {
+        ArgumentChecker::notEmpty($name, 'name');
+        $config = null;
+        $this->communicator->send(
+            ClientOperation::CACHE_GET_CONFIGURATION,
+            function (MessageBuffer $payload) use ($name)
+            {
+                $payload->writeInteger(Cache::calculateId($name));
+                $payload->writeByte(0);
+            },
+            function (MessageBuffer $payload) use (&$config)
+            {
+                $config = new CacheConfiguration();
+                $config->read($this->communicator, $payload);
+            });
+        return $config;
     }
     
     /**
@@ -172,10 +192,19 @@ class Client
      * @return array array with the existing cache names.
      *     The array is empty if no caches exist.
      * 
-     * @throws Exception::ClientException if error.
+     * @throws ClientException if error.
      */
     public function cacheNames(): array
     {
+        $names = null;
+        $this->communicator->send(
+            ClientOperation::CACHE_GET_NAMES,
+            null,
+            function (MessageBuffer $payload) use (&$names)
+            {
+                $names = $this->communicator->readStringArray($payload);
+            });
+        return $names;
     }
     
     /**
@@ -188,16 +217,16 @@ class Client
     {
         Logger::setDebug($value);
     }
-    
+
     private function writeCacheNameOrConfig(
             MessageBuffer $buffer,
             string $name,
             CacheConfiguration $cacheConfig = null): void
     {
         if ($cacheConfig) {
-            $cacheConfig->write($buffer, $name);
+            $cacheConfig->write($this->communicator, $buffer, $name);
         } else {
-            BinaryWriter::writeString($buffer, $name);
+            $this->communicator->writeString($buffer, $name);
         }
     }
 }

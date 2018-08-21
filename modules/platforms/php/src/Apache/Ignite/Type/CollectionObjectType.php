@@ -18,6 +18,10 @@
 
 namespace Apache\Ignite\Type;
 
+use Apache\Ignite\Exception\ClientException;
+use Apache\Ignite\Impl\Utils\ArgumentChecker;
+use Apache\Ignite\Impl\Binary\BinaryUtils;
+
 /** 
  * Class representing a collection type of Ignite object.
  * 
@@ -79,19 +83,60 @@ class CollectionObjectType extends ObjectType
      * will try to make automatic mapping between PHP types and Ignite object types -
      * according to the mapping table defined in the description of the ObjectType class.
      * 
-     * @param int $subType collection subtype, one of the CollectionObjectType constants.
+     * @param int $subType collection subtype, one of @ref CollectionSubType constants.
      * @param int|ObjectType|null $elementType type of elements in the collection:
      *   - either a type code of primitive (simple) type (@ref PrimitiveTypeCodes)
      *   - or an instance of class representing non-primitive (composite) type
      *   - or null (or not specified) that means the type is not specified
      * 
-     * @throws Exception::ClientException if error.
+     * @throws ClientException if error.
      */
     public function __construct(int $subType, $elementType = null)
     {
-        // TODO: check args
         parent::__construct(ObjectType::COLLECTION);
+        ArgumentChecker::hasValueFrom(
+            $subType, 'subType', false, 
+            [
+                CollectionObjectType::USER_SET,
+                CollectionObjectType::USER_COL,
+                CollectionObjectType::ARRAY_LIST,
+                CollectionObjectType::LINKED_LIST,
+                CollectionObjectType::HASH_SET,
+                CollectionObjectType::LINKED_HASH_SET,
+                CollectionObjectType::SINGLETON_LIST
+            ]);
+        BinaryUtils::checkObjectType($elementType, 'elementType');
         $this->subType = $subType;
         $this->elementType = $elementType;
+    }
+
+    /**
+     * Returns collection subtype, one of @ref CollectionSubType constants.
+     * 
+     * @return int collection subtype, one of @ref CollectionSubType constants.
+     */
+    public function getSubType(): int
+    {
+        return $this->subType;
+    }
+    
+    /**
+     * Returns type of elements in the collection.
+     * 
+     * @return int|ObjectType|null type of elements in the collection:
+     *   - either a type code of primitive (simple) type (@ref PrimitiveTypeCodes)
+     *   - or an instance of class representing non-primitive (composite) type
+     *   - or null (or not specified) that means the type is not specified
+     */
+    public function getElementType()
+    {
+        return $this->elementType;
+    }
+    
+    public static function isSet($subType): bool
+    {
+        return $subType === CollectionObjectType::USER_SET ||
+            $subType === CollectionObjectType::HASH_SET ||
+            $subType === CollectionObjectType::LINKED_HASH_SET;
     }
 }

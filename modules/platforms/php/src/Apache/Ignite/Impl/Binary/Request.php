@@ -18,7 +18,6 @@
 
 namespace Apache\Ignite\Impl\Binary;
 
-use Apache\Ignite\Impl\Binary\BinaryUtils;
 use Apache\Ignite\Type\ObjectType;
 
 class Request
@@ -31,7 +30,7 @@ class Request
     
     private static $requestId = 0;
             
-    public function __construct(int $opCode, callable $payloadWriter, callable $payloadReader = null, bool $isHandshake = false)
+    public function __construct(int $opCode, ?callable $payloadWriter, callable $payloadReader = null, bool $isHandshake = false)
     {
         $this->id = Request::getRequestId();
         $this->opCode = $opCode;
@@ -49,8 +48,8 @@ class Request
     {
         return $this->isHandshake;
     }
-    
-    public function getMessage(): string
+
+    public function getMessage(): MessageBuffer
     {
         $message = new MessageBuffer();
         // Skip message length
@@ -69,7 +68,7 @@ class Request
         // Message length
         $message->setPosition(0);
         $message->writeInteger($message->getLength() - $messageStartPos);
-        return $message->getBuffer();
+        return $message;
     }
     
     public function getPayloadReader(): ?callable

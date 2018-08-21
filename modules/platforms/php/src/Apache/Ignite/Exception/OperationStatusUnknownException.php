@@ -16,15 +16,20 @@
  * limitations under the License.
  */
 
-namespace Apache\Ignite;
+namespace Apache\Ignite\Exception;
 
 /**
- * Class representing Ignite cache configuration on a server.
  *
- * All configuration settings are optional and have defaults which are defined on a server side.
- *
- * See Apache Ignite documentation for details of every configuration setting. 
  */
-class CacheConfiguration
+class OperationStatusUnknownException extends ClientException
 {
+    /**
+     * Constructs an OperationStatusUnknownException with the specified detail message.
+     * 
+     * @param string $message the detail message.
+     */
+    public function __construct(string $message)
+    {
+        parent::__construct($message);
+    }
 }

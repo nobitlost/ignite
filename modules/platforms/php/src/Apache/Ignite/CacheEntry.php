@@ -31,8 +31,6 @@ class CacheEntry
      * 
      * @param mixed $key key corresponding to this entry.
      * @param mixed $value value associated with the key.
-     * 
-     * @return CacheEntry new CacheEntry instance.
      */
     public function __construct($key, $value)
     {

@@ -18,13 +18,15 @@
 
 namespace Apache\Ignite;
 
+use Apache\Ignite\Exception\ClientException;
+use Apache\Ignite\Impl\Utils\ArgumentChecker;
+
 /**
  * Class representing Ignite client configuration.
  *
  * The configuration includes:
  *   - (mandatory) Ignite node endpoint(s)
  *   - (optional) user credentials for authentication
- *   - (optional) TLS enabling
  *   - (optional) connection options
  */
 class ClientConfiguration
@@ -32,29 +34,38 @@ class ClientConfiguration
     private $endpoints;
     private $userName;
     private $password;
-    
+    private $tlsOptions;
+    private $timeout;
+    private $sendChunkSize;
+    private $receiveChunkSize;
+    private $tcpNoDelay;
+
     /**
      * Creates an instance of Ignite client configuration
      * with the provided mandatory settings and default optional settings.
      *
      * By default, the client does not use authentication and secure connection.
      *
-     * @param string ...$endpoints Ignite node endpoint(s). The client randomly connects/reconnects 
+     * @param string ...$endpoints Ignite node endpoint(s). The client randomly connects/reconnects
      * to one of the specified node.
      *
-     * @return ClientConfiguration new client configuration instance.
-     *
-     * @throws Exception::ClientException if error.
+     * @throws ClientException if error.
      */
     public function __construct(string ...$endpoints)
     {
+        ArgumentChecker::notEmpty($endpoints, 'endpoints');
         $this->endpoints = $endpoints;
         $this->userName = null;
         $this->password = null;
+        $this->tlsOptions = null;
+        $this->timeout = 0;
+        $this->sendChunkSize = 0;
+        $this->receiveChunkSize = 0;
+        $this->tcpNoDelay = true;
     }
     
     /**
-     * 
+     * Returns Ignite node endpoints specified in the constructor.
      * 
      * @return string[] endpoints
      */
@@ -63,16 +74,6 @@ class ClientConfiguration
         return $this->endpoints;
     }
 
-    /**
-     * 
-     * 
-     * @return string|null 
-     */
-    public function getUserName(): ?string
-    {
-        return $this->userName;
-    }
-    
     /**
      * Sets username which will be used for authentication during the client's connection.
      *
@@ -89,13 +90,13 @@ class ClientConfiguration
     }
     
     /**
+     * Returns the username specified in the setUserName() method.
      * 
-     * 
-     * @return string|null 
+     * @return string|null username or null (if authentication is disabled).
      */
-    public function getPassword(): ?string
+    public function getUserName(): ?string
     {
-        return $this->password;
+        return $this->userName;
     }
     
     /**
@@ -112,5 +113,129 @@ class ClientConfiguration
     {
         $this->password = $password;
         return $this;
+    }
+    
+    /**
+     * Returns the password specified in the setPassword() method.
+     * 
+     * @return string|null password or null (if password is empty).
+     */
+    public function getPassword(): ?string
+    {
+        return $this->password;
+    }
+    
+    /**
+     *
+     * @param array $tlsOptions TLS connection options in a format defined here: http://php.net/manual/en/context.ssl.php
+     *
+     * @return ClientConfiguration the same instance of the ClientConfiguration.
+     */
+    public function setTLSOptions(?array $tlsOptions): ClientConfiguration
+    {
+        $this->tlsOptions = $tlsOptions;
+        return $this;
+    }
+    
+    /**
+     * 
+     * 
+     * @return array|null 
+     */
+    public function getTLSOptions(): ?array
+    {
+        return $this->tlsOptions;
+    }
+
+    /**
+     *
+     *
+     * @param int $timeout send/receive timeout in milliseconds.
+     *
+     * @return ClientConfiguration the same instance of the ClientConfiguration.
+     */
+    public function setTimeout(int $timeout): ClientConfiguration
+    {
+        $this->timeout = $timeout;
+        return $this;
+    }
+
+    /**
+     *
+     *
+     * @return int
+     */
+    public function getTimeout(): int
+    {
+        return $this->timeout;
+    }
+
+    /**
+     *
+     *
+     * @param int $size
+     *
+     * @return ClientConfiguration the same instance of the ClientConfiguration.
+     */
+    public function setSendChunkSize(int $size): ClientConfiguration
+    {
+        $this->sendChunkSize = $size;
+        return $this;
+    }
+
+    /**
+     *
+     *
+     * @return int
+     */
+    public function getSendChunkSize(): int
+    {
+        return $this->sendChunkSize;
+    }
+
+    /**
+     *
+     *
+     * @param int $size
+     *
+     * @return ClientConfiguration the same instance of the ClientConfiguration.
+     */
+    public function setReceiveChunkSize(int $size): ClientConfiguration
+    {
+        $this->receiveChunkSize = $size;
+        return $this;
+    }
+
+    /**
+     *
+     *
+     * @return int
+     */
+    public function getReceiveChunkSize(): int
+    {
+        return $this->receiveChunkSize;
+    }
+
+    /**
+     * Disables/enables the TCP Nagle algorithm.
+     *
+     * @param bool $tcpNoDelay
+     *
+     * @return ClientConfiguration the same instance of the ClientConfiguration.
+     */
+    public function setTcpNoDelay(bool $tcpNoDelay): ClientConfiguration
+    {
+        $this->tcpNoDelay = $tcpNoDelay;
+        return $this;
+    }
+
+    /**
+     *
+     *
+     * @return bool
+     */
+    public function getTcpNoDelay(): bool
+    {
+        return $this->tcpNoDelay;
     }
 }

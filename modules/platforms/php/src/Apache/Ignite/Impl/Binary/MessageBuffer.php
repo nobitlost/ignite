@@ -19,23 +19,26 @@
 namespace Apache\Ignite\Impl\Binary;
 
 use Apache\Ignite\Type\ObjectType;
-use Apache\Ignite\Impl\Binary\BinaryUtils;
 
 class MessageBuffer
 {
     const BYTE_ZERO = 0;
     const BYTE_ONE = 1;
     const BUFFER_CAPACITY_DEFAULT = 256;
-    
+
+    const PROTOCOL_STRING_ENCODING = 'UTF-8';
+
     private $buffer;
     private $position;
     private $length;
 
     private static $isLittleEndian;
+    private static $defaultEncoding;
 
     public static function init(): void
     {
         MessageBuffer::$isLittleEndian = pack('L', 1) === pack('V', 1);
+        MessageBuffer::$defaultEncoding = ini_get('default_charset');
     }
     
     public function __construct(int $capacity = MessageBuffer::BUFFER_CAPACITY_DEFAULT)
@@ -53,24 +56,34 @@ class MessageBuffer
     
     public function getBuffer(): string
     {
-        return substr($this->buffer, 0, $this->getLength());
+        return $this->getSlice(0, $this->getLength());
     }
     
-    public function setPosition($position): void
+    public function getSlice(int $startPos, int $length): string
+    {
+        return substr($this->buffer, $startPos, $length);
+    }
+    
+    public function getPosition(): int
+    {
+        return $this->position;
+    }
+    
+    public function setPosition(int $position): void
     {
         $this->ensureCapacity($position);
         $this->position = $position;
     }
     
-    public function append($buffer): void
+    public function append(string &$buffer): void
     {
         $this->buffer .= $buffer;
         $this->length += strlen($buffer);
     }
-    
-    public function writeByte(int $value): void
+
+    public function writeByte(int $value, $signed = true): void
     {
-        $this->writeNumber($value, ObjectType::BYTE);
+        $this->writeNumber($value, ObjectType::BYTE, $signed);
     }
 
     public function writeShort(int $value): void
@@ -83,75 +96,62 @@ class MessageBuffer
         $this->writeNumber($value, ObjectType::INTEGER);
     }
 
-    public function writeLong(int $value): void
+    public function writeLong(float $value): void
     {
         $this->writeNumber($value, ObjectType::LONG);
     }
 
     public function writeFloat(float $value): void
     {
-        // TODO: check size
         $this->writeNumber($value, ObjectType::FLOAT);
     }
 
     public function writeDouble(float $value): void
     {
-        // TODO: check size
         $this->writeNumber($value, ObjectType::DOUBLE);
     }
 
-    public function writeNumber($value, int $type): void
+    public function writeNumber($value, int $type, bool $signed = true): void
     {
-        $strValue = null;
-        switch ($type) {
-            case ObjectType::BYTE:
-                $strValue = pack('c', $value);
-                break;
-            case ObjectType::SHORT:
-                $strValue = pack('s', $value);
-                break;
-            case ObjectType::INTEGER:
-                $strValue = pack('l', $value);
-                break;
-            case ObjectType::LONG:
-                $strValue = pack('q', $value);
-                break;
-            case ObjectType::FLOAT:
-                $strValue = pack('g', $value);
-                break;
-            case ObjectType::DOUBLE:
-                $strValue = pack('e', $value);
-                break;
-            default:
-                BinaryUtils::internalError();
+        $format = $this->getNumberFormat($type, $signed);
+        $strValue = pack($format, $value);
+        if (strlen($strValue) !== TypeInfo::getTypeInfo($type)->getSize()) {
+            BinaryUtils::unsupportedType(BinaryUtils::getTypeName($type));
         }
-        // TODO: check pack errors
         $this->convertEndianness($strValue, $type);
-        $this->writeBuffer($strValue);
+        $this->writeStr($strValue);
     }
 
     public function writeBoolean(bool $value): void
     {
         $this->writeByte($value ? MessageBuffer::BYTE_ONE : MessageBuffer::BYTE_ZERO);
     }
-    
+
     public function writeChar(string $value): void
     {
         $this->writeShort(mb_ord($value));
     }
 
-    public function writeString(string $value): void
+    public function writeString(string $value, bool $encode = true): void
     {
+        if ($encode) {
+            $value = mb_convert_encoding($value, self::PROTOCOL_STRING_ENCODING, self::$defaultEncoding);
+        }
         $length = strlen($value);
         $this->writeInteger($length);
         if ($length > 0) {
-            $this->writeBuffer($value);
+            $this->writeStr($value);
         }
     }
     
-    public function readByte(): int
+    public function writeBuffer(MessageBuffer $buffer, int $startPos, int $length): void
     {
-        return $this->readNumber(ObjectType::BYTE);
+        $this->writeStr($buffer->buffer, $startPos, $length);
+    }
+
+    public function readByte(bool $signed = true): int
+    {
+        return $this->readNumber(ObjectType::BYTE, $signed);
     }
 
     public function readShort(): int
@@ -164,7 +164,7 @@ class MessageBuffer
         return $this->readNumber(ObjectType::INTEGER);
     }
 
-    public function readLong()
+    public function readLong(): float
     {
         return $this->readNumber(ObjectType::LONG);
     }
@@ -178,36 +178,14 @@ class MessageBuffer
     {
         return $this->readNumber(ObjectType::DOUBLE);
     }
-    
-    public function readNumber(int $type)
+
+    public function readNumber(int $type, bool $signed = true)
     {
         $size = BinaryUtils::getSize($type);
         $this->ensureSize($size);
         $strValue = substr($this->buffer, $this->position, $size);
         $this->convertEndianness($strValue, $type);
-        $value = 0;
-        switch ($type) {
-            case ObjectType::BYTE:
-                $value = unpack('c', $strValue);
-                break;
-            case ObjectType::SHORT:
-                $value = unpack('s', $strValue);
-                break;
-            case ObjectType::INTEGER:
-                $value = unpack('l', $strValue);
-                break;
-            case ObjectType::LONG:
-                $value = unpack('q', $strValue);
-                break;
-            case ObjectType::FLOAT:
-                $value = unpack('g', $strValue);
-                break;
-            case ObjectType::DOUBLE:
-                $value = unpack('e', $strValue);
-                break;
-            default:
-                BinaryUtils::internalError();
-        }
+        $value = unpack($this->getNumberFormat($type, $signed), $strValue);
         $this->position += $size;
         return $value[1];
     }
@@ -216,20 +194,45 @@ class MessageBuffer
     {
         return $this->readByte() === MessageBuffer::BYTE_ONE;
     }
-    
-    public function readChar(): string {
+
+    public function readChar(): string
+    {
         return mb_chr($this->readShort());
     }
 
-    public function readString(): string
+    public function readString(bool $decode = true): string
     {
         $bytesCount = $this->readInteger();
         $this->ensureSize($bytesCount);
         $result = substr($this->buffer, $this->position, $bytesCount);
+        if ($decode) {
+            $result = mb_convert_encoding($result, self::$defaultEncoding, self::PROTOCOL_STRING_ENCODING);
+        }
         $this->position += $bytesCount;
         return $result;
     }
-    
+
+    private function getNumberFormat(int $type, bool $signed): string
+    {
+        switch ($type) {
+            case ObjectType::BYTE:
+                return $signed ? 'c' : 'C';
+            case ObjectType::SHORT:
+                return $signed ? 's' : 'S';
+            case ObjectType::INTEGER:
+                return $signed ? 'l' : 'L';
+            case ObjectType::LONG:
+                return $signed ? 'q' : 'Q';
+            case ObjectType::FLOAT:
+                return 'g';
+            case ObjectType::DOUBLE:
+                return 'e';
+            default:
+                BinaryUtils::internalError();
+        }
+        return null;
+    }
+
     private function convertEndianness(string &$value, int $type): void
     {
         if (!MessageBuffer::$isLittleEndian &&
@@ -240,12 +243,14 @@ class MessageBuffer
         }
     }
     
-    private function writeBuffer(string $buffer): void
+    private function writeStr(string &$buffer, int $startPos = 0, int $length = -1): void
     {
-        $length = strlen($buffer);
+        if ($length < 0) {
+            $length = strlen($buffer);
+        }
         $this->ensureCapacity($length);
         for ($i = 0; $i < $length; $i++) {
-            $this->buffer[$this->position + $i] = $buffer[$i];
+            $this->buffer[$this->position + $i] = $buffer[$startPos + $i];
         }
         if ($this->position + $length > $this->length) {
             $this->length = $this->position + $length;
