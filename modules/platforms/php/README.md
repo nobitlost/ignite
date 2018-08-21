@@ -227,6 +227,20 @@ Finally, use the returned object with the [SqlFieldsCursorInterface](TODO:link) 
 
 TODO: example
 
+### Errors Processing ###
+
+Many of the client's methods throw PHP Exception in case of error.
+
+There are three specific exceptions which may occur during the normal execution of an application. The application logic should process these errors:
+- [OperationException](TODO:link) - when the Ignite cluster returns an error for the requested operation.
+- [NoConnectionException](TODO:link) - when an operation with the Ignite cluster is called but the client is not connected to the cluster at this moment. The operation is not executed.
+- [OperationStatusUnknownException](TODO:link) - when an operation with the Ignite cluster is called and the client initiates it but a connection problem occurs during the operation. The status of the operation, whether it is executed or not in the Ignite cluster, is unknown.
+
+Other errors (eg. wrong usage of the client, invalid arguments passed into methods, etc.) usually indicate issues during an application development which should be fixed during debugging and therefore should not occur after the application has been deployed. For all such errors the client throws the general exception:
+- [ClientException](TODO:link)
+
+TODO: example ?
+
 ### Enabling Debug ###
 
 To switch on/off the client's debug output (including errors logging), call `setDebug()` method of the Ignite `Client` object. Debug output is disabled by default.
