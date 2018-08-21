@@ -86,6 +86,10 @@ Inheritance diagram for Apache\Ignite\Type\CollectionObjectType:</div>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a15e135d0b6e32eb3bc35687bf43bf18e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_collection_object_type.html#a15e135d0b6e32eb3bc35687bf43bf18e">__construct</a> (int $subType, $elementType=null)</td></tr>
 <tr class="separator:a15e135d0b6e32eb3bc35687bf43bf18e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afa12eaf422ad85c83b1d286a85e2dfbf"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_collection_object_type.html#afa12eaf422ad85c83b1d286a85e2dfbf">getSubType</a> ()</td></tr>
+<tr class="separator:afa12eaf422ad85c83b1d286a85e2dfbf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a662302dd14f446e304808c719fbda59c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_collection_object_type.html#a662302dd14f446e304808c719fbda59c">getElementType</a> ()</td></tr>
+<tr class="separator:a662302dd14f446e304808c719fbda59c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="inherit_header pub_methods_class_apache_1_1_ignite_1_1_type_1_1_object_type"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_class_apache_1_1_ignite_1_1_type_1_1_object_type')"><img src="closed.png" alt="-"/>&#160;Public Member Functions inherited from <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html">Apache\Ignite\Type\ObjectType</a></td></tr>
 <tr class="memitem:aa18f1ab6c78fd12599efa73bedc71d7c inherit pub_methods_class_apache_1_1_ignite_1_1_type_1_1_object_type"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html#aa18f1ab6c78fd12599efa73bedc71d7c">getTypeCode</a> ()</td></tr>
 <tr class="separator:aa18f1ab6c78fd12599efa73bedc71d7c inherit pub_methods_class_apache_1_1_ignite_1_1_type_1_1_object_type"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -219,7 +223,7 @@ Public Attributes</h2></td></tr>
 <p>If the type of elements is not specified then during operations the Ignite client will try to make automatic mapping between PHP types and Ignite object types - according to the mapping table defined in the description of the <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html">ObjectType</a> class.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramtype">int</td><td class="paramname">$subType</td><td>collection subtype, one of the <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_collection_object_type.html">CollectionObjectType</a> constants. </td></tr>
+    <tr><td class="paramtype">int</td><td class="paramname">$subType</td><td>collection subtype, one of <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_collection_object_type.html#CollectionSubType">CollectionSubType</a> constants. </td></tr>
     <tr><td class="paramtype">int&#160;|&#160;<a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html">ObjectType</a>&#160;|&#160;null</td><td class="paramname">$elementType</td><td>type of elements in the collection:<ul>
 <li>either a type code of primitive (simple) type (<a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html#PrimitiveTypeCodes">PrimitiveTypeCodes</a>)</li>
 <li>or an instance of class representing non-primitive (composite) type</li>
@@ -231,10 +235,54 @@ Public Attributes</h2></td></tr>
 </dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
+    <tr><td class="paramname">ClientException</td><td>if error. </td></tr>
   </table>
   </dd>
 </dl>
+
+</div>
+</div>
+<h2 class="groupheader">Member Function Documentation</h2>
+<a id="a662302dd14f446e304808c719fbda59c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a662302dd14f446e304808c719fbda59c">&#9670;&nbsp;</a></span>getElementType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Apache\Ignite\Type\CollectionObjectType::getElementType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Returns type of elements in the collection.</p>
+<dl class="section return"><dt>Returns</dt><dd>int|ObjectType|null type of elements in the collection:<ul>
+<li>either a type code of primitive (simple) type (<a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html#PrimitiveTypeCodes">PrimitiveTypeCodes</a>)</li>
+<li>or an instance of class representing non-primitive (composite) type</li>
+<li>or null (or not specified) that means the type is not specified </li>
+</ul>
+</dd></dl>
+
+</div>
+</div>
+<a id="afa12eaf422ad85c83b1d286a85e2dfbf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afa12eaf422ad85c83b1d286a85e2dfbf">&#9670;&nbsp;</a></span>getSubType()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Apache\Ignite\Type\CollectionObjectType::getSubType </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Returns collection subtype, one of <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_collection_object_type.html#CollectionSubType">CollectionSubType</a> constants.</p>
+<dl class="section return"><dt>Returns</dt><dd>int collection subtype, one of <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_collection_object_type.html#CollectionSubType">CollectionSubType</a> constants. </dd></dl>
 
 </div>
 </div>

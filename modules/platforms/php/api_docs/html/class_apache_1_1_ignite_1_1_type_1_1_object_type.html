@@ -79,7 +79,9 @@ Inheritance diagram for Apache\Ignite\Type\ObjectType:</div>
   <img src="class_apache_1_1_ignite_1_1_type_1_1_object_type.png" usemap="#Apache_5CIgnite_5CType_5CObjectType_map" alt=""/>
   <map id="Apache_5CIgnite_5CType_5CObjectType_map" name="Apache_5CIgnite_5CType_5CObjectType_map">
 <area href="class_apache_1_1_ignite_1_1_type_1_1_collection_object_type.html" alt="Apache\Ignite\Type\CollectionObjectType" shape="rect" coords="0,56,247,80"/>
-<area href="class_apache_1_1_ignite_1_1_type_1_1_map_object_type.html" alt="Apache\Ignite\Type\MapObjectType" shape="rect" coords="257,56,504,80"/>
+<area href="class_apache_1_1_ignite_1_1_type_1_1_complex_object_type.html" alt="Apache\Ignite\Type\ComplexObjectType" shape="rect" coords="257,56,504,80"/>
+<area href="class_apache_1_1_ignite_1_1_type_1_1_map_object_type.html" alt="Apache\Ignite\Type\MapObjectType" shape="rect" coords="514,56,761,80"/>
+<area href="class_apache_1_1_ignite_1_1_type_1_1_object_array_type.html" alt="Apache\Ignite\Type\ObjectArrayType" shape="rect" coords="771,56,1018,80"/>
 </map>
  </div></div>
 <table class="memberdecls">
@@ -183,118 +185,189 @@ Public Attributes</h2></td></tr>
 <p>In many methods the Ignite client does not require to directly specify a type of Ignite object. In this case the Ignite client tries to make automatic mapping between PHP types and Ignite object types according to the following mapping tables: </p><hr/>
 <p>COMMENTS TO ALL TABLES:</p>
 <h2>PHP type </h2>
-<p>It is a PHP primitive or a PHP object: <a href="http://php.net/manual/en/language.types.intro.php">http://php.net/manual/en/language.types.intro.php</a> Plus additional types:</p><ul>
-<li>Ds/Set, Ds/Map - ???</li>
-<li>Date, Time, Timestamp, ???, BinaryObject - are PHP classes introduced by the Ignite client.</li>
+<p>It is a PHP primitive or a PHP object: <a href="http://php.net/manual/en/language.types.intro.php">http://php.net/manual/en/language.types.intro.php</a></p>
+<p>Plus additional types:</p><ul>
+<li>Ds\Set, Ds\Map - PHP Data Structures extension classes (<a href="http://php.net/manual/en/book.ds.php">http://php.net/manual/en/book.ds.php</a>)</li>
+<li>Date, Time, Timestamp, EnumItem, BinaryObject - are PHP classes introduced by the Ignite client.</li>
+<li>Brick\Math\BigDecimal - ??? <a href="https://github.com/brick/math">https://github.com/brick/math</a></li>
 </ul>
 <h2>Ignite type code </h2>
 <p>It is a type code of Ignite primitive type (<a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html#PrimitiveTypeCodes">PrimitiveTypeCodes</a>) or Ignite composite type (<a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html#CompositeTypeCodes">CompositeTypeCodes</a>). </p><hr/>
 <p>DEFAULT MAPPING FROM PHP type TO Ignite type code:</p>
 <p>This mapping is used when an application does not explicitly specify an Ignite type for a field and it is writing data to that field.</p>
-<pre>
-| PHP type                      | Ignite type code      |
-| ----------------------------- | ----------------------|
-| boolean                       | BOOLEAN               |
-| integer                       | INTEGER               |
-| float                         | DOUBLE                |
-| string                        | STRING                |
-| Date                          | DATE                  |
-| Time                          | TIME                  |
-| Timestamp                     | TIMESTAMP             |
-| ???                           | ENUM                  |
-| ???                           | DECIMAL               |
-| BinaryObject ???              | COMPLEX_OBJECT        |
-| any other PHP Object          | COMPLEX_OBJECT        |
-| associative array of          |                       |
-|    any PHP supported type     | MAP (HASH_MAP)        |
-| indexed array of boolean      | BOOLEAN_ARRAY         |
-| indexed array of integer      | INTEGER_ARRAY         |
-| indexed array of float        | DOUBLE_ARRAY          |
-| indexed array of string       | STRING_ARRAY          |
-| indexed array of Date         | DATE_ARRAY            |
-| indexed array of Time         | TIME_ARRAY            |
-| indexed array of Timestamp    | TIMESTAMP_ARRAY       |
-| indexed array of ???          | ENUM_ARRAY            |
-| indexed array of ???          | DECIMAL_ARRAY         |
-| indexed array of BinaryObject | OBJECT_ARRAY          |
-| indexed array of              |                       |
-|       any other PHP Object    | OBJECT_ARRAY          |
-| Ds/Set                        | COLLECTION (HASH_SET) |
-| Ds/Map                        | MAP (HASH_MAP)        |
-</pre><p>All other PHP types have no default mapping.</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">PHP type  </th><th class="markdownTableHeadNone">Ignite type code   </th></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">boolean  </td><td class="markdownTableBodyNone">BOOLEAN   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">integer  </td><td class="markdownTableBodyNone">INTEGER   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">float  </td><td class="markdownTableBodyNone">DOUBLE   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">string  </td><td class="markdownTableBodyNone">STRING   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Date  </td><td class="markdownTableBodyNone">DATE   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Time  </td><td class="markdownTableBodyNone">TIME   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Timestamp  </td><td class="markdownTableBodyNone">TIMESTAMP   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">EnumItem  </td><td class="markdownTableBodyNone">ENUM   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Brick\Math\BigDecimal  </td><td class="markdownTableBodyNone">DECIMAL   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">BinaryObject  </td><td class="markdownTableBodyNone">COMPLEX_OBJECT   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">any other PHP Object  </td><td class="markdownTableBodyNone">COMPLEX_OBJECT   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">associative array of any PHP supported type  </td><td class="markdownTableBodyNone">MAP (HASH_MAP)   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">indexed array of boolean  </td><td class="markdownTableBodyNone">BOOLEAN_ARRAY   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">indexed array of integer  </td><td class="markdownTableBodyNone">INTEGER_ARRAY   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">indexed array of float  </td><td class="markdownTableBodyNone">DOUBLE_ARRAY   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">indexed array of string  </td><td class="markdownTableBodyNone">STRING_ARRAY   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">indexed array of Date  </td><td class="markdownTableBodyNone">DATE_ARRAY   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">indexed array of Time  </td><td class="markdownTableBodyNone">TIME_ARRAY   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">indexed array of Timestamp  </td><td class="markdownTableBodyNone">TIMESTAMP_ARRAY   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">indexed array of EnumItem  </td><td class="markdownTableBodyNone">ENUM_ARRAY   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">indexed array of Brick\Math\BigDecimal  </td><td class="markdownTableBodyNone">DECIMAL_ARRAY   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">indexed array of BinaryObject  </td><td class="markdownTableBodyNone">OBJECT_ARRAY   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">indexed array of any other PHP Object  </td><td class="markdownTableBodyNone">OBJECT_ARRAY   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">Ds\Set  </td><td class="markdownTableBodyNone">COLLECTION (HASH_SET)   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Ds\Map  </td><td class="markdownTableBodyNone">MAP (HASH_MAP)   </td></tr>
+</table>
+<p>All other PHP types have no default mapping.</p>
 <p>PHP Class - ??? PHP supported type - is any PHP type mentioned in the table.</p>
-<p>Associative and indexed PHP arrays: <a href="http://php.net/manual/en/language.types.array.php">http://php.net/manual/en/language.types.array.php</a> Type of an array's value is determined by the value's type in the first element of the array. Empty array has no default mapping. </p><hr/>
+<p>Associative and indexed PHP arrays: <a href="http://php.net/manual/en/language.types.array.php">http://php.net/manual/en/language.types.array.php</a></p>
+<p>Type of an array's value is determined by the value's type in the first element of the array. Empty array has no default mapping. </p><hr/>
 <p>DEFAULT MAPPING FROM Ignite type code TO PHP type:</p>
 <p>This mapping is used when an application does not explicitly specify an Ignite type for a field and it is reading data from that field.</p>
-<pre>
-| Ignite type code             | PHP type                              |
-| ---------------------------- | --------------------------------------|
-| BYTE                         | integer                               |
-| SHORT                        | integer                               |
-| INTEGER                      | integer                               |
-| LONG                         | integer/float                         |
-| FLOAT                        | float                                 |
-| DOUBLE                       | float                                 |
-| DECIMAL                      | ???                                   |
-| BOOLEAN                      | boolean                               |
-| STRING                       | string                                |
-| CHAR                         | string (one character)                |
-| UUID                         | ???                                   |
-| DATE                         | Date                                  |
-| TIME                         | Time                                  |
-| TIMESTAMP                    | Timestamp                             |
-| ENUM                         | ???                                   |
-| COMPLEX_OBJECT               | BinaryObject ???                      |
-| BYTE_ARRAY                   | array of integer                      |
-| SHORT_ARRAY                  | array of integer                      |
-| INTEGER_ARRAY                | array of integer                      |
-| LONG_ARRAY                   | array of integer/float                |
-| FLOAT_ARRAY                  | array of float                        |
-| DOUBLE_ARRAY                 | array of float                        |
-| DECIMAL_ARRAY                | ???                                   |
-| BOOLEAN_ARRAY                | array of boolean                      |
-| STRING_ARRAY                 | array of string                       |
-| CHAR_ARRAY                   | array of string (one character)       |
-| UUID_ARRAY                   | ???                                   |
-| DATE_ARRAY                   | array of Date                         |
-| TIME_ARRAY                   | array of Time                         |
-| TIMESTAMP_ARRAY              | array of Timestamp                    |
-| ENUM_ARRAY                   | ???                                   |
-| OBJECT_ARRAY                 | ???                                   |
-| COLLECTION (USER_COL)        | array                                 |
-| COLLECTION (ARR_LIST)        | array                                 |
-| COLLECTION (LINKED_LIST)     | array                                 |
-| COLLECTION (SINGLETON_LIST)  | array                                 |
-| COLLECTION (HASH_SET)        | Ds/Set                                |
-| COLLECTION (LINKED_HASH_SET) | Ds/Set                                |
-| COLLECTION (USER_SET)        | Ds/Set                                |
-| MAP (HASH_MAP)               | Ds/Map                                |
-| MAP (LINKED_HASH_MAP)        | Ds/Map                                |
-| NULL                         | null                                  |
-</pre> <hr/>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Ignite type code  </th><th class="markdownTableHeadNone">PHP type   </th></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">BYTE  </td><td class="markdownTableBodyNone">integer   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">SHORT  </td><td class="markdownTableBodyNone">integer   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">INTEGER  </td><td class="markdownTableBodyNone">integer   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">LONG  </td><td class="markdownTableBodyNone">float   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">FLOAT  </td><td class="markdownTableBodyNone">float   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">DOUBLE  </td><td class="markdownTableBodyNone">float   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">DECIMAL  </td><td class="markdownTableBodyNone">Brick\Math\BigDecimal   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">BOOLEAN  </td><td class="markdownTableBodyNone">boolean   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">STRING  </td><td class="markdownTableBodyNone">string   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">CHAR  </td><td class="markdownTableBodyNone">string (one character)   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">UUID  </td><td class="markdownTableBodyNone">array of integers (16 items)   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">DATE  </td><td class="markdownTableBodyNone">Date   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">TIME  </td><td class="markdownTableBodyNone">Time   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">TIMESTAMP  </td><td class="markdownTableBodyNone">Timestamp   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">ENUM  </td><td class="markdownTableBodyNone">EnumItem   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">COMPLEX_OBJECT  </td><td class="markdownTableBodyNone">BinaryObject   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">BYTE_ARRAY  </td><td class="markdownTableBodyNone">array of integer   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">SHORT_ARRAY  </td><td class="markdownTableBodyNone">array of integer   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">INTEGER_ARRAY  </td><td class="markdownTableBodyNone">array of integer   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">LONG_ARRAY  </td><td class="markdownTableBodyNone">array of float   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">FLOAT_ARRAY  </td><td class="markdownTableBodyNone">array of float   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">DOUBLE_ARRAY  </td><td class="markdownTableBodyNone">array of float   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">DECIMAL_ARRAY  </td><td class="markdownTableBodyNone">array of Brick\Math\BigDecimal   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">BOOLEAN_ARRAY  </td><td class="markdownTableBodyNone">array of boolean   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">STRING_ARRAY  </td><td class="markdownTableBodyNone">array of string   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">CHAR_ARRAY  </td><td class="markdownTableBodyNone">array of string (one character)   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">UUID_ARRAY  </td><td class="markdownTableBodyNone">array of array of integers (16 items)   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">DATE_ARRAY  </td><td class="markdownTableBodyNone">array of Date   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">TIME_ARRAY  </td><td class="markdownTableBodyNone">array of Time   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">TIMESTAMP_ARRAY  </td><td class="markdownTableBodyNone">array of Timestamp   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">ENUM_ARRAY  </td><td class="markdownTableBodyNone">array of EnumItem   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">OBJECT_ARRAY  </td><td class="markdownTableBodyNone">array   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">COLLECTION (USER_COL)  </td><td class="markdownTableBodyNone">array   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">COLLECTION (ARR_LIST)  </td><td class="markdownTableBodyNone">array   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">COLLECTION (LINKED_LIST)  </td><td class="markdownTableBodyNone">array   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">COLLECTION (SINGLETON_LIST)  </td><td class="markdownTableBodyNone">array   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">COLLECTION (HASH_SET)  </td><td class="markdownTableBodyNone">Ds\Set   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">COLLECTION (LINKED_HASH_SET)  </td><td class="markdownTableBodyNone">Ds\Set   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">COLLECTION (USER_SET)  </td><td class="markdownTableBodyNone">Ds\Set   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">MAP (HASH_MAP)  </td><td class="markdownTableBodyNone">Ds\Map   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">MAP (LINKED_HASH_MAP)  </td><td class="markdownTableBodyNone">Ds\Map   </td></tr>
+<tr class="markdownTableBody" class="markdownTableRowEven">
+<td class="markdownTableBodyNone">NULL  </td><td class="markdownTableBodyNone">null   </td></tr>
+</table>
+<hr/>
 <p>RETURNED PHP types WHEN READING DATA OF THE SPECIFIED Ignite type code:</p>
 <p>When an application explicitly specifies an Ignite type for a field and it is reading data from that field, the following PHP types are returned for every concrete Ignite type code - SEE THE PREVIOUS TABLE with the following additional comments:</p>
 <p>TO UPDATE ???</p>
 <ul>
-<li>for COMPLEX_OBJECT the Ignite <a class="el" href="class_apache_1_1_ignite_1_1_client.html">Client</a> returns a PHP Object which is defined by the specified ComplexObjectType.</li>
+<li>for COMPLEX_OBJECT the Ignite <a class="el" href="class_apache_1_1_ignite_1_1_client.html">Client</a> returns a PHP Object which is defined by the specified <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_complex_object_type.html">ComplexObjectType</a>.</li>
 <li>the returned Map for MAP is defined by the specified <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_map_object_type.html">MapObjectType</a>.</li>
 <li>the returned Set or Array for COLLECTION is defined by the specified <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_collection_object_type.html">CollectionObjectType</a>.</li>
-<li>the returned Array for OBJECT_ARRAY is defined by the specified ObjectArrayType.</li>
-<li>NULL cannot be specified as a type of a field but PHP null may be returned as a value of a field. <hr/>
-</li>
+<li>the returned Array for OBJECT_ARRAY is defined by the specified <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_array_type.html">ObjectArrayType</a>.</li>
+<li>NULL cannot be specified as a type of a field but PHP null may be returned as a value of a field.</li>
 </ul>
+<hr/>
 <p>ALLOWED PHP types WHEN WRITING DATA OF THE SPECIFIED Ignite type code:</p>
 <p>When an application explicitly specifies an Ignite type for a field and it is writing data to that field, the following PHP types are allowed for every concrete Ignite type code - SEE THE PREVIOUS TABLE with the following additional comments:</p>
 <p>TO UPDATE ???</p>
 <ul>
-<li>for COMPLEX_OBJECT the Ignite <a class="el" href="class_apache_1_1_ignite_1_1_client.html">Client</a> allows a PHP Object which is defined by the specified ComplexObjectType.</li>
+<li>for COMPLEX_OBJECT the Ignite <a class="el" href="class_apache_1_1_ignite_1_1_client.html">Client</a> allows a PHP Object which is defined by the specified <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_complex_object_type.html">ComplexObjectType</a>.</li>
 <li>the allowed Map for MAP is defined by the specified <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_map_object_type.html">MapObjectType</a>.</li>
 <li>the allowed Set or Array for COLLECTION is defined by the specified <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_collection_object_type.html">CollectionObjectType</a>.</li>
-<li>the allowed Array for OBJECT_ARRAY is defined by the specified ObjectArrayType.</li>
+<li>the allowed Array for OBJECT_ARRAY is defined by the specified <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_array_type.html">ObjectArrayType</a>.</li>
 <li>NULL cannot be specified as a type of a field but PHP null is allowed as value of a field (but not as a key/value in a cache) or as a value of Array/Set/Map element for all Ignite types, except BYTE, SHORT, INTEGER, LONG, FLOAT, DOUBLE, CHAR, BOOLEAN.</li>
+<li>for all *_ARRAY Ignite types an empty PHP Array is allowed.</li>
 </ul>
-<h2>- for all *_ARRAY Ignite types an empty PHP Array is allowed. </h2>
-</div><h2 class="groupheader">Member Function Documentation</h2>
+<hr/>
+ </div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="aa18f1ab6c78fd12599efa73bedc71d7c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#aa18f1ab6c78fd12599efa73bedc71d7c">&#9670;&nbsp;</a></span>getTypeCode()</h2>
 

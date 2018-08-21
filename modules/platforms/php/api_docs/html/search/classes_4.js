@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['time',['Time',['../class_apache_1_1_ignite_1_1_data_1_1_time.html',1,'Apache::Ignite::Data']]],
-  ['timestamp',['Timestamp',['../class_apache_1_1_ignite_1_1_data_1_1_timestamp.html',1,'Apache::Ignite::Data']]]
+  ['mapobjecttype',['MapObjectType',['../class_apache_1_1_ignite_1_1_type_1_1_map_object_type.html',1,'Apache::Ignite::Type']]]
 ];

@@ -81,9 +81,9 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:ab8b0c48c01bb9eddeb00ed4ebba0a650"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af14768828af196522dfdaaceea980f7a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apache_1_1_ignite_1_1_client.html#af14768828af196522dfdaaceea980f7a">disconnect</a> ()</td></tr>
 <tr class="separator:af14768828af196522dfdaaceea980f7a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5e5a23f9ff97a7cc334fa89eaf226358"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apache_1_1_ignite_1_1_client.html#a5e5a23f9ff97a7cc334fa89eaf226358">createCache</a> (string $name, <a class="el" href="class_apache_1_1_ignite_1_1_cache_configuration.html">CacheConfiguration</a> $cacheConfig=null)</td></tr>
+<tr class="memitem:a5e5a23f9ff97a7cc334fa89eaf226358"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apache_1_1_ignite_1_1_client.html#a5e5a23f9ff97a7cc334fa89eaf226358">createCache</a> (string $name, <a class="el" href="class_apache_1_1_ignite_1_1_config_1_1_cache_configuration.html">CacheConfiguration</a> $cacheConfig=null)</td></tr>
 <tr class="separator:a5e5a23f9ff97a7cc334fa89eaf226358"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a245c1d5b8d28a2a92f468a87a79439ae"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apache_1_1_ignite_1_1_client.html#a245c1d5b8d28a2a92f468a87a79439ae">getOrCreateCache</a> (string $name, <a class="el" href="class_apache_1_1_ignite_1_1_cache_configuration.html">CacheConfiguration</a> $cacheConfig=null)</td></tr>
+<tr class="memitem:a245c1d5b8d28a2a92f468a87a79439ae"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apache_1_1_ignite_1_1_client.html#a245c1d5b8d28a2a92f468a87a79439ae">getOrCreateCache</a> (string $name, <a class="el" href="class_apache_1_1_ignite_1_1_config_1_1_cache_configuration.html">CacheConfiguration</a> $cacheConfig=null)</td></tr>
 <tr class="separator:a245c1d5b8d28a2a92f468a87a79439ae"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9ec8e6b48728e7b6bf168b800ced203a"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_apache_1_1_ignite_1_1_client.html#a9ec8e6b48728e7b6bf168b800ced203a">getCache</a> (string $name)</td></tr>
 <tr class="separator:a9ec8e6b48728e7b6bf168b800ced203a"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -113,8 +113,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Public constructor.</p>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_apache_1_1_ignite_1_1_client.html">Client</a> new Ignite client instance. </dd></dl>
+<p>Public <a class="el" href="class_apache_1_1_ignite_1_1_client.html">Client</a> constructor. </p>
 
 </div>
 </div>
@@ -137,7 +136,7 @@ Public Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>array array with the existing cache names. The array is empty if no caches exist.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
+    <tr><td class="paramname">ClientException</td><td>if error. </td></tr>
   </table>
   </dd>
 </dl>
@@ -169,7 +168,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
+    <tr><td class="paramname">ClientException</td><td>if error. </td></tr>
   </table>
   </dd>
 </dl>
@@ -191,7 +190,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_apache_1_1_ignite_1_1_cache_configuration.html">CacheConfiguration</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="class_apache_1_1_ignite_1_1_config_1_1_cache_configuration.html">CacheConfiguration</a>&#160;</td>
           <td class="paramname"><em>$cacheConfig</em> = <code>null</code>&#160;</td>
         </tr>
         <tr>
@@ -205,14 +204,14 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramtype">string</td><td class="paramname">$name</td><td>cache name. </td></tr>
-    <tr><td class="paramtype"><a class="el" href="class_apache_1_1_ignite_1_1_cache_configuration.html">CacheConfiguration</a></td><td class="paramname">$cacheConfig</td><td>optional cache configuration.</td></tr>
+    <tr><td class="paramtype">CacheConfiguration</td><td class="paramname">$cacheConfig</td><td>optional cache configuration.</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html">CacheInterface</a> new instance of the class with interface representing the created cache.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
+    <tr><td class="paramname">ClientException</td><td>if error. </td></tr>
   </table>
   </dd>
 </dl>
@@ -243,7 +242,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
+    <tr><td class="paramname">ClientException</td><td>if error. </td></tr>
   </table>
   </dd>
 </dl>
@@ -294,7 +293,7 @@ Public Member Functions</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html">CacheInterface</a> new instance of the class with interface representing the cache.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
+    <tr><td class="paramname">ClientException</td><td>if error. </td></tr>
   </table>
   </dd>
 </dl>
@@ -323,10 +322,10 @@ Public Member Functions</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_apache_1_1_ignite_1_1_cache_configuration.html">CacheConfiguration</a> cache configuration.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>CacheConfiguration cache configuration.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
+    <tr><td class="paramname">ClientException</td><td>if error. </td></tr>
   </table>
   </dd>
 </dl>
@@ -348,7 +347,7 @@ Public Member Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="class_apache_1_1_ignite_1_1_cache_configuration.html">CacheConfiguration</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="class_apache_1_1_ignite_1_1_config_1_1_cache_configuration.html">CacheConfiguration</a>&#160;</td>
           <td class="paramname"><em>$cacheConfig</em> = <code>null</code>&#160;</td>
         </tr>
         <tr>
@@ -362,14 +361,14 @@ Public Member Functions</h2></td></tr>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramtype">string</td><td class="paramname">$name</td><td>cache name. </td></tr>
-    <tr><td class="paramtype"><a class="el" href="class_apache_1_1_ignite_1_1_cache_configuration.html">CacheConfiguration</a></td><td class="paramname">$cacheConfig</td><td>cache configuration (ignored if cache with the provided name already exists).</td></tr>
+    <tr><td class="paramtype">CacheConfiguration</td><td class="paramname">$cacheConfig</td><td>cache configuration (ignored if cache with the provided name already exists).</td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html">CacheInterface</a> new instance of the class with interface representing the existing or created cache.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
+    <tr><td class="paramname">ClientException</td><td>if error. </td></tr>
   </table>
   </dd>
 </dl>

@@ -121,6 +121,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a267e3b90258f89896cddec6c6a0050fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7edd7779a03a7b228c7c755bdb36bbb2"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html#a7edd7779a03a7b228c7c755bdb36bbb2">getSize</a> (int ... $peekModes)</td></tr>
 <tr class="separator:a7edd7779a03a7b228c7c755bdb36bbb2"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa7784dad022389a61ba6345581d486a6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html#aa7784dad022389a61ba6345581d486a6">query</a> (<a class="el" href="class_apache_1_1_ignite_1_1_query_1_1_query.html">Query</a> $query)</td></tr>
+<tr class="separator:aa7784dad022389a61ba6345581d486a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -136,7 +138,15 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a6d00b14c2542140ee9b90e09b860aad9"><td class="memItemLeft" align="right" valign="top">const&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html#a6d00b14c2542140ee9b90e09b860aad9">PEEK_MODE_BACKUP</a> = 3</td></tr>
 <tr class="separator:a6d00b14c2542140ee9b90e09b860aad9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
-<h2 class="groupheader">Member Function Documentation</h2>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Interface representing and providing access to Ignite cache.</p>
+<p>An instance of the class with this interface should be obtained via the methods of Ignite <a class="el" href="class_apache_1_1_ignite_1_1_client.html">Client</a>. One instance of such a class provides access to one Ignite cache which is specified during the instance obtaining and cannot be changed after that.</p>
+<p>There are three groups of methods in the cache interface:</p><ul>
+<li>methods to configure the interface itself (optionally specify Ignite type for cache key and/or value)</li>
+<li>methods to operate with the cache using Key-Value Queries</li>
+<li>methods to operate with the cache using SQL and Scan Queries </li>
+</ul>
+</div><h2 class="groupheader">Member Function Documentation</h2>
 <a id="af23ec9a7f995a4eed13b2991a13b8deb"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#af23ec9a7f995a4eed13b2991a13b8deb">&#9670;&nbsp;</a></span>clear()</h2>
 
@@ -154,7 +164,7 @@ Public Attributes</h2></td></tr>
 <p>Removes all entries from the cache, without notifying listeners and cache writers.</p>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
+    <tr><td class="paramname">ClientException</td><td>if error. </td></tr>
   </table>
   </dd>
 </dl>
@@ -185,7 +195,7 @@ Public Attributes</h2></td></tr>
 </dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
+    <tr><td class="paramname">ClientException</td><td>if error. </td></tr>
   </table>
   </dd>
 </dl>
@@ -216,7 +226,7 @@ Public Attributes</h2></td></tr>
 </dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
+    <tr><td class="paramname">ClientException</td><td>if error. </td></tr>
   </table>
   </dd>
 </dl>
@@ -248,7 +258,7 @@ Public Attributes</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>bool true if the key exists, false otherwise.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
+    <tr><td class="paramname">ClientException</td><td>if error. </td></tr>
   </table>
   </dd>
 </dl>
@@ -280,7 +290,7 @@ Public Attributes</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>bool true if all the keys exist, false if at least one of the keys does not exist in the cache.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
+    <tr><td class="paramname">ClientException</td><td>if error. </td></tr>
   </table>
   </dd>
 </dl>
@@ -312,7 +322,7 @@ Public Attributes</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>mixed value associated with the specified key, or null if it does not exist.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
+    <tr><td class="paramname">ClientException</td><td>if error. </td></tr>
   </table>
   </dd>
 </dl>
@@ -344,7 +354,7 @@ Public Attributes</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>array the retrieved entries (key-value pairs) of <a class="el" href="class_apache_1_1_ignite_1_1_cache_entry.html">CacheEntry</a>. Entries with the keys which do not exist in the cache are not included into the array.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
+    <tr><td class="paramname">ClientException</td><td>if error. </td></tr>
   </table>
   </dd>
 </dl>
@@ -388,7 +398,7 @@ Public Attributes</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>mixed the previous value associated with the specified key, or null if it did not exist.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
+    <tr><td class="paramname">ClientException</td><td>if error. </td></tr>
   </table>
   </dd>
 </dl>
@@ -431,7 +441,7 @@ Public Attributes</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>mixed the current value associated with the key if it already exists in the cache, null if the new entry is created.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
+    <tr><td class="paramname">ClientException</td><td>if error. </td></tr>
   </table>
   </dd>
 </dl>
@@ -463,7 +473,7 @@ Public Attributes</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>mixed the last value associated with the specified key, or null if it did not exist.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
+    <tr><td class="paramname">ClientException</td><td>if error. </td></tr>
   </table>
   </dd>
 </dl>
@@ -506,7 +516,7 @@ Public Attributes</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>mixed the previous value associated with the specified key, or null if it did not exist.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
+    <tr><td class="paramname">ClientException</td><td>if error. </td></tr>
   </table>
   </dd>
 </dl>
@@ -538,7 +548,7 @@ Public Attributes</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>int the number of the entries in the cache.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
+    <tr><td class="paramname">ClientException</td><td>if error. </td></tr>
   </table>
   </dd>
 </dl>
@@ -581,7 +591,7 @@ Public Attributes</h2></td></tr>
 </dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
+    <tr><td class="paramname">ClientException</td><td>if error. </td></tr>
   </table>
   </dd>
 </dl>
@@ -613,7 +623,7 @@ Public Attributes</h2></td></tr>
 </dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
+    <tr><td class="paramname">ClientException</td><td>if error. </td></tr>
   </table>
   </dd>
 </dl>
@@ -656,7 +666,43 @@ Public Attributes</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>true if the operation has been done, false otherwise.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
+    <tr><td class="paramname">ClientException</td><td>if error. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="aa7784dad022389a61ba6345581d486a6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa7784dad022389a61ba6345581d486a6">&#9670;&nbsp;</a></span>query()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">Apache\Ignite\CacheInterface::query </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="class_apache_1_1_ignite_1_1_query_1_1_query.html">Query</a>&#160;</td>
+          <td class="paramname"><em>$query</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p>Starts an SQL, SQL Fields or Scan query operation.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramtype">Query</td><td class="paramname">$query</td><td>query to be executed.</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>CursorInterface new instance of the class with interface representing a cursor to obtain the results of the query operation:<ul>
+<li>SqlFieldsCursorInterface in case of SqlFieldsQuery query</li>
+<li>CursorInterface in case of other types of query</li>
+</ul>
+</dd></dl>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">ClientException</td><td>if error. </td></tr>
   </table>
   </dd>
 </dl>
@@ -680,7 +726,7 @@ Public Attributes</h2></td></tr>
 <p>Removes all entries from the cache, notifying listeners and cache writers.</p>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
+    <tr><td class="paramname">ClientException</td><td>if error. </td></tr>
   </table>
   </dd>
 </dl>
@@ -723,7 +769,7 @@ Public Attributes</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>bool true if the operation has been done, false otherwise.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
+    <tr><td class="paramname">ClientException</td><td>if error. </td></tr>
   </table>
   </dd>
 </dl>
@@ -755,7 +801,7 @@ Public Attributes</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>bool true if the operation has been done, false otherwise.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
+    <tr><td class="paramname">ClientException</td><td>if error. </td></tr>
   </table>
   </dd>
 </dl>
@@ -786,7 +832,7 @@ Public Attributes</h2></td></tr>
 </dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
+    <tr><td class="paramname">ClientException</td><td>if error. </td></tr>
   </table>
   </dd>
 </dl>
@@ -829,7 +875,7 @@ Public Attributes</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>bool true if the operation has been done, false otherwise.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
+    <tr><td class="paramname">ClientException</td><td>if error. </td></tr>
   </table>
   </dd>
 </dl>
@@ -879,7 +925,7 @@ Public Attributes</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>bool true if the operation has been done, false otherwise.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
+    <tr><td class="paramname">ClientException</td><td>if error. </td></tr>
   </table>
   </dd>
 </dl>
@@ -902,9 +948,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Specifies a type of the cache key.</p>
-<p>The cache client assumes that keys in all further operations with the cache will have the specified type. Eg. the cache client will convert keys provided as input parameters of the methods to the specified object type before sending them to a server.</p>
-<p>After the cache client creation a type of the cache key is not specified (null).</p>
-<p>If the type is not specified then during operations the cache client will do automatic mapping between some of the PHP types and Ignite object types - according to the mapping table defined in the description of the ObjectType class.</p>
+<p>Ignite client assumes that keys in all further operations with the cache will have the Ignite type specified by this method. Eg. the client will convert keys provided as input parameters of the Key-Value or SQL operations to the specified Ignite object type before sending the keys to a server.</p>
+<p>By default a type of the cache key is not specified (null).</p>
+<p>If the type is not specified then during operations Ignite client will do automatic mapping between some of the PHP types and Ignite object types - according to the mapping table defined in the description of the ObjectType class.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramtype">int&#160;|&#160;ObjectType&#160;|&#160;null</td><td class="paramname">$type</td><td>type of the keys in the cache:<ul>
@@ -916,10 +962,10 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html">CacheInterface</a> the same instance of the cache client.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html">CacheInterface</a> the same instance of the class.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
+    <tr><td class="paramname">ClientException</td><td>if error. </td></tr>
   </table>
   </dd>
 </dl>
@@ -942,9 +988,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Specifies a type of the cache value.</p>
-<p>The cache client assumes that values in all further operations with the cache will have the specified type. Eg. the cache client will convert values provided as input parameters of the methods to the specified object type before sending them to a server.</p>
-<p>After the cache client creation a type of the cache value is not specified (null).</p>
-<p>If the type is not specified then during operations the cache client will do automatic mapping between some of the PHP types and object types - according to the mapping table defined in the description of the ObjectType class.</p>
+<p>Ignite client assumes that values in all further operations with the cache will have the Ignite type specified by this method. Eg. the client will convert values provided as input parameters of the Key-Value or SQL operations to the specified Ignite object type before sending the values to a server.</p>
+<p>By default a type of the cache value is not specified (null).</p>
+<p>If the type is not specified then during operations Ignite client will do automatic mapping between some of the PHP types and Ignite object types - according to the mapping table defined in the description of the ObjectType class.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramtype">int&#160;|&#160;ObjectType&#160;|&#160;null</td><td class="paramname">$type</td><td>type of the values in the cache:<ul>
@@ -956,10 +1002,10 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html">CacheInterface</a> the same instance of the cache client.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><a class="el" href="interface_apache_1_1_ignite_1_1_cache_interface.html">CacheInterface</a> the same instance of the class.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
+    <tr><td class="paramname">ClientException</td><td>if error. </td></tr>
   </table>
   </dd>
 </dl>

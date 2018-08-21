@@ -222,7 +222,7 @@ Public Attributes</h2></td></tr>
 <p>If key and/or value type is not specified then during operations the Ignite client will try to make automatic mapping between PHP types and Ignite object types - according to the mapping table defined in the description of the <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html">ObjectType</a> class.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramtype">int</td><td class="paramname">$subType</td><td>map subtype, one of the <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_map_object_type.html">MapObjectType</a> constants. </td></tr>
+    <tr><td class="paramtype">int</td><td class="paramname">$subType</td><td>map subtype, one of <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_map_object_type.html#MapSubType">MapSubType</a> constants. </td></tr>
     <tr><td class="paramtype">int&#160;|&#160;<a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html">ObjectType</a>&#160;|&#160;null</td><td class="paramname">$keyType</td><td>type of the keys in the map:<ul>
 <li>either a type code of primitive (simple) type (<a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html#PrimitiveTypeCodes">PrimitiveTypeCodes</a>)</li>
 <li>or an instance of class representing non-primitive (composite) type</li>
@@ -240,7 +240,7 @@ Public Attributes</h2></td></tr>
 </dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
-    <tr><td class="paramname"><a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a></td><td>if error. </td></tr>
+    <tr><td class="paramname">ClientException</td><td>if error. </td></tr>
   </table>
   </dd>
 </dl>
@@ -286,8 +286,8 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Returns map subtype, one of the <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_map_object_type.html">MapObjectType</a> constants.</p>
-<dl class="section return"><dt>Returns</dt><dd>int map subtype, one of the <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_map_object_type.html">MapObjectType</a> constants. </dd></dl>
+<p>Returns map subtype, one of <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_map_object_type.html#MapSubType">MapSubType</a> constants.</p>
+<dl class="section return"><dt>Returns</dt><dd>int map subtype, one of <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_map_object_type.html#MapSubType">MapSubType</a> constants. </dd></dl>
 
 </div>
 </div>
