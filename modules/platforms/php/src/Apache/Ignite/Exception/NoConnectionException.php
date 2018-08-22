@@ -19,17 +19,17 @@
 namespace Apache\Ignite\Exception;
 
 /**
- * Ignite server returns error for the requested operation.
+ * Ignite client is not connected.
  */
-class OperationException extends ClientException
+class NoConnectionException extends ClientException
 {
     /**
-     * Constructs an OperationException with the specified detail message.
+     * Constructs a NoConnectionException with the specified detail message.
      * 
      * @param string $message the detail message.
      */
-    public function __construct(string $message)
+    public function __construct(string $message = null)
     {
-        parent::__construct($message);
+        parent::__construct($message ? $message : 'Operation is not completed due to the connection problem');
     }
 }

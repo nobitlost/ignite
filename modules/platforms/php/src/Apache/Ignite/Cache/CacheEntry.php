@@ -16,20 +16,45 @@
  * limitations under the License.
  */
 
-namespace Apache\Ignite\Exception;
+namespace Apache\Ignite\Cache;
 
 /**
- * Ignite server returns error for the requested operation.
+ * A cache entry (key-value pair).
  */
-class OperationException extends ClientException
+class CacheEntry
 {
+    private $key;
+    private $value;
+    
     /**
-     * Constructs an OperationException with the specified detail message.
+     * Public constructor.
      * 
-     * @param string $message the detail message.
+     * @param mixed $key key corresponding to this entry.
+     * @param mixed $value value associated with the key.
      */
-    public function __construct(string $message)
+    public function __construct($key, $value)
     {
-        parent::__construct($message);
+        $this->key = $key;
+        $this->value = $value;
+    }
+
+    /**
+     * Returns the key corresponding to this entry.
+     * 
+     * @return mixed the key corresponding to this entry.
+     */
+    public function getKey()
+    {
+        return $this->key;
+    }
+
+    /**
+     * Returns the value corresponding to this entry.
+     *
+     * @return mixed the value corresponding to this entry.
+     */
+    public function getValue()
+    {
+        return $this->value;
     }
 }
