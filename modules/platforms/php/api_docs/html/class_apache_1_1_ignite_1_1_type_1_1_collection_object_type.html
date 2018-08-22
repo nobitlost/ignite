@@ -219,12 +219,12 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Public constructor.</p>
-<p>Specifies a kind of collection and optionally specifies a type of elements in the collection.</p>
-<p>If the type of elements is not specified then during operations the Ignite client will try to make automatic mapping between PHP types and Ignite object types - according to the mapping table defined in the description of the <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html">ObjectType</a> class.</p>
+<p>Specifies the collection subtype and optionally specifies Ignite type of elements in the collection.</p>
+<p>If Ignite type of elements is not specified then during operations the Ignite client tries to make automatic mapping between PHP types and Ignite object types - according to the mapping table defined in the description of the <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html">ObjectType</a> class.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramtype">int</td><td class="paramname">$subType</td><td>collection subtype, one of <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_collection_object_type.html#CollectionSubType">CollectionSubType</a> constants. </td></tr>
-    <tr><td class="paramtype">int&#160;|&#160;<a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html">ObjectType</a>&#160;|&#160;null</td><td class="paramname">$elementType</td><td>type of elements in the collection:<ul>
+    <tr><td class="paramtype">int&#160;|&#160;<a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html">ObjectType</a>&#160;|&#160;null</td><td class="paramname">$elementType</td><td>Ignite type of elements in the collection:<ul>
 <li>either a type code of primitive (simple) type (<a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html#PrimitiveTypeCodes">PrimitiveTypeCodes</a>)</li>
 <li>or an instance of class representing non-primitive (composite) type</li>
 <li>or null (or not specified) that means the type is not specified</li>
@@ -257,11 +257,11 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Returns type of elements in the collection.</p>
+<p>Returns Ignite type of elements in the collection.</p>
 <dl class="section return"><dt>Returns</dt><dd>int|ObjectType|null type of elements in the collection:<ul>
 <li>either a type code of primitive (simple) type (<a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html#PrimitiveTypeCodes">PrimitiveTypeCodes</a>)</li>
 <li>or an instance of class representing non-primitive (composite) type</li>
-<li>or null (or not specified) that means the type is not specified </li>
+<li>or null that means the type is not specified </li>
 </ul>
 </dd></dl>
 
@@ -373,7 +373,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>General collection type, which can not be mapped to any more specific collection type. </p>
+<p>General collection type, which can not be mapped to any specific collection type. </p>
 
 </div>
 </div>

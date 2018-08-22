@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['query',['query',['../interface_apache_1_1_ignite_1_1_cache_interface.html#aa7784dad022389a61ba6345581d486a6',1,'Apache::Ignite::CacheInterface']]]
+  ['query',['query',['../interface_apache_1_1_ignite_1_1_cache_1_1_cache_interface.html#a92d96bf0c32d6d1775a639de2c369c9c',1,'Apache::Ignite::Cache::CacheInterface']]]
 ];

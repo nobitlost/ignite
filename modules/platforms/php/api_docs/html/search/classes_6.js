@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['query',['Query',['../class_apache_1_1_ignite_1_1_query_1_1_query.html',1,'Apache::Ignite::Query']]],
-  ['queryentity',['QueryEntity',['../class_apache_1_1_ignite_1_1_config_1_1_query_entity.html',1,'Apache::Ignite::Config']]],
-  ['queryfield',['QueryField',['../class_apache_1_1_ignite_1_1_config_1_1_query_field.html',1,'Apache::Ignite::Config']]],
-  ['queryindex',['QueryIndex',['../class_apache_1_1_ignite_1_1_config_1_1_query_index.html',1,'Apache::Ignite::Config']]]
+  ['objectarraytype',['ObjectArrayType',['../class_apache_1_1_ignite_1_1_type_1_1_object_array_type.html',1,'Apache::Ignite::Type']]],
+  ['objecttype',['ObjectType',['../class_apache_1_1_ignite_1_1_type_1_1_object_type.html',1,'Apache::Ignite::Type']]],
+  ['operationexception',['OperationException',['../class_apache_1_1_ignite_1_1_exception_1_1_operation_exception.html',1,'Apache::Ignite::Exception']]],
+  ['operationstatusunknownexception',['OperationStatusUnknownException',['../class_apache_1_1_ignite_1_1_exception_1_1_operation_status_unknown_exception.html',1,'Apache::Ignite::Exception']]]
 ];

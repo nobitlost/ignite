@@ -113,6 +113,7 @@ Public Member Functions</h2></td></tr>
 <p>The configuration includes:</p><ul>
 <li>(mandatory) Ignite node endpoint(s)</li>
 <li>(optional) user credentials for authentication</li>
+<li>(optional) TLS options for secure connection</li>
 <li>(optional) connection options </li>
 </ul>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
@@ -182,7 +183,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Returns the password specified in the <a class="el" href="class_apache_1_1_ignite_1_1_client_configuration.html#a12f348aeee59975a2e31813653533d6f">setPassword()</a> method.</p>
+<p>Returns the current password.</p>
 <dl class="section return"><dt>Returns</dt><dd>string|null password or null (if password is empty). </dd></dl>
 
 </div>
@@ -201,7 +202,8 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
+<p>Returns the current size of the receive chunk.</p>
+<dl class="section return"><dt>Returns</dt><dd>int size of the receive chunk (in bytes). </dd></dl>
 
 </div>
 </div>
@@ -219,7 +221,8 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
+<p>Returns the current size of the send chunk.</p>
+<dl class="section return"><dt>Returns</dt><dd>int size of the send chunk (in bytes). </dd></dl>
 
 </div>
 </div>
@@ -237,7 +240,8 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>bool </dd></dl>
+<p>Returns the current status of the TCP Nagle algorithm.</p>
+<dl class="section return"><dt>Returns</dt><dd>bool true if enabled, false if disabled. </dd></dl>
 
 </div>
 </div>
@@ -255,7 +259,8 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>int </dd></dl>
+<p>Returns the current send/receive timeout.</p>
+<dl class="section return"><dt>Returns</dt><dd>int send/receive timeout (in milliseconds). </dd></dl>
 
 </div>
 </div>
@@ -273,7 +278,8 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>array|null </dd></dl>
+<p>Returns the current TLS connection options.</p>
+<dl class="section return"><dt>Returns</dt><dd>array|null TLS connection options or null (if secure connection is not used). </dd></dl>
 
 </div>
 </div>
@@ -291,7 +297,7 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Returns the username specified in the <a class="el" href="class_apache_1_1_ignite_1_1_client_configuration.html#a0809cf53e2b2b450fee1e7585203f2b8">setUserName()</a> method.</p>
+<p>Returns the current username.</p>
 <dl class="section return"><dt>Returns</dt><dd>string|null username or null (if authentication is disabled). </dd></dl>
 
 </div>
@@ -338,9 +344,11 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Sets the size of the receive chunk.</p>
+<p>8192 bytes by default.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramtype">int</td><td class="paramname">$size</td><td></td></tr>
+    <tr><td class="paramtype">int</td><td class="paramname">$size</td><td>size of the receive chunk (in bytes).</td></tr>
   </table>
   </dd>
 </dl>
@@ -363,9 +371,11 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Sets the size of the send chunk.</p>
+<p>8192 bytes by default.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramtype">int</td><td class="paramname">$size</td><td></td></tr>
+    <tr><td class="paramtype">int</td><td class="paramname">$size</td><td>size of the send chunk (in bytes).</td></tr>
   </table>
   </dd>
 </dl>
@@ -389,9 +399,10 @@ Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Disables/enables the TCP Nagle algorithm.</p>
+<p>Enabled by default.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramtype">bool</td><td class="paramname">$tcpNoDelay</td><td></td></tr>
+    <tr><td class="paramtype">bool</td><td class="paramname">$tcpNoDelay</td><td>true to enable, false to disable.</td></tr>
   </table>
   </dd>
 </dl>
@@ -414,9 +425,11 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Sets send/receive timeout.</p>
+<p>Default value is defined by the PHP settings.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramtype">int</td><td class="paramname">$timeout</td><td>send/receive timeout in milliseconds.</td></tr>
+    <tr><td class="paramtype">int</td><td class="paramname">$timeout</td><td>send/receive timeout (in milliseconds).</td></tr>
   </table>
   </dd>
 </dl>
@@ -439,9 +452,11 @@ Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
+<p>Enables and setup TLS connection.</p>
+<p>If not enabled (by default), the client does not use secure connection.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramtype">array</td><td class="paramname">$tlsOptions</td><td>TLS connection options in a format defined here: <a href="http://php.net/manual/en/context.ssl.php">http://php.net/manual/en/context.ssl.php</a></td></tr>
+    <tr><td class="paramtype">array&#160;|&#160;null</td><td class="paramname">$tlsOptions</td><td>TLS connection options in the format defined here: <a href="http://php.net/manual/en/context.ssl.php">http://php.net/manual/en/context.ssl.php</a> If null, secure connection is not used.</td></tr>
   </table>
   </dd>
 </dl>

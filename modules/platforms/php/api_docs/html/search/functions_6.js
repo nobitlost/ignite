@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['put',['put',['../interface_apache_1_1_ignite_1_1_cache_interface.html#a2159c928e1aa9afee679870d18f2a81e',1,'Apache::Ignite::CacheInterface']]],
-  ['putall',['putAll',['../interface_apache_1_1_ignite_1_1_cache_interface.html#ab845ba00bf994db2397f8530f07f5626',1,'Apache::Ignite::CacheInterface']]],
-  ['putifabsent',['putIfAbsent',['../interface_apache_1_1_ignite_1_1_cache_interface.html#ad5a3a778d424a50e74e9df2a46b0b293',1,'Apache::Ignite::CacheInterface']]]
+  ['put',['put',['../interface_apache_1_1_ignite_1_1_cache_1_1_cache_interface.html#afd80d8c9e38f03e0e4f68e64ae141e4d',1,'Apache::Ignite::Cache::CacheInterface']]],
+  ['putall',['putAll',['../interface_apache_1_1_ignite_1_1_cache_1_1_cache_interface.html#a72748fd72365b4c51f876c999ab11ae8',1,'Apache::Ignite::Cache::CacheInterface']]],
+  ['putifabsent',['putIfAbsent',['../interface_apache_1_1_ignite_1_1_cache_1_1_cache_interface.html#a9d055d4dfab1058ed297a9120a0cf502',1,'Apache::Ignite::Cache::CacheInterface']]]
 ];

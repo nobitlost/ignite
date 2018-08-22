@@ -217,19 +217,19 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Public constructor.</p>
-<p>Optionally specifies a kind of map and types of keys and values in the map.</p>
-<p>If a kind of map is not specified, <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_map_object_type.html#aa215559de46f69ed8ad8ec34baf028b8">MapObjectType::HASH_MAP</a> is assumed.</p>
-<p>If key and/or value type is not specified then during operations the Ignite client will try to make automatic mapping between PHP types and Ignite object types - according to the mapping table defined in the description of the <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html">ObjectType</a> class.</p>
+<p>Optionally specifies the map subtype and Ignite types of keys and values in the map.</p>
+<p>If the map subtype is not specified, <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_map_object_type.html#aa215559de46f69ed8ad8ec34baf028b8">MapObjectType::HASH_MAP</a> is assumed.</p>
+<p>If Ignite type is not specified for the key and/or value then during operations the Ignite client tries to make automatic mapping between PHP types and Ignite object types - according to the mapping table defined in the description of the <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html">ObjectType</a> class.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramtype">int</td><td class="paramname">$subType</td><td>map subtype, one of <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_map_object_type.html#MapSubType">MapSubType</a> constants. </td></tr>
-    <tr><td class="paramtype">int&#160;|&#160;<a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html">ObjectType</a>&#160;|&#160;null</td><td class="paramname">$keyType</td><td>type of the keys in the map:<ul>
+    <tr><td class="paramtype">int&#160;|&#160;<a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html">ObjectType</a>&#160;|&#160;null</td><td class="paramname">$keyType</td><td>Ignite type of the keys in the map:<ul>
 <li>either a type code of primitive (simple) type (<a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html#PrimitiveTypeCodes">PrimitiveTypeCodes</a>)</li>
 <li>or an instance of class representing non-primitive (composite) type</li>
 <li>or null (or not specified) that means the type is not specified </li>
 </ul>
 </td></tr>
-    <tr><td class="paramtype">int&#160;|&#160;<a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html">ObjectType</a>&#160;|&#160;null</td><td class="paramname">$valueType</td><td>type of the values in the map:<ul>
+    <tr><td class="paramtype">int&#160;|&#160;<a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html">ObjectType</a>&#160;|&#160;null</td><td class="paramname">$valueType</td><td>Ignite type of the values in the map:<ul>
 <li>either a type code of primitive (simple) type (<a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html#PrimitiveTypeCodes">PrimitiveTypeCodes</a>)</li>
 <li>or an instance of class representing non-primitive (composite) type</li>
 <li>or null (or not specified) that means the type is not specified</li>
@@ -262,11 +262,11 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Returns type of the keys in the map.</p>
+<p>Returns Ignite type of the keys in the map.</p>
 <dl class="section return"><dt>Returns</dt><dd>int|ObjectType|null type of the keys in the map:<ul>
 <li>either a type code of primitive (simple) type (<a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html#PrimitiveTypeCodes">PrimitiveTypeCodes</a>)</li>
 <li>or an instance of class representing non-primitive (composite) type</li>
-<li>or null (or not specified) that means the type is not specified </li>
+<li>or null that means the type is not specified </li>
 </ul>
 </dd></dl>
 
@@ -286,7 +286,7 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Returns map subtype, one of <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_map_object_type.html#MapSubType">MapSubType</a> constants.</p>
+<p>Returns the map subtype, one of <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_map_object_type.html#MapSubType">MapSubType</a> constants.</p>
 <dl class="section return"><dt>Returns</dt><dd>int map subtype, one of <a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_map_object_type.html#MapSubType">MapSubType</a> constants. </dd></dl>
 
 </div>
@@ -305,11 +305,11 @@ Public Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Returns type of the values in the map.</p>
+<p>Returns Ignite type of the values in the map.</p>
 <dl class="section return"><dt>Returns</dt><dd>int|ObjectType|null type of the values in the map:<ul>
 <li>either a type code of primitive (simple) type (<a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html#PrimitiveTypeCodes">PrimitiveTypeCodes</a>)</li>
 <li>or an instance of class representing non-primitive (composite) type</li>
-<li>or null (or not specified) that means the type is not specified </li>
+<li>or null that means the type is not specified </li>
 </ul>
 </dd></dl>
 

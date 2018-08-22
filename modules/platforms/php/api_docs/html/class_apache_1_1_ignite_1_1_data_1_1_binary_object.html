@@ -173,12 +173,12 @@ Static Public Member Functions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-<p>Creates an instance of the <a class="el" href="class_apache_1_1_ignite_1_1_data_1_1_binary_object.html">BinaryObject</a> from the specified instance of PHP Object.</p>
-<p>All public properties of the PHP Object instance with their values are added as fields to the <a class="el" href="class_apache_1_1_ignite_1_1_data_1_1_binary_object.html">BinaryObject</a>. Fields may be added or removed later using <a class="el" href="class_apache_1_1_ignite_1_1_data_1_1_binary_object.html#a16aedb05677188969ba80cfac06a066a">setField()</a> and <a class="el" href="class_apache_1_1_ignite_1_1_data_1_1_binary_object.html#a104affb391d2d3f7ff428efd67e05230">removeField()</a> methods.</p>
-<p>If complexObjectType parameter is specified, then the type Id is taken from it. Otherwise, the type Id is generated from the name of the PHP Object.</p>
+<p>Creates an instance of the <a class="el" href="class_apache_1_1_ignite_1_1_data_1_1_binary_object.html">BinaryObject</a> from the specified instance of PHP class.</p>
+<p>All public properties of the PHP object with their values are added as fields to the <a class="el" href="class_apache_1_1_ignite_1_1_data_1_1_binary_object.html">BinaryObject</a>. Fields may be added or removed later using <a class="el" href="class_apache_1_1_ignite_1_1_data_1_1_binary_object.html#a16aedb05677188969ba80cfac06a066a">setField()</a> and <a class="el" href="class_apache_1_1_ignite_1_1_data_1_1_binary_object.html#a104affb391d2d3f7ff428efd67e05230">removeField()</a> methods.</p>
+<p>If complexObjectType parameter is specified, then the type Id is taken from it. Otherwise, the type Id is generated from the name of the PHP class which instance is specified.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramtype">object</td><td class="paramname">$object</td><td>instance of PHP Object which adds and initializes the fields of the <a class="el" href="class_apache_1_1_ignite_1_1_data_1_1_binary_object.html">BinaryObject</a> instance. </td></tr>
+    <tr><td class="paramtype">object</td><td class="paramname">$object</td><td>instance of PHP class which adds and initializes the fields of the <a class="el" href="class_apache_1_1_ignite_1_1_data_1_1_binary_object.html">BinaryObject</a> instance. </td></tr>
     <tr><td class="paramtype">ComplexObjectType</td><td class="paramname">$complexObjectType</td><td>instance of complex type definition which specifies non-standard mapping of the fields of the <a class="el" href="class_apache_1_1_ignite_1_1_data_1_1_binary_object.html">BinaryObject</a> instance to/from the Ignite types.</td></tr>
   </table>
   </dd>
@@ -219,12 +219,12 @@ Static Public Member Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p>Returns a value of the specified field.</p>
-<p>Optionally, specifies a type of the field. If the type is not specified then the Ignite client will try to make automatic mapping between PHP types and Ignite object types - according to the mapping table defined in the description of the ObjectType class.</p>
+<p>Optionally, specifies Ignite type of the field. If the type is not specified then the Ignite client tries to make automatic mapping between PHP types and Ignite object types - according to the mapping table defined in the description of the ObjectType class.</p>
 <p>If field with the specified name doesn't exist, throws <a class="el" href="class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html">Exception::ClientException</a>. Use <a class="el" href="class_apache_1_1_ignite_1_1_data_1_1_binary_object.html#a2e9f00fbce095ac890e5fc330aaf1225">hasField()</a> method to ensure the field exists.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramtype">string</td><td class="paramname">$fieldName</td><td>name of the field. </td></tr>
-    <tr><td class="paramtype">int&#160;|&#160;ObjectType&#160;|&#160;null</td><td class="paramname">$fieldType</td><td>type of the field:<ul>
+    <tr><td class="paramtype">int&#160;|&#160;ObjectType&#160;|&#160;null</td><td class="paramname">$fieldType</td><td>Ignite type of the field:<ul>
 <li>either a type code of primitive (simple) type (<a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html#PrimitiveTypeCodes">PrimitiveTypeCodes</a>)</li>
 <li>or an instance of class representing non-primitive (composite) type</li>
 <li>or null (or not specified) that means the type is not specified</li>
@@ -257,7 +257,7 @@ Static Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Returns names of all fields of this <a class="el" href="class_apache_1_1_ignite_1_1_data_1_1_binary_object.html">BinaryObject</a> instance.</p>
+<p>Returns names of all fields in this <a class="el" href="class_apache_1_1_ignite_1_1_data_1_1_binary_object.html">BinaryObject</a> instance.</p>
 <dl class="section return"><dt>Returns</dt><dd>array names of all fields.</dd></dl>
 <dl class="exception"><dt>Exceptions</dt><dd>
   <table class="exception">
@@ -382,13 +382,13 @@ Static Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Sets the new value of the specified field. Adds the specified field, if it did not exist before.</p>
-<p>Optionally, specifies a type of the field. If the type is not specified then during operations the Ignite client will try to make automatic mapping between PHP types and Ignite object types - according to the mapping table defined in the description of the ObjectType class.</p>
+<p>Sets new value of the specified field. Adds the specified field, if it did not exist before.</p>
+<p>Optionally, specifies an Ignite type of the field. If the type is not specified then the Ignite client tries to make automatic mapping between PHP types and Ignite object types - according to the mapping table defined in the description of the ObjectType class.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramtype">string</td><td class="paramname">$fieldName</td><td>name of the field. </td></tr>
     <tr><td class="paramtype">mixed</td><td class="paramname">$fieldValue</td><td>new value of the field. </td></tr>
-    <tr><td class="paramtype">int&#160;|&#160;ObjectType&#160;|&#160;null</td><td class="paramname">$fieldType</td><td>type of the field:<ul>
+    <tr><td class="paramtype">int&#160;|&#160;ObjectType&#160;|&#160;null</td><td class="paramname">$fieldType</td><td>Ignite type of the field:<ul>
 <li>either a type code of primitive (simple) type (<a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html#PrimitiveTypeCodes">PrimitiveTypeCodes</a>)</li>
 <li>or an instance of class representing non-primitive (composite) type</li>
 <li>or null (or not specified) that means the type is not specified</li>
@@ -422,7 +422,7 @@ Static Public Member Functions</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p>Deserializes this <a class="el" href="class_apache_1_1_ignite_1_1_data_1_1_binary_object.html">BinaryObject</a> instance into an instance of the specified complex object type.</p>
+<p>Deserializes this <a class="el" href="class_apache_1_1_ignite_1_1_data_1_1_binary_object.html">BinaryObject</a> instance into PHP object which corresponds to the specified complex object type.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramtype">ComplexObjectType</td><td class="paramname">$complexObjectType</td><td>instance of class representing complex object type.</td></tr>
