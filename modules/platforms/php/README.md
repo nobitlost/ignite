@@ -213,7 +213,7 @@ connectClient();
 
 ### Caches Usage and Configuration ###
 
-The next step is to obtain an object representing an Ignite cache. It's an instance of a PHP class with the [CacheInterface](https://rawgit.com/nobitlost/ignite/ignite-7783-docs/modules/platforms/php/api_docs/html/interface_apache_1_1_ignite_1_1_cache_interface.html).
+The next step is to obtain an object representing an Ignite cache. It's an instance of a PHP class with the [CacheInterface](https://rawgit.com/nobitlost/ignite/ignite-7783-docs/modules/platforms/php/api_docs/html/interface_apache_1_1_ignite_1_1_cache_1_1_cache_interface.html).
 
 The thin client provides several methods to work with Ignite caches and to obtain objects with the `CacheInterface` - get a cache by its name, create a cache with a specified name and optional cache configuration, get or create a cache, destroys a cache, etc.
 
@@ -767,7 +767,7 @@ php CachePutGetExample.php
 ### Additional Setup for AuthTlsExample ###
 
 1. Obtain certificates required for TLS:
-  - either use pre-generated certificates provided in the [examples/certs](./certs) folder. Password for the files: `123456`. Note, these certificates work for an Ignite server installed locally only.
+  - either use pre-generated certificates provided in the [examples/certs](./examples/certs) folder. Password for the files: `123456`. Note, these certificates work for an Ignite server installed locally only.
   - or obtain other existing certificates applicable for a concrete Ignite server.
   - or generate new certificates applicable for a concrete Ignite server.
 
@@ -775,9 +775,9 @@ php CachePutGetExample.php
     - keystore.jks, truststore.jks - for the server side
     - client.pem, ca.pem - for the client side
 
-2. Place client.pem and ca.pem files somewhere locally, eg. into the [examples/certs](.examples/certs) folder.
+2. Place client.pem and ca.pem files somewhere locally, eg. into the [examples/certs](./examples/certs) folder.
 
-3. If needed, modify `TLS_CLIENT_CERT_FILE_NAME` and `TLS_CA_FILE_NAME` constants in the example source file. The default values point to the files in the [examples/certs](.example/certs) folder.
+3. If needed, modify `TLS_CLIENT_CERT_FILE_NAME` and `TLS_CA_FILE_NAME` constants in the example source file. The default values point to the files in the [examples/certs](./examples/certs) folder.
 
 4. Setup Apache Ignite server to accept TLS - see appropriate Ignite documentation. Provide the obtained keystore.jks and truststore.jks certificates during the setup.
 
