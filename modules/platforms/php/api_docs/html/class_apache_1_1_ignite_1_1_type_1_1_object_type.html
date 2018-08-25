@@ -187,13 +187,13 @@ Public Attributes</h2></td></tr>
 <h2>PHP type </h2>
 <p>It is a PHP primitive or a PHP object: <a href="http://php.net/manual/en/language.types.intro.php">http://php.net/manual/en/language.types.intro.php</a></p>
 <p>Plus additional types:</p><ul>
-<li>Ds\Set, Ds\Map - PHP Data Structures extension classes (<a href="http://php.net/manual/en/book.ds.php">http://php.net/manual/en/book.ds.php</a>)</li>
-<li>Date, Time, Timestamp, EnumItem, BinaryObject - are PHP classes introduced by the Ignite client.</li>
-<li>Brick\Math\BigDecimal - ??? <a href="https://github.com/brick/math">https://github.com/brick/math</a></li>
+<li>Ds\Set, Ds\Map - PHP Data Structures extension classes: <a href="http://php.net/manual/en/book.ds.php">http://php.net/manual/en/book.ds.php</a></li>
+<li>Brick\Math\BigDecimal - PHP class from the extension library to work with arbitrary precision numbers: <a href="https://github.com/brick/math">https://github.com/brick/math</a></li>
+<li>Date, Time, Timestamp, EnumItem, BinaryObject - PHP classes introduced by the Ignite client.</li>
 </ul>
 <h2>Ignite type code </h2>
 <p>It is a type code of Ignite primitive type (<a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html#PrimitiveTypeCodes">PrimitiveTypeCodes</a>) or Ignite composite type (<a class="el" href="class_apache_1_1_ignite_1_1_type_1_1_object_type.html#CompositeTypeCodes">CompositeTypeCodes</a>). </p><hr/>
-<p>DEFAULT MAPPING FROM PHP type TO Ignite type code:</p>
+<h2>DEFAULT MAPPING FROM PHP type TO Ignite type code: </h2>
 <p>This mapping is used when an application does not explicitly specify an Ignite type for a field and it is writing data to that field.</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -219,11 +219,11 @@ Public Attributes</h2></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
 <td class="markdownTableBodyNone">BinaryObject  </td><td class="markdownTableBodyNone">COMPLEX_OBJECT   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">any other PHP Object  </td><td class="markdownTableBodyNone">COMPLEX_OBJECT   </td></tr>
+<td class="markdownTableBodyNone">any other PHP Object**  </td><td class="markdownTableBodyNone">COMPLEX_OBJECT   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
-<td class="markdownTableBodyNone">associative array of any PHP supported type  </td><td class="markdownTableBodyNone">MAP (HASH_MAP)   </td></tr>
+<td class="markdownTableBodyNone">associative*** array of PHP supported type*  </td><td class="markdownTableBodyNone">MAP (HASH_MAP)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">indexed array of boolean  </td><td class="markdownTableBodyNone">BOOLEAN_ARRAY   </td></tr>
+<td class="markdownTableBodyNone">indexed*** array of boolean  </td><td class="markdownTableBodyNone">BOOLEAN_ARRAY   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
 <td class="markdownTableBodyNone">indexed array of integer  </td><td class="markdownTableBodyNone">INTEGER_ARRAY   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
@@ -243,17 +243,18 @@ Public Attributes</h2></td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
 <td class="markdownTableBodyNone">indexed array of BinaryObject  </td><td class="markdownTableBodyNone">OBJECT_ARRAY   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
-<td class="markdownTableBodyNone">indexed array of any other PHP Object  </td><td class="markdownTableBodyNone">OBJECT_ARRAY   </td></tr>
+<td class="markdownTableBodyNone">indexed array of any other PHP Object**  </td><td class="markdownTableBodyNone">OBJECT_ARRAY   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowEven">
 <td class="markdownTableBodyNone">Ds\Set  </td><td class="markdownTableBodyNone">COLLECTION (HASH_SET)   </td></tr>
 <tr class="markdownTableBody" class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">Ds\Map  </td><td class="markdownTableBodyNone">MAP (HASH_MAP)   </td></tr>
 </table>
-<p>All other PHP types have no default mapping.</p>
-<p>PHP Class - ??? PHP supported type - is any PHP type mentioned in the table.</p>
-<p>Associative and indexed PHP arrays: <a href="http://php.net/manual/en/language.types.array.php">http://php.net/manual/en/language.types.array.php</a></p>
+<p>All other PHP types have no default mapping to Ignite type codes.</p>
+<p>(*) PHP supported type - is any PHP type mentioned in the table.</p>
+<p>(**) Any other PHP Object - is any PHP class, not explicitly mentioned in the table.</p>
+<p>(***) Associative and indexed PHP arrays: <a href="http://php.net/manual/en/language.types.array.php">http://php.net/manual/en/language.types.array.php</a></p>
 <p>Type of an array's value is determined by the value's type in the first element of the array. Empty array has no default mapping. </p><hr/>
-<p>DEFAULT MAPPING FROM Ignite type code TO PHP type:</p>
+<h2>DEFAULT MAPPING FROM Ignite type code TO PHP type: </h2>
 <p>This mapping is used when an application does not explicitly specify an Ignite type for a field and it is reading data from that field.</p>
 <table class="markdownTable">
 <tr class="markdownTableHead">
@@ -344,7 +345,7 @@ Public Attributes</h2></td></tr>
 <td class="markdownTableBodyNone">NULL  </td><td class="markdownTableBodyNone">null   </td></tr>
 </table>
 <hr/>
-<p>RETURNED PHP types WHEN READING DATA OF THE SPECIFIED Ignite type code:</p>
+<h2>RETURNED PHP types WHEN READING DATA OF THE SPECIFIED Ignite type code: </h2>
 <p>When an application explicitly specifies an Ignite type for a field and it is reading data from that field, the following PHP types are returned for every concrete Ignite type code - SEE THE PREVIOUS TABLE with the following additional comments:</p>
 <p>TO UPDATE ???</p>
 <ul>
@@ -355,7 +356,7 @@ Public Attributes</h2></td></tr>
 <li>NULL cannot be specified as a type of a field but PHP null may be returned as a value of a field.</li>
 </ul>
 <hr/>
-<p>ALLOWED PHP types WHEN WRITING DATA OF THE SPECIFIED Ignite type code:</p>
+<h2>ALLOWED PHP types WHEN WRITING DATA OF THE SPECIFIED Ignite type code: </h2>
 <p>When an application explicitly specifies an Ignite type for a field and it is writing data to that field, the following PHP types are allowed for every concrete Ignite type code - SEE THE PREVIOUS TABLE with the following additional comments:</p>
 <p>TO UPDATE ???</p>
 <ul>

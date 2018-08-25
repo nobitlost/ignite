@@ -377,6 +377,7 @@ Additional Inherited Members</h2></td></tr>
 <p>Affects data reading operations only.</p>
 <p>The specified name will be used as PHP class name to instantiate a PHP object the received Ignite complex object is deserialized to.</p>
 <p>By default (if the name is not specified), the Ignite complex type name of the received complex object is used as PHP class name to instantiate a PHP object during deserialization.</p>
+<p>The PHP Class must have a constructor without parameters or with optional parameters only.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramtype">string&#160;|&#160;null</td><td class="paramname">$phpClassName</td><td>name of the PHP class or null (the name is not specified).</td></tr>
