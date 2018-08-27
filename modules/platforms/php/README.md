@@ -14,11 +14,6 @@ The client requires PHP version 7.2 or higher (http://php.net/manual/en/install.
 
 The client additionally requires PHP Multibyte String extension. Depending on you PHP configuration you may need to additionally install/configure it (http://php.net/manual/en/mbstring.installation.php)
 
-The client has been tested on the following platforms:
-- Ubuntu 14.04 LTS 32-bit
-- Ubuntu 14.04 LTS 64-bit
-- Windows 10 Home 64-bit
-
 Before connecting to Ignite from PHP thin client, start at least one Ignite cluster node. For instance, you can use `ignite.sh` script as follows:
 
 In Unix:
@@ -92,9 +87,9 @@ The below sections explain the basic steps to work with Apache Ignite using PHP 
 
 See the [Prerequisites](#prerequisites) section first.
 
-## Installation ##
+### Installation ###
 
-### Installation from the PHP Package Repository ###
+#### Installation from the PHP Package Repository ####
 
 Run from your application root
 ```
@@ -106,7 +101,7 @@ To use the client in your application, include `vendor/autoload.php` file, gener
 require_once __DIR__ . '/vendor/autoload.php';
 ```
 
-### Installation from Sources ###
+#### Installation from Sources ####
 
 1. Clone or download the Ignite repository to `local_ignite_path`
 2. Go to `local_ignite_path/modules/platforms/php` folder
@@ -645,6 +640,7 @@ Other errors (eg. wrong usage of the client, invalid arguments passed into metho
 
 ```
 try {
+    // ...
     // These exceptions are usually processed for a concrete operation    
     try {
         // Some operation with the Ignite cluster
@@ -702,7 +698,7 @@ composer install --no-dev
 
 3. Run an example by calling `php <example_file_name>.php`, eg:
 ```
-cd {ignite}/modules/platforms/php/examples
+cd local_ignite_path/modules/platforms/php/examples
 php CachePutGetExample.php
 ```
 
