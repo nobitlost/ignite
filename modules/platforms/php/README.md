@@ -792,12 +792,6 @@ Source: [FailoverExample.php](./examples/FailoverExample.php)
 
 This example requires [additional setup](#additional-setup-for-failoverexample).
 
-This example demonstrates the failover behavior of the client
-- configures the client to connect to a set of nodes
-- connects to a node
-- if connection is broken, the client automatically tries to reconnect to another node
-- if no specified nodes are available, stops the client
-
 This example demonstrates "failover re-connection algorithm" of the client. It:
 - configures the client to connect to a set of nodes
 - connects to a node
@@ -838,7 +832,7 @@ The client has been tested on the following platforms:
 
 ## Tests Installation ##
 
-1. Clone or download Ignite repository https://github.com/nobitlost/ignite.git to `local_ignite_path`
+1. Clone or download Ignite repository the Ignite repository to `local_ignite_path`
 2. Go to `local_ignite_path/modules/platforms/php` folder
 3. Execute `composer install` command. Depending on you PHP configuration you may need to install/configure some additional PHP extensions required by PHPUnit (see Composer error messages if any).
 
@@ -854,15 +848,17 @@ composer install
     - **APACHE_IGNITE_CLIENT_ENDPOINTS** - comma separated list of Ignite node endpoints.
     - **APACHE_IGNITE_CLIENT_DEBUG** - (optional) if *true*, tests will display additional output (default: *false*).
 3. Alternatively, instead of the environment variables setting, you can directly specify the values of the corresponding variables in [local_ignite_path/modules/platforms/php/tests/TestConfig.php](./tests/TestConfig.php) file.
-4. Run the tests:
+4. Run the tests. 
+
+The below commands include `--teamcity` option to generate additional output for integration with TeamCity. If you don't need this output remove that option.
 
 ### Run Functional Tests ###
 
-Call `./vendor/bin/phpunit -c tests/test_config.xml --teamcity tests` command from `local_ignite_path/modules/platforms/php` folder.
+Call `./vendor/bin/phpunit --teamcity tests` command from `local_ignite_path/modules/platforms/php` folder.
 
 ### Run Examples Executors ###
 
-Call `./vendor/bin/phpunit -c tests/test_config.xml --teamcity tests/examples/ExecuteExamples.php` command from `local_ignite_path/modules/platforms/php` folder.
+Call `./vendor/bin/phpunit --teamcity tests/examples/ExecuteExamples.php` command from `local_ignite_path/modules/platforms/php` folder.
 
 ### Run AuthTlsExample Executor ###
 
@@ -874,7 +870,7 @@ If the server runs locally:
 
 If the server runs remotely, and/or other certificates are required, and/or non-default username/password is required - see this [instruction](#additional-setup-for-authtlsexample).
 
-Call `./vendor/bin/phpunit -c tests/test_config.xml --teamcity tests/examples/ExecuteAuthTlsExample.php` command from `local_ignite_path/modules/platforms/php` folder.
+Call `./vendor/bin/phpunit --teamcity tests/examples/ExecuteAuthTlsExample.php` command from `local_ignite_path/modules/platforms/php` folder.
 
 ---------------------------------------------------------------------
 
@@ -892,4 +888,30 @@ Note: `local_ignite_path/modules/platforms/php/api_docs/Doxyfile` is a file with
 
 # Release the client in the PHP Package Repository: instruction #
 
-TODO
+1. Register an account at Packagist (https://packagist.org/), if not registered yet
+
+2. Prepare/update composer.json file. 
+
+Example of this file is [here](./composer.json). 
+
+Pay attention to:
+   - "name" - name of the package
+   - "description" - description of the package
+   - "keywords" - keywords for the search of the package on Packagist
+   - "license", "homepage", "authors"
+   - other properties depend on the implementation/tests, do not touch them
+
+Note: The current version of Packagist requires composer.json file must be in the root of a repository.
+(https://github.com/composer/packagist/issues/472)
+
+3. Create git tag with a new version name.
+Packagist obtains package versions from git tags. Tag names should match 'X.Y.Z' or 'vX.Y.Z' pattern, with an optional suffix.
+
+4. Publish/update the package.
+
+To publish the package the first time 
+- Go to https://packagist.org/packages/submit
+- Enter the client Repository URL and click "Check", click "Submit"
+
+To update the existing package
+- Go to https://packagist.org/packages/apache/apache-ignite-client (assuming `apache/apache-ignite-client` is the name of the package) and click "Update"
