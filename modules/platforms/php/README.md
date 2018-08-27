@@ -14,7 +14,7 @@ The client requires PHP version 7.2 or higher (http://php.net/manual/en/install.
 
 The client additionally requires PHP Multibyte String extension. Depending on you PHP configuration you may need to additionally install/configure it (http://php.net/manual/en/mbstring.installation.php)
 
-### Installation from the PHP Package Repository ###
+### Installation from the PHP Package Repository ### - TODO
 
 Run from your application root
 ```
@@ -28,7 +28,7 @@ require_once __DIR__ . '/vendor/autoload.php';
 
 ### Installation from Sources ###
 
-1. Clone or download Ignite repository https://github.com/nobitlost/ignite.git to `local_ignite_path`
+1. Clone or download the Ignite repository to `local_ignite_path`
 2. Go to `local_ignite_path/modules/platforms/php` folder
 3. Execute `composer install --no-dev` command
 
@@ -44,33 +44,13 @@ require_once "<local_ignite_path>/vendor/autoload.php";
 
 ## Quick Start ##
 
-Let's use existing [PHP examples]([./examples]) that are delivered with every Ignite distribution for the sake of quick getting started.
+Let's use existing [PHP examples](#full-examples) that are delivered with every Ignite distribution for the sake of quick getting started.
 
-Before connecting to Ignite from PHP thin client, start at least one Ignite cluster node. For instance, you can use `ignite.sh` script as follows:
+1. [Install the client and the examples](#installation)
 
-In Unix:
-```bash
-./ignite.sh
-```
+2. [Start at least one Ignite cluster node](#prerequisites)
 
-In Windows:
-```bash
-ignite.bat
-```
-
-Install Ignite PHP Client dependencies if you haven't done this yet:
-```
-cd {ignite}/modules/platforms/php
-composer install --no-dev
-```
-
-If needed, modify ENDPOINT constant in an example source file which represents a remote Ignite node endpoint. The default value is 127.0.0.1:10800.
-
-Run an example by calling `php <example_file_name>.php`, as follows:
-```
-cd {ignite}/modules/platforms/php/examples
-php CachePutGetExample.php
-```
+3. Setup and run examples - TODO
 
 ## Supported APIs ##
 
@@ -82,7 +62,6 @@ The client supports all operations and types from the [Binary Client Protocol v.
 - It is not possible to register a new Ignite Enum type. Reading and writing items of the existing Ignite Enum types are supported.
 
 The following additional features are supported:
-- Authentication using username/password.
 - SSL/TLS connection.
 - "Failover re-connection algorithm".
 
@@ -157,7 +136,7 @@ Optional parts of the configuration can be specified using additional methods wh
 - SSL/TLS connection.
 - PHP connection options.
 
-By default, the client establishes a non-secure connection with default connection options defined by PHP and does not use authentication.
+By default, the client establishes a non-secure connection with default connection options and does not use authentication.
 
 The example below shows how to configure the client:
 
@@ -182,9 +161,9 @@ $clientConfiguration = (new ClientConfiguration('127.0.0.1:10800'))->
 
 The next step is to connect the client to an Ignite cluster. The configuration for the client's connection, which includes endpoint(s) to connect to, is specified in the connect method.
 
-If the client is not connected (including the case it can not successfully reconnect using the "failover re-connection algorithm"), the [NoConnectionException](https://rawgit.com/nobitlost/ignite/ignite-7783-docs/modules/platforms/php/api_docs/html/class_apache_1_1_ignite_1_1_exception_1_1_no_connection_exception.html) is thrown for any operation with a cache.
+If the client is not connected (including the case it can not successfully reconnect using the "failover re-connection algorithm"), the [NoConnectionException](https://rawgit.com/nobitlost/ignite/ignite-7783-docs/modules/platforms/php/api_docs/html/class_apache_1_1_ignite_1_1_exception_1_1_no_connection_exception.html) is thrown for any operation with the Ignite cluster.
 
-If the client unexpectedly losts the connection during an operation, the [OperationStatusUnknownException](https://rawgit.com/nobitlost/ignite/ignite-7783-docs/modules/platforms/php/api_docs/html/class_apache_1_1_ignite_1_1_exception_1_1_operation_status_unknown_exception.html) is thrown. In this case, it is not known if the operation has been actually executed in the cluster or not.
+If the client unexpectedly losts the connection before or during an operation, the [OperationStatusUnknownException](https://rawgit.com/nobitlost/ignite/ignite-7783-docs/modules/platforms/php/api_docs/html/class_apache_1_1_ignite_1_1_exception_1_1_operation_status_unknown_exception.html) is thrown. In this case, it is not known if the operation has been actually executed in the cluster or not. Note, the "failover re-connection algorithm" will be executed when the next operation is called by the application.
 
 At any moment, an application can forcibly disconnect the client by calling the disconnect method.
 
@@ -655,7 +634,28 @@ There are three specific exceptions which may occur during the normal execution 
 Other errors (eg. wrong usage of the client, invalid arguments passed into methods, etc.) usually indicate issues during an application development which should be fixed during debugging and therefore should not occur after the application has been deployed. For all such errors the client throws the general exception:
 - [ClientException](https://rawgit.com/nobitlost/ignite/ignite-7783-docs/modules/platforms/php/api_docs/html/class_apache_1_1_ignite_1_1_exception_1_1_client_exception.html)
 
-TODO: example ?
+```
+try {
+    // These exceptions are usually processed for a concrete operation    
+    try {
+        // Some operation with the Ignite cluster
+        // ...
+    } catch (OperationException $e) {
+        // Ignite cluster returns an error, should be processed by an application's logic
+    } catch (OperationStatusUnknownException $e) {
+        // Status of the operation is unknown,
+        // an application may repeat the operation if necessary
+    }
+    // ...
+    
+// These exceptions are usually processed for the whole application
+} catch (NoConnectionException $e) {
+    // The client is disconnected, all further operation with Ignite server fail till the client is connected again.
+    // An application may recall connect() method with the same or different list of Ignite nodes.
+} catch (ClientException $e) {
+    // Usually means an issue that should be fixed during the development
+}
+```
 
 ### Enabling Debug ###
 
@@ -668,13 +668,38 @@ $client = new Client();
 $client->setDebug(true);
 ```
 
-## Full Examples ##
+---------------------------------------------------------------------
 
-PHP Thin Client contains fully workable examples to demonstrate the main behavior of the client.
+# Full Examples #
 
-### Examples Description ###
+PHP Thin Client contains fully workable [examples](./examples) to demonstrate the main behavior of the client.
 
-#### Sql Example ####
+## Examples Installation ## - TODO
+
+1. Clone or download the Ignite repository to `local_ignite_path`
+2. Go to `local_ignite_path/modules/platforms/php` folder
+3. Execute `composer install --no-dev` command
+
+```bash
+cd local_ignite_path/modules/platforms/php
+composer install --no-dev
+```
+
+## Examples Setup and Running ## - TODO
+
+1. [Run Apache Ignite server](#prerequisites) - locally or remotely. 
+
+2. If needed, modify `ENDPOINT` constant in an example source file - Ignite node endpoint. The default value is `127.0.0.1:10800`.
+
+3. Run an example by calling `php <example_file_name>.php`, eg: - TODO
+```
+cd {ignite}/modules/platforms/php/examples
+php CachePutGetExample.php
+```
+
+## Examples Description ##
+
+### Sql Example ###
 
 Source: [SqlExample.php](./examples/SqlExample.php)
 
@@ -688,7 +713,7 @@ This example shows primary APIs to use with Ignite as with an SQL database:
 - deletes tables (DROP TABLE)
 - destroys the cache
 
-#### Cache Put Get Example ####
+### Cache Put Get Example ###
 
 Source: [CachePutGetExample.php](./examples/CachePutGetExample.php)
 
@@ -704,7 +729,7 @@ This example demonstrates basic Cache, Key-Value Queries and Scan Query operatio
   - ScanQuery
 - destroys the cache
 
-#### Sql Query Entries Example ####
+### Sql Query Entries Example ###
 
 Source: [SqlQueryEntriesExample.php](./examples/SqlQueryEntriesExample.php)
 
@@ -715,7 +740,7 @@ This example demonstrates basic Cache, Key-Value Queries and SQL Query operation
 - reads data from the cache using SQL Query
 - destroys the cache
 
-#### Auth Tls Example ####
+### Auth Tls Example ###
 
 Source: [AuthTlsExample.php](./examples/AuthTlsExample.php)
 
@@ -729,42 +754,7 @@ This example demonstrates how to establish a secure connection to an Ignite node
 - get data from the cache
 - destroys the cache
 
-### Failover Example ###
-
-Source: [FailoverExample.php](./examples/FailoverExample.php)
-
-This example requires [additional setup](#additional-setup-for-failoverexample).
-
-This example demonstrates the failover behavior of the client
-- configures the client to connect to a set of nodes
-- connects to a node
-- if connection is broken, the client automatically tries to reconnect to another node
-- if no specified nodes are available, stops the client
-
-### Examples Installation ###
-
-1. Clone or download Ignite repository https://github.com/nobitlost/ignite.git to `local_ignite_path`
-2. Go to `local_ignite_path/modules/platforms/php` folder
-3. Execute `composer install --no-dev` command
-
-```bash
-cd local_ignite_path/modules/platforms/php
-composer install --no-dev
-```
-
-### Examples Setup and Running ###
-
-1. Run Apache Ignite server - locally or remotely.
-
-2. If needed, modify `ENDPOINT` constant in an example source file - Ignite node endpoint. The default value is `127.0.0.1:10800`.
-
-3. Run an example by calling `php <example_file_name>.php`, eg:
-```
-cd {ignite}/modules/platforms/php/examples
-php CachePutGetExample.php
-```
-
-### Additional Setup for AuthTlsExample ###
+#### Additional Setup for AuthTlsExample ####
 
 1. Obtain certificates required for TLS:
   - either use pre-generated certificates provided in the [examples/certs](./examples/certs) folder. Password for the files: `123456`. Note, these certificates work for an Ignite server installed locally only.
@@ -787,12 +777,55 @@ php CachePutGetExample.php
 
 7. Executes [Setup and Running](#examples-setup-and-running) steps.
 
-## Tests ##
+### Failover Example ###
+
+Source: [FailoverExample.php](./examples/FailoverExample.php)
+
+This example requires [additional setup](#additional-setup-for-failoverexample).
+
+This example demonstrates the failover behavior of the client
+- configures the client to connect to a set of nodes
+- connects to a node
+- if connection is broken, the client automatically tries to reconnect to another node
+- if no specified nodes are available, stops the client
+
+This example demonstrates "failover re-connection algorithm" of the client. It:
+- configures the client to connect to a set of nodes
+- connects to a node
+- executes an operation with Ignite server in a cycle (10 operations with 5 seconds pause) and finishes (in about 50 seconds after start)
+- if connection is broken, the client automatically tries to reconnect to another node
+- if not possible to connect to any node, the example finishes immediately
+
+#### Additional Setup for FailoverExample ####
+
+1. Run three Ignite nodes. See appropriate Ignite documentation for more details.
+
+2. If needed, modify `ENDPOINT1`, `ENDPOINT2`, `ENDPOINT2` constants in an example source file - Ignite node endpoints.
+Default values are `localhost:10800`, `localhost:10801`, `localhost:10802` respectively.
+
+2. Run the example by calling `php FailoverExample.php`. 
+
+3. Shut down the node the client connected to (you can find it out from the client logs in the console).
+
+4. From the logs, you will see that the client automatically reconnects to another node which is available.
+
+5. Shut down all the nodes. You will see the client being stopped after failing to connect to each of the nodes.
+
+Note, you have about 50 seconds after the example is started to play with the nodes. After this time the examples finishes.
+
+---------------------------------------------------------------------
+
+# Tests #
 
 PHP Client for Apache Ignite contains [PHPUnit](https://phpunit.de/) tests to check the behavior of the client. The tests include:
 - functional tests which cover all API methods of the client
 - examples executors which run all examples except AuthTlsExample
 - AuthTlsExample executor
+
+The client is tested on the following platforms:
+- Ubuntu 14.04 LTS 32-bit
+- Ubuntu 14.04 LTS 64-bit
+- Windows 10 Home 64-bit
 
 ## Tests Installation ##
 
@@ -834,7 +867,9 @@ If the server runs remotely, and/or other certificates are required, and/or non-
 
 Call `./vendor/bin/phpunit -c tests/test_config.xml --teamcity tests/examples/ExecuteAuthTlsExample.php` command from `local_ignite_path/modules/platforms/php` folder.
 
-## API spec generation: instruction ##
+---------------------------------------------------------------------
+
+# API spec generation: instruction #
 
 It must be done if a public API class/method has been changed.
 1. Install Doxygen (http://doxygen.org/download.html)
@@ -844,6 +879,8 @@ It must be done if a public API class/method has been changed.
 
 Note: `local_ignite_path/modules/platforms/php/api_docs/Doxyfile` is a file with Doxygen configuration.
 
-## Release the client in the PHP Package Repository: instruction ##
+---------------------------------------------------------------------
+
+# Release the client in the PHP Package Repository: instruction #
 
 TODO
