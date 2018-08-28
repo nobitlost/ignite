@@ -53,23 +53,15 @@ The following additional features are supported:
 
 All API method calls are synchronous.
 
-## Data Types ##
+## Data Types Mapping ##
 
 A mapping between Ignite types defined by the Binary Client Protocol and PHP types occurs every time an application writes or reads a field to/from an Ignite via the client's API. The field here is any data stored in Ignite - the whole key or value of an Ignite entry, an element of an array or set, a field of a complex object, etc.
 
 The client supports two cases of mapping:
-- default mapping,
-- explicit mapping.
+- Explicit mapping. Using the client's API methods, an application can explicitly specify an Ignite type for a particular field. The client uses this information to transform the field from PHP type to Ignite type and vice verse during the read/write operations.
+- Default mapping. It defines what happens if an application does not use the explicit type mapping for a field.
 
-### Default Mapping ###
-
-Default mapping between Ignite and PHP types is described [here](https://rawgit.com/nobitlost/ignite/ignite-7783-docs/modules/platforms/php/api_docs/html/class_apache_1_1_ignite_1_1_type_1_1_object_type.html). It defines what happens if an application does not use the explicit type mapping for a field.
-
-### Explicit Mapping ###
-
-Using the client's API methods, an application can explicitly specify an Ignite type for a particular field. The client uses this information to transform the field from PHP type to Ignite type and vice verse during the read/write operations.
-
-If an application does not explicitly specify an Ignite type for a field, the client uses default mapping during the field read/write operations.
+Mappings between Ignite and PHP types during the read/write operations are described [here](https://rawgit.com/nobitlost/ignite/ignite-7783-docs/modules/platforms/php/api_docs/html/class_apache_1_1_ignite_1_1_type_1_1_object_type.html).
 
 ### Complex Object Type Support ###
 
@@ -292,7 +284,7 @@ It is possible to specify concrete Ignite types for the key and/or the value of 
 
 If Ignite type is not explicitly specified for some field, the client tries to make automatic default mapping between PHP types and Ignite object types.
 
-More details about types and mappings are clarified in the [Data Types](#data-types) section.
+More details about types and mappings are clarified in the [Data Types Mapping](#data-types-mapping) section.
 
 ```
 use Apache\Ignite\Client;
@@ -897,8 +889,8 @@ Pay attention to:
    - "license", "homepage", "authors"
    - other properties depend on the implementation/tests, do not touch them
 
-Note: The current version of Packagist requires composer.json file must be in the root of a repository.
-(https://github.com/composer/packagist/issues/472)
+Note: The current version of Packagist requires composer.json file to be at the root of a repository
+(https://github.com/composer/packagist/issues/472).
 
 3. Create git tag with a new version name.
 Packagist obtains package versions from git tags. Tag names should match 'X.Y.Z' or 'vX.Y.Z' pattern, with an optional suffix.
