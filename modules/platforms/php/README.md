@@ -46,6 +46,7 @@ The client supports all operations and types from the [Binary Client Protocol v.
 - OP_REGISTER_BINARY_TYPE_NAME and OP_GET_BINARY_TYPE_NAME operations are not supported.
 - Filter object for OP_QUERY_SCAN operation is not supported. OP_QUERY_SCAN operation itself is supported.
 - It is not possible to register a new Ignite Enum type. Reading and writing items of the existing Ignite Enum types are supported.
+- Raw data is not supported in the complex objects.
 
 The following additional features are supported:
 - SSL/TLS connection.
