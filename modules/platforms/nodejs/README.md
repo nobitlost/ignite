@@ -817,4 +817,44 @@ Note: `local_ignite_path/modules/platforms/nodejs/api_spec/conf.json` is a file 
 8. Execute `npm publish` command from the `local_ignite_path/modules/platforms/nodejs` folder.
 9. Check the module is published and well-described at https://www.npmjs.com/package/apache-ignite-client (assuming `apache-ignite-client` is the name of the module)
 
+package.json content example:
+
+```
+{
+  "name": "apache-ignite-client",
+  "version": "1.0.0",
+  "description": "NodeJS Client for Apache Ignite",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/apache/ignite/tree/master/modules/platforms/nodejs"
+  },
+  "keywords": [
+    "apache",
+    "ignite",
+    "client"
+  ],
+  "author": "",
+  "license": "Apache-2.0",
+  "engines": {
+    "node": ">=8.0.0"
+  },
+  "dependencies": {
+    "long": "latest",
+    "decimal.js": "latest"
+  },
+  "scripts": {
+    "test": "jasmine",
+    "test:examples": "node ./spec/ExamplesExecutor.js Examples",
+    "test:auth_example": "node ./spec/ExamplesExecutor.js AuthExample"
+  },
+  "devDependencies": {
+    "jasmine": "latest",
+    "jasmine-expect": "latest",
+    "jasmine-reporters": "latest"
+  }
+}
+
+```
+
 Common instruction about npm publishing: https://docs.npmjs.com/getting-started/publishing-npm-packages
