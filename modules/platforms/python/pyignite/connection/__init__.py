@@ -267,7 +267,9 @@ class Connection:
 
         while total_bytes_sent < len(data):
             try:
-                bytes_sent = self.socket.send(data[total_bytes_sent:], **kwargs)
+                bytes_sent = self.socket.send(
+                    data[total_bytes_sent:], **kwargs
+                )
             except OSError:
                 self._socket = self.host = self.port = None
                 raise
@@ -284,40 +286,28 @@ class Connection:
         :param flags: (optional) OS-specific flags,
         :return: data received.
         """
+        kwargs = {}
+        if flags is not None:
+            kwargs['flags'] = flags
+
         pref_size = len(self.prefetch)
         if buffersize > pref_size:
             result = self.prefetch
             self.prefetch = b''
             try:
-                result += self._recv(buffersize-pref_size, flags)
+                received = self.socket.recv(SOCKET_RECV_PREFETCH, **kwargs)
             except (SocketError, OSError):
                 self._socket = self.host = self.port = None
                 raise
-            return result
+            border = buffersize - pref_size
+            result += received[:border]
+            if len(result) < buffersize:
+                raise SocketError('Socket connection broken.')
+            self.prefetch = received[border:]
         else:
             result = self.prefetch[:buffersize]
             self.prefetch = self.prefetch[buffersize:]
-            return result
-
-    def _recv(self, buffersize, flags=None) -> bytes:
-        """
-        Handle socket data reading.
-        """
-        kwargs = {}
-        if flags is not None:
-            kwargs['flags'] = flags
-        chunks = []
-        bytes_rcvd = 0
-
-        while bytes_rcvd < buffersize:
-            chunk = self.socket.recv(buffersize-bytes_rcvd, **kwargs)
-            if chunk == b'':
-                self.socket.close()
-                raise SocketError('Socket connection broken.')
-            chunks.append(chunk)
-            bytes_rcvd += len(chunk)
-
-        return b''.join(chunks)
+        return result
 
     def close(self):
         """

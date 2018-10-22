@@ -275,7 +275,7 @@ class AnyDataObject:
             data_class = tc_map(type_code)
         except KeyError:
             raise ParseError('Unknown type code: `{}`'.format(type_code))
-        client.prefetch += type_code
+        client.prefetch = type_code + client.prefetch
         return data_class.parse(client)
 
     @classmethod
