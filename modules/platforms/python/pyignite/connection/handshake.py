@@ -13,7 +13,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from typing import Optional
+from collections import OrderedDict
+from typing import Optional, Union
 
 from pyignite.constants import *
 from pyignite.datatypes import Byte, Int, Short, String, UUIDObject
@@ -70,7 +71,7 @@ class HandshakeRequest:
         return self.handshake_struct.from_python(handshake_data)
 
 
-def read_response(client):
+def read_response(client) -> Union[dict, OrderedDict]:
     response_start = Struct([
         ('length', Int),
         ('op_code', Byte),
