@@ -23,6 +23,7 @@ from pyignite.constants import *
 from .base import IgniteDataType
 from .type_codes import *
 from .type_ids import *
+from .type_names import *
 from .null_object import Null
 
 
@@ -67,7 +68,7 @@ class String(IgniteDataType):
     Pascal-style string: `c_int` counter, followed by count*bytes.
     UTF-8-encoded, so that one character may take 1 to 4 bytes.
     """
-    _type_name = 'java.lang.String'
+    _type_name = NAME_STRING
     _type_id = TYPE_STRING
     type_code = TC_STRING
     pythonic = str
@@ -132,7 +133,7 @@ class String(IgniteDataType):
 
 
 class DecimalObject(IgniteDataType):
-    _type_name = 'java.math.BigDecimal'
+    _type_name = NAME_DECIMAL
     _type_id = TYPE_DECIMAL
     type_code = TC_DECIMAL
     pythonic = decimal.Decimal
@@ -254,7 +255,7 @@ class UUIDObject(StandardObject):
     Universally unique identifier (UUID), aka Globally unique identifier
     (GUID). Payload takes up 16 bytes.
     """
-    _type_name = 'java.util.UUID'
+    _type_name = NAME_UUID
     _type_id = TYPE_UUID
     _object_c_type = None
     type_code = TC_UUID
@@ -308,7 +309,7 @@ class TimestampObject(StandardObject):
     `epoch` and `fraction` stored separately and represented as
     tuple(datetime.datetime, integer).
     """
-    _type_name = 'java.sql.Timestamp'
+    _type_name = NAME_TIMESTAMP
     _type_id = TYPE_TIMESTAMP
     _object_c_type = None
     type_code = TC_TIMESTAMP
@@ -366,7 +367,7 @@ class DateObject(StandardObject):
 
     Represented as a naive datetime.datetime in Python.
     """
-    _type_name = 'java.util.Date'
+    _type_name = NAME_DATE
     _type_id = TYPE_DATE
     _object_c_type = None
     type_code = TC_DATE
@@ -420,7 +421,7 @@ class TimeObject(StandardObject):
 
     Represented as a datetime.timedelta in Python.
     """
-    _type_name = 'java.sql.Time'
+    _type_name = NAME_TIME
     _type_id = TYPE_TIME
     _object_c_type = None
     type_code = TC_TIME
@@ -611,37 +612,37 @@ class StringArray(StandardArray):
 
     List(str) in Python.
     """
-    _type_name = 'String[]'
+    _type_name = NAME_STRING_ARR
     _type_id = TYPE_STRING_ARR
     standard_type = String
 
 
 class DecimalArray(StandardArray):
-    _type_name = 'BigDecimal[]'
+    _type_name = NAME_DECIMAL_ARR
     _type_id = TYPE_DECIMAL_ARR
     standard_type = DecimalObject
 
 
 class UUIDArray(StandardArray):
-    _type_name = 'UUID[]'
+    _type_name = NAME_UUID_ARR
     _type_id = TYPE_UUID_ARR
     standard_type = UUIDObject
 
 
 class TimestampArray(StandardArray):
-    _type_name = 'Timestamp[]'
+    _type_name = NAME_TIMESTAMP_ARR
     _type_id = TYPE_TIMESTAMP_ARR
     standard_type = TimestampObject
 
 
 class DateArray(StandardArray):
-    _type_name = 'Date[]'
+    _type_name = NAME_DATE_ARR
     _type_id = TYPE_DATE_ARR
     standard_type = DateObject
 
 
 class TimeArray(StandardArray):
-    _type_name = 'Time[]'
+    _type_name = NAME_TIME_ARR
     _type_id = TYPE_TIME_ARR
     standard_type = TimeObject
 
@@ -675,7 +676,7 @@ class StandardArrayObject(StandardArray):
 
 class StringArrayObject(StandardArrayObject):
     """ List of strings. """
-    _type_name = 'String[]'
+    _type_name = NAME_STRING_ARR
     _type_id = TYPE_STRING_ARR
     standard_type = String
     type_code = TC_STRING_ARRAY
@@ -683,7 +684,7 @@ class StringArrayObject(StandardArrayObject):
 
 class DecimalArrayObject(StandardArrayObject):
     """ List of decimal.Decimal objects. """
-    _type_name = 'BigDecimal[]'
+    _type_name = NAME_DECIMAL_ARR
     _type_id = TYPE_DECIMAL_ARR
     standard_type = DecimalObject
     type_code = TC_DECIMAL_ARRAY
@@ -691,7 +692,7 @@ class DecimalArrayObject(StandardArrayObject):
 
 class UUIDArrayObject(StandardArrayObject):
     """ Translated into Python as a list(uuid.UUID). """
-    _type_name = 'UUID[]'
+    _type_name = NAME_UUID_ARR
     _type_id = TYPE_UUID_ARR
     standard_type = UUIDObject
     type_code = TC_UUID_ARRAY
@@ -701,7 +702,7 @@ class TimestampArrayObject(StandardArrayObject):
     """
     Translated into Python as a list of (datetime.datetime, integer) tuples.
     """
-    _type_name = 'Timestamp[]'
+    _type_name = NAME_TIMESTAMP_ARR
     _type_id = TYPE_TIMESTAMP_ARR
     standard_type = TimestampObject
     type_code = TC_TIMESTAMP_ARRAY
@@ -709,7 +710,7 @@ class TimestampArrayObject(StandardArrayObject):
 
 class DateArrayObject(StandardArrayObject):
     """ List of datetime.datetime type values. """
-    _type_name = 'Date[]'
+    _type_name = NAME_DATE_ARR
     _type_id = TYPE_DATE_ARR
     standard_type = DateObject
     type_code = TC_DATE_ARRAY
@@ -717,7 +718,7 @@ class DateArrayObject(StandardArrayObject):
 
 class TimeArrayObject(StandardArrayObject):
     """ List of datetime.timedelta type values. """
-    _type_name = 'Time[]'
+    _type_name = NAME_TIME_ARR
     _type_id = TYPE_TIME_ARR
     standard_type = TimeObject
     type_code = TC_TIME_ARRAY
