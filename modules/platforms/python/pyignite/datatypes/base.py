@@ -13,8 +13,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from abc import ABC
-
 
 class IgniteDataTypeProps:
     """
@@ -31,7 +29,11 @@ class IgniteDataTypeProps:
         """ Binary object type ID. """
         from pyignite.utils import entity_id
 
-        return entity_id(getattr(self, '_type_name', None))
+        return getattr(
+            self,
+            '_type_id',
+            entity_id(getattr(self, '_type_name', None))
+        )
 
 
 class IgniteDataTypeMeta(type, IgniteDataTypeProps):
