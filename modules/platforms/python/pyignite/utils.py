@@ -13,8 +13,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import ctypes
 from functools import wraps
-from typing import Any, Type, Union
+from typing import Any, Type, Tuple, Union
 
 from pyignite.datatypes.base import IgniteDataType
 from .constants import *
@@ -177,3 +178,22 @@ def status_to_exception(exc: Type[Exception]):
             return result.value
         return ste_wrapper
     return ste_decorator
+
+
+def get_field_by_id(
+    obj: 'GenericObjectMeta', field_id: int
+) -> Tuple[Any, IgniteDataType]:
+    """
+    Returns a complex object's field value, given the field's entity ID.
+
+    :param obj: complex object,
+    :param field_id: field ID,
+    :return: complex object field's value and type.
+    """
+    for fname, ftype in obj._schema.items():
+        if entity_id(fname) == field_id:
+            return getattr(obj, fname, getattr(ftype, 'default')), ftype
+
+
+def unsigned(value: int, c_type: ctypes._SimpleCData = ctypes.c_uint) -> int:
+    return c_type(value).value
