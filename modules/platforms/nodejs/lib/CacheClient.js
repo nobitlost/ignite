@@ -381,7 +381,8 @@ class CacheClient {
             },
             async (payload) => {
                 result = payload.readBoolean();
-            });
+            },
+            await this._createAffinityHint(key));
         return result;
     }
 
@@ -620,7 +621,8 @@ class CacheClient {
                 this._writeCacheInfo(payload);
                 await this._writeKeyValue(payload, key, value);
             },
-            payloadReader);
+            payloadReader,
+            await this._createAffinityHint(key));
     }
 
     /**
@@ -660,7 +662,8 @@ class CacheClient {
                 this._writeCacheInfo(payload);
                 await this._communicator.writeObject(payload, key, this._getKeyType());
             },
-            payloadReader);
+            payloadReader,
+            await this._createAffinityHint(key));
     }
 
     /**
@@ -715,6 +718,16 @@ class CacheClient {
                 result = payload.readBoolean();
             });
         return result;
+    }
+
+    /**
+     * @ignore
+     */
+    async _createAffinityHint(key) {
+        const affinityHint = {};
+        affinityHint.cacheId = this._cacheId;
+        affinityHint.key = key;
+        return affinityHint;
     }
 }
 

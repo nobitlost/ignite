@@ -66,8 +66,11 @@ class IgniteClient {
      * @return {IgniteClient} - new IgniteClient instance.
      */
     constructor(onStateChanged = null) {
-        const ClientFailoverSocket = require('./internal/ClientFailoverSocket');
-        this._socket = new ClientFailoverSocket(onStateChanged);
+        // const ClientFailoverSocket = require('./internal/ClientFailoverSocket');
+        const Router = require('./internal/Router');
+        // TODO: Update classes'/variables' names
+        this._socket = new Router(onStateChanged);
+        // this._socket = new ClientFailoverSocket(onStateChanged);
         this._communicator = new BinaryCommunicator(this._socket);
     }
 
@@ -98,7 +101,7 @@ class IgniteClient {
     async connect(config) {
         ArgumentChecker.notEmpty(config, 'config');
         ArgumentChecker.hasType(config, 'config', false, IgniteClientConfiguration);
-        await this._socket.connect(config);
+        await this._socket.connect(this._communicator, config);
     }
 
     /**
