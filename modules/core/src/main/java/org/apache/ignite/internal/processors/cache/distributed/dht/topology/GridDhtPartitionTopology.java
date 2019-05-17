@@ -42,7 +42,7 @@ import org.apache.ignite.internal.util.tostring.GridToStringExclude;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * DHT partition topology.
+ * Distributed Hash Table (DHT) partition topology.
  */
 @GridToStringExclude
 public interface GridDhtPartitionTopology {
@@ -80,6 +80,11 @@ public interface GridDhtPartitionTopology {
         long updateSeq,
         boolean stopping
     ) throws IgniteInterruptedCheckedException;
+
+    /**
+     * @return {@code True} If ready version initialized. {@code False} If not initialized.
+     */
+    public boolean initialized();
 
     /**
      * @return Result topology version of last finished exchange.

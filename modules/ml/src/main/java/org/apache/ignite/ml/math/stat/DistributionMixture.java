@@ -17,12 +17,13 @@
 
 package org.apache.ignite.ml.math.stat;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.DoubleStream;
 import org.apache.ignite.internal.util.typedef.internal.A;
 import org.apache.ignite.ml.math.primitives.vector.Vector;
 import org.apache.ignite.ml.math.primitives.vector.VectorUtils;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.stream.DoubleStream;
 
 /**
  * Mixture of distributions class where each component has own probability and probability of input vector can be
@@ -31,9 +32,6 @@ import org.apache.ignite.ml.math.primitives.vector.VectorUtils;
  * @param <C> distributions mixture component class.
  */
 public abstract class DistributionMixture<C extends Distribution> implements Distribution {
-    /** */
-    private static final double EPS = 1e-5;
-
     /** Component probabilities. */
     private final Vector componentProbs;
 
@@ -51,7 +49,7 @@ public abstract class DistributionMixture<C extends Distribution> implements Dis
      */
     public DistributionMixture(Vector componentProbs, List<C> distributions) {
         A.ensure(DoubleStream.of(componentProbs.asArray()).allMatch(v -> v > 0), "All distribution components should be greater than zero");
-        A.ensure(Math.abs(componentProbs.sum() - 1.) < EPS, "Components distribution should be nomalized");
+        componentProbs = componentProbs.divide(componentProbs.sum());
 
         A.ensure(!distributions.isEmpty(), "Distribution mixture should have at least one component");
 
@@ -79,21 +77,21 @@ public abstract class DistributionMixture<C extends Distribution> implements Dis
     }
 
     /**
-     * @return an amount of components.
+     * @return An amount of components.
      */
     public int countOfComponents() {
         return componentProbs.size();
     }
 
     /**
-     * @return component probabilities.
+     * @return Component probabilities.
      */
     public Vector componentsProbs() {
         return componentProbs.copy();
     }
 
     /**
-     * @return list of components.
+     * @return List of components.
      */
     public List<C> distributions() {
         return Collections.unmodifiableList(distributions);

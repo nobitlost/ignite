@@ -236,6 +236,20 @@ public class GridClientPartitionTopology implements GridDhtPartitionTopology {
     }
 
     /** {@inheritDoc} */
+    @Override public boolean initialized() {
+        lock.readLock().lock();
+
+        try {
+            assert topVer != null;
+
+            return !AffinityTopologyVersion.NONE.equals(topVer);
+        }
+        finally {
+            lock.readLock().unlock();
+        }
+    }
+
+    /** {@inheritDoc} */
     @Override public AffinityTopologyVersion readyTopologyVersion() {
         lock.readLock().lock();
 
@@ -361,7 +375,7 @@ public class GridClientPartitionTopology implements GridDhtPartitionTopology {
 
         long updateSeq = this.updateSeq.incrementAndGet();
 
-        // If this is the oldest node.
+        // If this is the oldest node (coordinator) or cache was added during this exchange
         if (oldest.id().equals(loc.id()) || exchFut.dynamicCacheGroupStarted(grpId)) {
             if (node2part == null) {
                 node2part = new GridDhtPartitionFullMap(oldest.id(), oldest.order(), updateSeq);

@@ -56,7 +56,7 @@ public class GridCacheTwoStepQuery {
     private final List<Integer> cacheIds;
 
     /** */
-    private final boolean local;
+    private final boolean locSplit;
 
     /** */
     private final PartitionResult derivedPartitions;
@@ -64,15 +64,23 @@ public class GridCacheTwoStepQuery {
     /** */
     private final boolean mvccEnabled;
 
-    /** {@code FOR UPDATE} flag. */
-    private final boolean forUpdate;
-
     /** Number of positional arguments in the sql. */
     private final int paramsCnt;
 
     /**
-     * @param originalSql Original query SQL.
-     * @param tbls Tables in query.
+     *
+     * @param originalSql Original SQL.
+     * @param paramsCnt Parameters count.
+     * @param tbls Tables.
+     * @param rdc Reduce query.
+     * @param mapQrys Map query.
+     * @param skipMergeTbl Skip merge table flag.
+     * @param explain Explain flag.
+     * @param distributedJoins Distributed joins flag.
+     * @param derivedPartitions Derived partitions.
+     * @param cacheIds Cache ids.
+     * @param mvccEnabled Mvcc flag.
+     * @param locSplit Local split flag.
      */
     public GridCacheTwoStepQuery(
         String originalSql,
@@ -83,11 +91,10 @@ public class GridCacheTwoStepQuery {
         boolean skipMergeTbl,
         boolean explain,
         boolean distributedJoins,
-        boolean forUpdate,
         PartitionResult derivedPartitions,
         List<Integer> cacheIds,
         boolean mvccEnabled,
-        boolean local
+        boolean locSplit
     ) {
         this.originalSql = originalSql;
         this.paramsCnt = paramsCnt;
@@ -97,11 +104,10 @@ public class GridCacheTwoStepQuery {
         this.skipMergeTbl = skipMergeTbl;
         this.explain = explain;
         this.distributedJoins = distributedJoins;
-        this.forUpdate = forUpdate;
         this.derivedPartitions = derivedPartitions;
         this.cacheIds = cacheIds;
         this.mvccEnabled = mvccEnabled;
-        this.local = local;
+        this.locSplit = locSplit;
     }
 
     /**
@@ -163,6 +169,13 @@ public class GridCacheTwoStepQuery {
     }
 
     /**
+     * @return Whether cache IDs exist.
+     */
+    public boolean hasCacheIds() {
+        return !F.isEmpty(cacheIds);
+    }
+
+    /**
      * @return Original query SQL.
      */
     public String originalSql() {
@@ -173,7 +186,14 @@ public class GridCacheTwoStepQuery {
      * @return {@code True} If query is local.
      */
     public boolean isLocal() {
-        return local;
+        return F.isEmpty(cacheIds) || locSplit;
+    }
+
+    /**
+     * @return {@code True} if this is local query with split.
+     */
+    public boolean isLocalSplit() {
+        return locSplit;
     }
 
     /**
@@ -204,12 +224,6 @@ public class GridCacheTwoStepQuery {
         return mvccEnabled;
     }
 
-    /**
-     * @return {@code FOR UPDATE} flag.
-     */
-    public boolean forUpdate() {
-        return forUpdate;
-    }
 
     /**
      * @return Number of parameters

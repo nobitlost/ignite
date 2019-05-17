@@ -47,6 +47,7 @@ class MeanWithClusterProbAggregator implements Serializable {
      * Create an instance of MeanWithClusterProbAggregator.
      */
     MeanWithClusterProbAggregator() {
+        // NO-OP.
     }
 
     /**
@@ -63,14 +64,14 @@ class MeanWithClusterProbAggregator implements Serializable {
     }
 
     /**
-     * @return compute mean value by aggregated data.
+     * @return Compute mean value by aggregated data.
      */
     public Vector mean() {
         return weightedXsSum.divide(pcxiSum);
     }
 
     /**
-     * @return compute cluster probability by aggreated data.
+     * @return Compute cluster probability by aggreated data.
      */
     public double clusterProb() {
         return pcxiSum / rowCount;
@@ -80,10 +81,11 @@ class MeanWithClusterProbAggregator implements Serializable {
      * Aggregates statistics for means and cluster probabilities computing given dataset.
      *
      * @param dataset Dataset.
+     * @param countOfComponents Count of componets.
      */
-    public static AggregatedStats aggreateStats(Dataset<EmptyContext, GmmPartitionData> dataset) {
+    public static AggregatedStats aggreateStats(Dataset<EmptyContext, GmmPartitionData> dataset, int countOfComponents) {
         return new AggregatedStats(dataset.compute(
-            MeanWithClusterProbAggregator::map,
+            data -> map(data, countOfComponents),
             MeanWithClusterProbAggregator::reduce
         ));
     }
@@ -123,15 +125,16 @@ class MeanWithClusterProbAggregator implements Serializable {
      * Map stage for statistics aggregation.
      *
      * @param data Partition data.
+     * @param countOfComponents Count of components.
      * @return Aggregated statistics.
      */
-    static List<MeanWithClusterProbAggregator> map(GmmPartitionData data) {
+    static List<MeanWithClusterProbAggregator> map(GmmPartitionData data, int countOfComponents) {
         List<MeanWithClusterProbAggregator> aggregators = new ArrayList<>();
-        for (int i = 0; i < data.countOfComponents(); i++)
+        for (int i = 0; i < countOfComponents; i++)
             aggregators.add(new MeanWithClusterProbAggregator());
 
         for (int i = 0; i < data.size(); i++) {
-            for (int c = 0; c < data.countOfComponents(); c++)
+            for (int c = 0; c < countOfComponents; c++)
                 aggregators.get(c).add(data.getX(i), data.pcxi(c, i));
         }
 
@@ -189,14 +192,14 @@ class MeanWithClusterProbAggregator implements Serializable {
         }
 
         /**
-         * @return clusters probabilities.
+         * @return Clusters probabilities.
          */
         public Vector clusterProbabilities() {
             return clusterProbs;
         }
 
         /**
-         * @return means.
+         * @return Means.
          */
         public List<Vector> means() {
             return means;

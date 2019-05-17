@@ -18,7 +18,6 @@
 package org.apache.ignite.internal.processors.query.h2;
 
 import org.apache.ignite.cache.query.SqlFieldsQuery;
-import org.apache.ignite.internal.processors.query.h2.dml.UpdatePlanBuilder;
 import org.apache.ignite.internal.util.typedef.F;
 import org.apache.ignite.internal.util.typedef.internal.S;
 
@@ -41,8 +40,8 @@ class H2CachedStatementKey {
      * @param schemaName Schema name.
      * @param sql SQL.
      */
-    H2CachedStatementKey(String schemaName, String sql) {
-        this(schemaName, sql, null, false);
+    public H2CachedStatementKey(String schemaName, String sql) {
+        this(schemaName, sql, null);
     }
 
     /**
@@ -51,19 +50,20 @@ class H2CachedStatementKey {
      * @param schemaName Schema name.
      * @param sql SQL.
      * @param fieldsQry Query with flags.
-     * @param loc DML {@code SELECT} Locality flag.
      */
-    public H2CachedStatementKey(String schemaName, String sql, SqlFieldsQuery fieldsQry, boolean loc) {
+    public H2CachedStatementKey(String schemaName, String sql, SqlFieldsQuery fieldsQry) {
         this.schemaName = schemaName;
         this.sql = sql;
 
-        if (fieldsQry == null || loc || !UpdatePlanBuilder.isSkipReducerOnUpdateQuery(fieldsQry))
+        if (fieldsQry == null)
             this.flags = 0; // flags only relevant for server side updates.
         else {
             this.flags = (byte)(1 +
                 (fieldsQry.isDistributedJoins() ? 2 : 0) +
                 (fieldsQry.isEnforceJoinOrder() ? 4 : 0) +
-                (fieldsQry.isCollocated() ? 8 : 0));
+                (fieldsQry.isCollocated() ? 8 : 0) +
+                (fieldsQry.isLocal() ? 8 : 0)
+            );
         }
     }
 

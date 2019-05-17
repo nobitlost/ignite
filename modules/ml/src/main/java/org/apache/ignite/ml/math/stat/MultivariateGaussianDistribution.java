@@ -34,6 +34,9 @@ public class MultivariateGaussianDistribution implements Distribution {
     /** Normalizer. */
     private double normalizer;
 
+    /** Covariance. */
+    private Matrix covariance;
+
     /**
      * Constructs an instance of MultivariateGaussianDistribution.
      *
@@ -45,6 +48,7 @@ public class MultivariateGaussianDistribution implements Distribution {
         A.ensure(mean.size() == covariance.rowSize(), "Covariance matrix should be built from same space as mean vector");
 
         this.mean = mean;
+        this.covariance = covariance;
         invCovariance = covariance.inverse();
 
         double determinant = covariance.determinant();
@@ -70,9 +74,16 @@ public class MultivariateGaussianDistribution implements Distribution {
     }
 
     /**
-     * @return mean vector.
+     * @return Mean vector.
      */
     public Vector mean() {
         return mean.copy();
+    }
+
+    /**
+     * @return Covariance matrix.
+     */
+    public Matrix covariance() {
+        return covariance;
     }
 }

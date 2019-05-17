@@ -109,7 +109,7 @@ public class GridDhtPartitionTopologyImpl implements GridDhtPartitionTopology {
     /** */
     private final AtomicReferenceArray<GridDhtLocalPartition> locParts;
 
-    /** Node to partition map. */
+    /** Node to partition map from all nodes. */
     private GridDhtPartitionFullMap node2part;
 
     /** */
@@ -279,6 +279,15 @@ public class GridDhtPartitionTopologyImpl implements GridDhtPartitionTopology {
         finally {
             lock.writeLock().unlock();
         }
+    }
+
+    /** {@inheritDoc} */
+    @Override public boolean initialized() {
+        AffinityTopologyVersion topVer = readyTopVer;
+
+        assert topVer != null;
+
+        return !AffinityTopologyVersion.NONE.equals(topVer);
     }
 
     /** {@inheritDoc} */
@@ -574,7 +583,7 @@ public class GridDhtPartitionTopologyImpl implements GridDhtPartitionTopology {
                             assert !exchFut.context().mergeExchanges();
 
                             affVer = exchFut.initialVersion();
-                            affAssignment = grp.affinity().idealAssignment();
+                            affAssignment = grp.affinity().idealAssignmentRaw();
                         }
 
                         initPartitions(affVer, affAssignment, exchFut, updateSeq);
@@ -623,7 +632,7 @@ public class GridDhtPartitionTopologyImpl implements GridDhtPartitionTopology {
 
         ClusterNode oldest = discoCache.oldestAliveServerNode();
 
-        // If this is the oldest node.
+        // If this is the oldest node (coordinator) or cache was added during this exchange
         if (oldest != null && (ctx.localNode().equals(oldest) || grpStarted)) {
             if (node2part == null) {
                 node2part = new GridDhtPartitionFullMap(oldest.id(), oldest.order(), updateSeq);
@@ -2888,11 +2897,9 @@ public class GridDhtPartitionTopologyImpl implements GridDhtPartitionTopology {
                 if (affNodes.isEmpty())
                     continue;
 
-                Set<ClusterNode> owners = U.newHashSet(affNodes.size());
-
                 for (ClusterNode node : affNodes) {
-                    if (hasState(i, node.id(), OWNING))
-                        owners.add(node);
+                    if (!hasState(i, node.id(), OWNING))
+                        return;
                 }
 
                 if (!grp.isReplicated()) {
@@ -2903,15 +2910,12 @@ public class GridDhtPartitionTopologyImpl implements GridDhtPartitionTopology {
                             if (hasState(i, nodeId, OWNING)) {
                                 ClusterNode node = ctx.discovery().node(nodeId);
 
-                                if (node != null)
-                                    owners.add(node);
+                                if (node != null && !affNodes.contains(node))
+                                    return;
                             }
                         }
                     }
                 }
-
-                if (affNodes.size() != owners.size() || !owners.containsAll(affNodes))
-                    return;
             }
 
             rebalancedTopVer = readyTopVer;
